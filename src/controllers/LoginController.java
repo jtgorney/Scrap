@@ -1,0 +1,154 @@
+package controllers;
+
+import businessobjects.CompetitionUser;
+import businessobjects.SettingsCommunicator;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+
+import ui.IDEView;
+import ui.LoginFrame;
+import ui.LoginView;
+
+/**
+ * Login controller controls the login GUI and its logic.
+ *
+ * @author Jacob Gorney
+ *
+ */
+public class LoginController implements ActionListener {
+
+    /**
+     * The GUI reference to LoginView.
+     */
+    private LoginFrame loginView;
+
+    /**
+     * Constructor that takes the GUI for login.
+     *
+     * @param loginView Login JFrame GUI
+     */
+    public LoginController(final LoginFrame loginView) {
+        // Assign the GUI
+        this.loginView = loginView;
+        // Open the GUI via EventQueue
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    loginView.setLocationRelativeTo(null);
+                    loginView.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+		// Set the name of the competition. This will
+        // eventually be retrieved from the server.
+        loginView.jlblHeader.setText(SettingsCommunicator.getCompetitionName());
+        loginView.jlblSchool.setText(SettingsCommunicator.getCompetitionSchool());
+        loginView.repaint();
+        // Build listeners
+        loginView.jbtnEnter.addActionListener(this);
+        loginView.jtfUsername.addActionListener(this);
+        loginView.jpfPassword.addActionListener(this);
+        // Focus the username field
+        loginView.jtfUsername.requestFocus();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ev) {
+        if (ev.getSource() == loginView.jbtnEnter) {
+            jbtnEnterClick();
+        } else if (ev.getSource() == loginView.jbtnExit) {
+            jbtnExitClick();
+        } else if (ev.getSource() == loginView.jtfUsername) {
+            jtfUsernameEnter();
+        } else if (ev.getSource() == loginView.jpfPassword) {
+            jtfPasswordEnter();
+        }
+    }
+
+    /**
+     * jtfUsername enter key press.
+     */
+    public void jtfUsernameEnter() {
+        // Focus password field
+        loginView.jpfPassword.requestFocus();
+    }
+
+    /**
+     * jtfPassword enter key press.
+     */
+    public void jtfPasswordEnter() {
+        // Perform login
+        // @todo run in thread
+        doLogin();
+    }
+
+    /**
+     * Event method for jbtnEnter object.
+     */
+    private void jbtnEnterClick() {
+        // Perform login
+        // @todo run in thread
+        doLogin();
+    }
+
+    /**
+     * Event for jbtnExit object.
+     */
+    private void jbtnExitClick() {
+        // Ask to exit the system
+        if (JOptionPane.showConfirmDialog(loginView,
+                "Are you sure you wish to exit?", "Exit System",
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Perform the login operation.
+     */
+    private void doLogin() {
+        // Disable fields
+        loginView.jtfUsername.setEnabled(false);
+        loginView.jpfPassword.setEnabled(false);
+        loginView.jbtnEnter.setEnabled(false);
+        loginView.jbtnExit.setEnabled(false);
+        // Get credentials
+        String username = loginView.jtfUsername.getText();
+        String password = String.copyValueOf(loginView.jpfPassword.getPassword());
+        // Check for invalid username or password (blank)
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(loginView,
+                    "Username and password cannot be empty.",
+                    "Login", JOptionPane.WARNING_MESSAGE);
+        } else {
+            // Make the call
+            CompetitionUser user = new CompetitionUser(username, password);
+            // Authenticate them
+            user.authenticate();
+            // Apply the logic
+            if (user.isAuthenticated()) {
+                // Show the IDE view.
+                loginView.setVisible(false);
+                // Run the IDE controller
+                IDEController controller = new IDEController(new IDEView(), user);
+            } else {
+                JOptionPane.showMessageDialog(loginView,
+                        "Invalid username or password.", "Login",
+                        JOptionPane.WARNING_MESSAGE);
+                // Reset password field and focus username
+                loginView.jpfPassword.setText("");
+                loginView.jtfUsername.requestFocus();
+                loginView.jtfUsername.selectAll();
+            }
+        }
+        // Enable fields
+        loginView.jtfUsername.setEnabled(true);
+        loginView.jpfPassword.setEnabled(true);
+        loginView.jbtnEnter.setEnabled(true);
+        loginView.jbtnExit.setEnabled(true);
+    }
+}
