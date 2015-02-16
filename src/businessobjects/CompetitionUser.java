@@ -26,7 +26,10 @@ public class CompetitionUser extends User {
     }
 
     public boolean authenticate() {
-        if (username.isEmpty() || password.isEmpty()) {
+        // @todo make this work
+        authenticated = true;
+        return authenticated;
+        /*if (username.isEmpty() || password.isEmpty()) {
             authenticated = false;
             return authenticated;
         } else {
@@ -53,7 +56,7 @@ public class CompetitionUser extends User {
             // Process the response.
             authenticated = (response > -1);
             return authenticated;
-        }
+        }*/
     }
     
     public boolean isAuthenticated() {
