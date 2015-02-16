@@ -11,7 +11,9 @@ import java.util.ArrayList;
  * ClientLogin command class for jNetworkInterfaceServer.
  */
 public class ClientLogin implements Command {
+
     private String username, password;
+
     @Override
     public void setup(ArrayList<String> input, Socket client) {
         // Accept a username and password.
@@ -21,8 +23,13 @@ public class ClientLogin implements Command {
 
     @Override
     public String run() {
-    	DBMgr dbmgr = new DBMgr();
-    	// Return the resulting ID
-    	return String.valueOf(dbmgr.getUserIdForCredentials(username, password));
+        DBMgr dbmgr = new DBMgr();
+        if (!DBMgr.build("mysql.rentalsbyjb.com", "cs421_scrap",
+                "cs421_scrap", "cs421#scrap")) {
+            System.out.println("Error connecting to database.");
+            System.exit(0);
+        }
+        // Return the resulting ID
+        return String.valueOf(dbmgr.getUserIdForCredentials(username, password));
     }
 }

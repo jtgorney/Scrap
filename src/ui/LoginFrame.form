@@ -57,7 +57,9 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="159" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jpbLoading" min="-2" pref="46" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
               </Group>
@@ -80,14 +82,19 @@
                   <Component id="jpfPassword" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jbtnEnter" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                  <Component id="jbtnExit" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jbtnEnter" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="jbtnExit" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jpbLoading" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -214,6 +221,11 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Version: 0e3ce20a343e018582f8359d293b6d6fc7bd8b26"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="jpbLoading">
+      <Properties>
+        <Property name="indeterminate" type="boolean" value="true"/>
       </Properties>
     </Component>
   </SubComponents>

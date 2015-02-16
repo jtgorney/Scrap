@@ -6,10 +6,10 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import ui.IDEView;
 import ui.LoginFrame;
-import ui.LoginView;
 
 /**
  * Login controller controls the login GUI and its logic.
@@ -43,13 +43,14 @@ public class LoginController implements ActionListener {
                 }
             }
         });
-		// Set the name of the competition. This will
+        // Set the name of the competition. This will
         // eventually be retrieved from the server.
         loginView.jlblHeader.setText(SettingsCommunicator.getCompetitionName());
         loginView.jlblSchool.setText(SettingsCommunicator.getCompetitionSchool());
         loginView.repaint();
         // Build listeners
         loginView.jbtnEnter.addActionListener(this);
+        loginView.jbtnExit.addActionListener(this);
         loginView.jtfUsername.addActionListener(this);
         loginView.jpfPassword.addActionListener(this);
         // Focus the username field
@@ -66,6 +67,8 @@ public class LoginController implements ActionListener {
             jtfUsernameEnter();
         } else if (ev.getSource() == loginView.jpfPassword) {
             jtfPasswordEnter();
+        } else if (ev.getSource() == loginView.jbtnExit) {
+            jbtnExitClick();
         }
     }
 
@@ -102,7 +105,7 @@ public class LoginController implements ActionListener {
         // Ask to exit the system
         if (JOptionPane.showConfirmDialog(loginView,
                 "Are you sure you wish to exit?", "Exit System",
-                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
             System.exit(0);
         }
     }
@@ -111,44 +114,70 @@ public class LoginController implements ActionListener {
      * Perform the login operation.
      */
     private void doLogin() {
-        // Disable fields
-        loginView.jtfUsername.setEnabled(false);
-        loginView.jpfPassword.setEnabled(false);
-        loginView.jbtnEnter.setEnabled(false);
-        loginView.jbtnExit.setEnabled(false);
-        // Get credentials
-        String username = loginView.jtfUsername.getText();
-        String password = String.copyValueOf(loginView.jpfPassword.getPassword());
-        // Check for invalid username or password (blank)
-        if (username.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(loginView,
-                    "Username and password cannot be empty.",
-                    "Login", JOptionPane.WARNING_MESSAGE);
-        } else {
-            // Make the call
-            CompetitionUser user = new CompetitionUser(username, password);
-            // Authenticate them
-            user.authenticate();
-            // Apply the logic
-            if (user.isAuthenticated()) {
-                // Show the IDE view.
-                loginView.setVisible(false);
-                // Run the IDE controller
-                IDEController controller = new IDEController(new IDEView(), user);
-            } else {
-                JOptionPane.showMessageDialog(loginView,
-                        "Invalid username or password.", "Login",
-                        JOptionPane.WARNING_MESSAGE);
-                // Reset password field and focus username
-                loginView.jpfPassword.setText("");
-                loginView.jtfUsername.requestFocus();
-                loginView.jtfUsername.selectAll();
+        // Run in new thread to update GUI.
+        new Thread() {
+            @Override
+            public void run() {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Show progress
+                        loginView.jpbLoading.setVisible(true);
+                        // Disable fields
+                        loginView.jtfUsername.setEnabled(false);
+                        loginView.jpfPassword.setEnabled(false);
+                        loginView.jbtnEnter.setEnabled(false);
+                        loginView.jbtnExit.setEnabled(false);
+                    }
+                });
+
+                // Get credentials
+                String username = loginView.jtfUsername.getText();
+                String password = String.copyValueOf(loginView.jpfPassword.getPassword());
+                // Check for invalid username or password (blank)
+                if (username.isEmpty() || password.isEmpty()) {
+                    JOptionPane.showMessageDialog(loginView,
+                            "Username and password cannot be empty.",
+                            "Login", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    // Make the call
+                    CompetitionUser user = new CompetitionUser(username, password);
+                    // Authenticate them
+                    user.authenticate();
+                    // Apply the logic
+                    if (user.isAuthenticated()) {
+                        // Show the IDE view.
+                        loginView.setVisible(false);
+                        // Run the IDE controller
+                        IDEController controller = new IDEController(new IDEView(), user);
+                    } else {
+                        JOptionPane.showMessageDialog(loginView,
+                                "Invalid username or password.", "Login",
+                                JOptionPane.WARNING_MESSAGE);
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Reset password field and focus username
+                                loginView.jpfPassword.setText("");
+                                loginView.jtfUsername.requestFocus();
+                                loginView.jtfUsername.selectAll();
+                            }
+                        });
+                    }
+                }
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Hide progress
+                        loginView.jpbLoading.setVisible(false);
+                        // Enable fields
+                        loginView.jtfUsername.setEnabled(true);
+                        loginView.jpfPassword.setEnabled(true);
+                        loginView.jbtnEnter.setEnabled(true);
+                        loginView.jbtnExit.setEnabled(true);
+                    }
+                });
             }
-        }
-        // Enable fields
-        loginView.jtfUsername.setEnabled(true);
-        loginView.jpfPassword.setEnabled(true);
-        loginView.jbtnEnter.setEnabled(true);
-        loginView.jbtnExit.setEnabled(true);
+        }.start();
     }
 }
