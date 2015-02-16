@@ -3,6 +3,7 @@ package businessobjects;
 import jNetworking.jNetworkInterface.jNetworkInterface;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  * Competition specific user.
@@ -50,6 +51,10 @@ public class CompetitionUser extends User {
                 response = Integer.parseInt(client.sendCommand("clientlogin", commandData));
             } catch (Exception ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(null,
+                        "Error: Server cound not be contacted.",
+                        "Communication Error",
+                        JOptionPane.WARNING_MESSAGE);
             }
             // Process the response.
             authenticated = (response > -1);

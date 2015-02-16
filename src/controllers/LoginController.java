@@ -22,7 +22,7 @@ public class LoginController implements ActionListener {
     /**
      * The GUI reference to LoginView.
      */
-    private LoginFrame loginView;
+    private final LoginFrame loginView;
 
     /**
      * Constructor that takes the GUI for login.

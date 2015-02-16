@@ -221,7 +221,7 @@ public class IDEView {
         springLayout.putConstraint(SpringLayout.WEST, jpnlTopBar, 0, SpringLayout.WEST, jfrmIDEView.getContentPane());
         springLayout.putConstraint(SpringLayout.SOUTH, jpnlTopBar, 24, SpringLayout.NORTH, jfrmIDEView.getContentPane());
         springLayout.putConstraint(SpringLayout.EAST, jpnlTopBar, 0, SpringLayout.EAST, jfrmIDEView.getContentPane());
-        jpnlTopBar.setBackground(Color.GREEN);
+        jpnlTopBar.setBackground(new java.awt.Color(0, 153, 51));
         jfrmIDEView.getContentPane().add(jpnlTopBar);
 
         JLabel jlblTopContent = new JLabel("Saginaw Valley State University | Test Contest | Time Remaining: 03:00:00 | Team: Pickles");
@@ -237,7 +237,7 @@ public class IDEView {
         springLayout.putConstraint(SpringLayout.SOUTH, jpnlCodeControls, -6, SpringLayout.NORTH, jpnlBottomBar);
         springLayout.putConstraint(SpringLayout.NORTH, jpnlBottomBar, -24, SpringLayout.SOUTH, jfrmIDEView.getContentPane());
         springLayout.putConstraint(SpringLayout.SOUTH, jpnlBottomBar, 0, SpringLayout.SOUTH, jfrmIDEView.getContentPane());
-        jpnlBottomBar.setBackground(Color.GREEN);
+        jpnlBottomBar.setBackground(new java.awt.Color(0, 153, 51));
         jfrmIDEView.getContentPane().add(jpnlBottomBar);
         FlowLayout fl_jpnlBottomBar = new FlowLayout(FlowLayout.LEFT);
         fl_jpnlBottomBar.setVgap(4);
