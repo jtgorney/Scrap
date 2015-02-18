@@ -1,4 +1,4 @@
-package usercode;
+package compiler;
 
 import java.io.File;
 import java.io.FilenameFilter;

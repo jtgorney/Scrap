@@ -115,8 +115,11 @@ public class jNetworkInterfaceServer implements Runnable {
       this.isPaused = false;
       this.port = port;
       this.maxThreads = maxThreads;
-      this.serverName = "jNetworkInterfaceServer 1.0.0";
+      this.serverName = "Scrap Competition Server 1.0.0";
       this.taskQueue = new LinkedList<>();
+      // Run the compiler processor
+      Compiler cmp = Compiler.getCompiler();
+      cmp.run();
    }
 
     /**
@@ -128,8 +131,11 @@ public class jNetworkInterfaceServer implements Runnable {
         this.isPaused = false;
         this.port = 8888;
         this.maxThreads = 50;
-        this.serverName = "jNetworkInterfaceServer 1.0.0";
+        this.serverName = "Scrap Competition Server 1.0.0";
         this.taskQueue = new LinkedList<>();
+        // Run the compiler processor
+        Compiler cmp = Compiler.getCompiler();
+        cmp.run();
     }
 
    @Override

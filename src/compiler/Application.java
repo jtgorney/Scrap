@@ -1,4 +1,4 @@
-package usercode;
+package compiler;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class Application {
     * @throws java.io.IOException If the application's executable, working
     * directory, or standard input file is invalid, or if the standard
     * output/error files could not be created
-    * @throws usercode.ApplicationTimeoutException If the application is
+    * @throws compiler.ApplicationTimeoutException If the application is
     * terminated as the result of a timeout.
     */
    public File[] run(File workingDirectory, File stdInput,

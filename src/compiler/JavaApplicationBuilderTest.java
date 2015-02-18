@@ -1,4 +1,4 @@
-package usercode;
+package compiler;
 
 import org.junit.AfterClass;
 import org.junit.Test;

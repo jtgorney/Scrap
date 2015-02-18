@@ -1,4 +1,4 @@
-package usercode;
+package compiler;
 
 import org.junit.After;
 import org.junit.Before;
