@@ -5,9 +5,13 @@
  */
 package jNetworking.jNetworkInterface.Commands;
 
+import businessobjects.CompilerRunner;
 import jNetworking.jNetworkInterface.Command;
+import jNetworking.jNetworkInterface.Compiler;
+import java.io.File;
 import java.net.Socket;
 import java.util.ArrayList;
+import util.SourceCodeFileManager;
 
 /**
  *
@@ -19,6 +23,14 @@ public class TestSolution implements Command {
      */
     private int teamId = -1;
     /**
+     * The problem id.
+     */
+    private int problemId = -1;
+    /**
+     * cpp or java.
+     */
+    private String type;
+    /**
      * Code to be executed.
      */
     private String code;
@@ -27,12 +39,19 @@ public class TestSolution implements Command {
     public void setup(ArrayList<String> input, Socket client) {
         // Values passed by command
         teamId = Integer.parseInt(input.get(0));
-        code = input.get(1);
+        problemId = Integer.parseInt(input.get(1));
+        type = input.get(2).trim();
+        code = input.get(3);
     }
     
     @Override
     public String run() {
+        // Build the file
+        File f = SourceCodeFileManager.writeSourceCode(teamId, problemId, type, code);
+        // Add the job to the compiler queue
+        Compiler comp = Compiler.getCompiler();
+        comp.add(new CompilerRunner(teamId, problemId, type, f));
         // Add the run to the queue.
-        return null;
+        return "OK";
     }
 }

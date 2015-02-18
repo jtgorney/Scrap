@@ -5,15 +5,15 @@ import jNetworking.jNetworkInterface.*;
 /**
  * Scrap server and methods.
  */
-public class ScrapServer {
+public class Server {
 
     private jNetworkInterfaceServer server;
 
     public static void main(String[] args) {
-        new ScrapServer();
+        new Server();
     }
 
-    public ScrapServer() {
+    public Server() {
         server = new jNetworkInterfaceServer(8888, 50, false);
         server.setServerName("Scrap Competition Server");
         server.run();

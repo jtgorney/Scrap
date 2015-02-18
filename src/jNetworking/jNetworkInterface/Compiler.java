@@ -77,7 +77,15 @@ public class Compiler {
             }
         }).start();
     }
-
+    
+    /**
+     * Add a compiler job to the queue.
+     * @param c Compiler runner
+     */
+    public void add(CompilerRunner c) {
+        compilerQueue.add(c);
+    }
+    
     private Compiler() {
 
     }
