@@ -68,7 +68,6 @@ public class IDEController implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent ev) {
-        System.out.println("Testing");
         if (ev.getSource() == ideFrame.jbtnSubmitSolution) {
             jbtnSubmitSolutionClick();
         } else if (ev.getSource() == ideFrame.jbtnTestSolution) {

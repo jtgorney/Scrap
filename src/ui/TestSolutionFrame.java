@@ -120,6 +120,6 @@ public class TestSolutionFrame extends JFrame {
         this.getContentPane().add(lblTestingPleaseWait);
 
         // Show JOptionPane
-        JOptionPane.showMessageDialog(this, "Your Test Results:\n\nCompile Errors: None\nRuntime Errors: None\n\nOutput: \nHello World!");
+        // JOptionPane.showMessageDialog(this, "Your Test Results:\n\nCompile Errors: None\nRuntime Errors: None\n\nOutput: \nHello World!");
     }
 }
