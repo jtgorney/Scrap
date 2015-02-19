@@ -5,11 +5,13 @@
  */
 package controllers;
 
+import businessobjects.CompetitionUser;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.SwingUtilities;
 import ui.IDEFrame;
 import ui.TestSolutionFrame;
 
@@ -26,15 +28,27 @@ public class TestSolutionController implements ActionListener {
      * The parent IDE View.
      */
     private IDEFrame parent;
+    /**
+     * Source code builder.
+     */
+    private final String sourceCode;
+    private final CompetitionUser user;
+    private final int problemId;
 
     /**
-     * Constructor that takes the GUI for login.
-     *
-     * @param frame Test Solution JFrame GUI
+     * Construct a test solution controller.
+     * @param frame GUI
+     * @param user Competition User
+     * @param problemId Problem set ID
+     * @param code Source code
      */
-    public TestSolutionController(final TestSolutionFrame frame) {
-        // Assign the GUI
-        testSolutionFrame = frame;
+    public TestSolutionController(final TestSolutionFrame frame, CompetitionUser user,
+            int problemId, String code) {
+        // Assign the GUI and data
+        this.testSolutionFrame = frame;
+        this.user = user;
+        this.problemId = problemId;
+        this.sourceCode = code;
         // Open the GUI via EventQueue
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -47,6 +61,7 @@ public class TestSolutionController implements ActionListener {
             }
         });
         testSolutionFrame.btnCancel.addActionListener(this);
+        testSolutionFrame.btnTest.addActionListener(this);
         // Add the closing operation to show parent frame
         testSolutionFrame.addWindowListener(new WindowAdapter() {
             @Override
@@ -82,9 +97,49 @@ public class TestSolutionController implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent ev) {
-        if (ev.getSource() == testSolutionFrame.btnCancel) {
+        if (ev.getSource() == testSolutionFrame.btnCancel)
             btnCancelClick();
-        }
+        else if (ev.getSource() == testSolutionFrame.btnTest)
+            btnTestClick();
+    }
+    
+    private void btnTestClick() {
+        // Build a new thread and run the operation.
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Setup GUI
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        // setup GUI
+                        testSolutionFrame.jlblTesting.setVisible(true);
+                        testSolutionFrame.jpbLoading.setVisible(true);
+                        testSolutionFrame.btnCancel.setEnabled(false);
+                        testSolutionFrame.btnTest.setEnabled(false);
+                        
+                    }
+                });
+                // Send the stuff to the server.
+                try {
+                    Thread.sleep(7000);
+                } catch (Exception ex) {
+                    
+                }
+                // Revert GUI
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Revert GUI
+                        testSolutionFrame.jlblTesting.setVisible(false);
+                        testSolutionFrame.jpbLoading.setVisible(false);
+                        testSolutionFrame.btnCancel.setEnabled(true);
+                        testSolutionFrame.btnTest.setEnabled(true);
+                        
+                    }
+                });
+            }
+        }).start();
     }
     
     private void btnCancelClick() {
