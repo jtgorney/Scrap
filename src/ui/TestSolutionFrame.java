@@ -57,6 +57,10 @@ public class TestSolutionFrame extends JFrame {
      */
     public JProgressBar jpbLoading;
     /**
+     * Problem number label.
+     */
+    public JLabel lblProblemNumber;
+    /**
      * Create the application.
      */
     public TestSolutionFrame() {
@@ -89,7 +93,7 @@ public class TestSolutionFrame extends JFrame {
         lblNewLabel.setBounds(0, 11, 392, 24);
         panel.add(lblNewLabel);
 
-        JLabel lblProblemNumber = new JLabel("Problem Number: 1");
+        lblProblemNumber = new JLabel("Problem Number: 1");
         lblProblemNumber.setHorizontalAlignment(SwingConstants.CENTER);
         lblProblemNumber.setForeground(Color.WHITE);
         lblProblemNumber.setFont(new Font("Tahoma", Font.BOLD, 10));

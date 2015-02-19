@@ -51,6 +51,10 @@ public class IDEFrame extends JFrame {
     * Problem set tabs.
     */
     public JTabbedPane tpProblemSet;
+    /**
+     * Compiler combo box.
+     */
+    public JComboBox<String> jcmbLanguage;
     
     /**
      * Create the application.
@@ -184,9 +188,9 @@ public class IDEFrame extends JFrame {
         this.getContentPane().add(jpnlCodeControls);
         jpnlCodeControls.setLayout(new GridLayout(0, 3, 5, 5));
 
-        JComboBox<String> jcmbLanguage = new JComboBox<>();
-        jcmbLanguage.addItem("Java SE 8.0");
+        jcmbLanguage = new JComboBox<>();
         jcmbLanguage.addItem("C++ 14");
+        jcmbLanguage.addItem("Java SE 8.0");
         jpnlCodeControls.add(jcmbLanguage);
 
         jbtnTestSolution = new JButton("Test Solution");

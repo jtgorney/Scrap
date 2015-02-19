@@ -95,9 +95,24 @@ public class IDEController implements ActionListener {
         TestSolutionController controller = new TestSolutionController(
             new TestSolutionFrame(), user,
                 (ideFrame.tpProblemSet.getSelectedIndex() + 1),
-                ideFrame.rstaCode.getText());
+                ideFrame.rstaCode.getText(), getCompilerType());
         // Hide windows
         controller.setParentIDEFrame(ideFrame);
         controller.hideParent();
+    }
+    
+    /**
+     * Return the compiler type.
+     * @return Compiler type/ext
+     */
+    private String getCompilerType() {
+        switch (ideFrame.jcmbLanguage.getSelectedIndex()) {
+            case 0:
+                return "cpp";
+            case 1:
+                return "java";
+            default:
+                return "cpp";
+        }
     }
 }

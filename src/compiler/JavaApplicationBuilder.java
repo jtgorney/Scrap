@@ -54,7 +54,7 @@ class JavaApplicationBuilder extends CompiledAndInterpretedApplicationBuilder {
       }
       Application compiler =
               new Application(
-                      new File("/usr/lib/jvm/j2sdk1.8-oracle/bin/javac"));
+                      new File("/opt/java/jdk1.8.0_25/bin/javac"));
       String className = className(code);
       File newFile = code;
       if (className != null) {
@@ -83,7 +83,7 @@ class JavaApplicationBuilder extends CompiledAndInterpretedApplicationBuilder {
    @Override
    protected Application constructApplication(File compiledCode) {
       File interpreter =
-              new File("/usr/lib/jvm/j2sdk1.8-oracle/bin/java");
+              new File("/usr/bin/java");
       return new Application(interpreter, "-cp",
                              compiledCode.getParentFile().getAbsolutePath(),
                              FileUtils.removeFileExtension(compiledCode));

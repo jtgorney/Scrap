@@ -45,6 +45,10 @@ public class TestSolutionController implements ActionListener {
      * Problem ID
      */
     private final int problemId;
+    /**
+     * The compiler type.
+     */
+    private final String compiler;
 
     /**
      * Construct a test solution controller.
@@ -53,14 +57,16 @@ public class TestSolutionController implements ActionListener {
      * @param user Competition User
      * @param problemId Problem set ID
      * @param code Source code
+     * @param compiler Compiler type
      */
     public TestSolutionController(final TestSolutionFrame frame, CompetitionUser user,
-            int problemId, String code) {
+            int problemId, String code, String compiler) {
         // Assign the GUI and data
         this.testSolutionFrame = frame;
         this.user = user;
         this.problemId = problemId;
         this.sourceCode = code;
+        this.compiler = compiler;
         // Open the GUI via EventQueue
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -81,6 +87,9 @@ public class TestSolutionController implements ActionListener {
                 showParent();
             }
         });
+        // Set the header label with the problem Id
+        testSolutionFrame.lblProblemNumber.setText("Problem Number: " +
+                String.valueOf(problemId));
     }
 
     /**
@@ -148,7 +157,7 @@ public class TestSolutionController implements ActionListener {
                     ArrayList<String> commandData = new ArrayList<>();
                     commandData.add(jNetworkInterface.base64Encode(String.valueOf(user.getId())));
                     commandData.add(jNetworkInterface.base64Encode(String.valueOf(problemId)));
-                    commandData.add(jNetworkInterface.base64Encode("cpp"));
+                    commandData.add(jNetworkInterface.base64Encode(compiler));
                     commandData.add(jNetworkInterface.base64Encode(sourceCode));
                     // Get response
                     Thread.sleep(5000);
@@ -170,6 +179,10 @@ public class TestSolutionController implements ActionListener {
                     }
                     // Display the result to the user
                     JOptionPane.showMessageDialog(testSolutionFrame, response);
+                    // Close
+                    testSolutionFrame.dispatchEvent(new WindowEvent(
+                    testSolutionFrame, WindowEvent.WINDOW_CLOSING));
+                    showParent();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
