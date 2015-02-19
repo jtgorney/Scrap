@@ -25,10 +25,10 @@ package controllers;
 
 import java.awt.EventQueue;
 import businessobjects.User;
-import ui.IDEView;
+import ui.IDEFrame;
 
 /**
- * IDEView Controller for programming interaction.
+ * IDEFrame Controller for programming interaction.
  *
  * @author Jacob Gorney
  *
@@ -36,20 +36,20 @@ import ui.IDEView;
 public class IDEController {
 
     /**
-     * The GUI reference to IDEView.
+     * The GUI reference to IDEFrame.
      */
-    private IDEView ideView;
+    private IDEFrame ideFrame;
 
     /**
-     * Constructor for IDEView GUI.
+     * Constructor for IDEFrame GUI.
      *
-     * @param ideView IDEView class
+     * @param ideView IDEFrame class
      * @param user User object
      */
-    public IDEController(final IDEView ideView, User user) {
+    public IDEController(final IDEFrame ideView, User user) {
         // Nothing for now. Just show GUI
-        this.ideView = ideView;
-        // For now, just display the GUI until we build the IDEView controller
+        this.ideFrame = ideView;
+        // For now, just display the GUI until we build the IDEFrame controller
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {

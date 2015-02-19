@@ -34,11 +34,11 @@ import javax.swing.JTextArea;
 
 import java.awt.LayoutManager;
 
-public class IDEView extends JFrame {
+public class IDEFrame extends JFrame {
     /**
      * Create the application.
      */
-    public IDEView() {
+    public IDEFrame() {
         initialize();
     }
 
@@ -91,7 +91,7 @@ public class IDEView extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
-        tpProblemSet.addTab("Problem 1", new ImageIcon(IDEView.class.getResource("/com/alee/extended/filechooser/icons/ok.png")), panel, null);
+        tpProblemSet.addTab("Problem 1", new ImageIcon(IDEFrame.class.getResource("/com/alee/extended/filechooser/icons/ok.png")), panel, null);
         panel.setLayout(new BorderLayout(0, 0));
 
         JTextArea jtxtProblemText = new JTextArea();
@@ -104,7 +104,7 @@ public class IDEView extends JFrame {
 
         JPanel panel_1 = new JPanel();
         panel_1.setBackground(Color.WHITE);
-        tpProblemSet.addTab("Problem 2", new ImageIcon(IDEView.class.getResource("/com/alee/extended/filechooser/icons/ok.png")), panel_1, null);
+        tpProblemSet.addTab("Problem 2", new ImageIcon(IDEFrame.class.getResource("/com/alee/extended/filechooser/icons/ok.png")), panel_1, null);
         panel_1.setLayout(new BorderLayout(0, 0));
 
         JTextArea txtrCreateAProgram = new JTextArea();
@@ -173,11 +173,11 @@ public class IDEView extends JFrame {
         jpnlCodeControls.add(jcmbLanguage);
 
         JButton jbtnTestSolution = new JButton("Test Solution");
-        jbtnTestSolution.setIcon(new ImageIcon(IDEView.class.getResource("/com/alee/extended/filechooser/icons/forward.png")));
+        jbtnTestSolution.setIcon(new ImageIcon(IDEFrame.class.getResource("/com/alee/extended/filechooser/icons/forward.png")));
         jpnlCodeControls.add(jbtnTestSolution);
 
         JButton jbtnSubmitSolution = new JButton("Submit Solution");
-        jbtnSubmitSolution.setIcon(new ImageIcon(IDEView.class.getResource("/com/alee/extended/filechooser/icons/ok.png")));
+        jbtnSubmitSolution.setIcon(new ImageIcon(IDEFrame.class.getResource("/com/alee/extended/filechooser/icons/ok.png")));
         jpnlCodeControls.add(jbtnSubmitSolution);
 
         JPanel jpnlTopBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -210,7 +210,7 @@ public class IDEView extends JFrame {
         jpnlBottomBar.setLayout(fl_jpnlBottomBar);
 
         JLabel jlblStatusBar = new JLabel("Connection Status: CONNECTED");
-        jlblStatusBar.setIcon(new ImageIcon(IDEView.class.getResource("/com/alee/extended/filechooser/icons/ok.png")));
+        jlblStatusBar.setIcon(new ImageIcon(IDEFrame.class.getResource("/com/alee/extended/filechooser/icons/ok.png")));
         jlblStatusBar.setForeground(Color.WHITE);
         jlblStatusBar.setFont(new Font("Tahoma", Font.BOLD, 10));
         jpnlBottomBar.add(jlblStatusBar);

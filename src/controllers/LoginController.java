@@ -31,7 +31,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import ui.IDEView;
+import ui.IDEFrame;
 import ui.LoginFrame;
 
 /**
@@ -172,7 +172,7 @@ public class LoginController implements ActionListener {
                         // Show the IDE view.
                         loginView.setVisible(false);
                         // Run the IDE controller
-                        IDEController controller = new IDEController(new IDEView(), user);
+                        IDEController controller = new IDEController(new IDEFrame(), user);
                     } else {
                         JOptionPane.showMessageDialog(loginView,
                                 "Invalid username or password.", "Login",
