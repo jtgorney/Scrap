@@ -50,6 +50,10 @@ public class CompilerRunner {
      * Result output file.
      */
     private File resultFile;
+    /**
+     * Used to identify the runner.
+     */
+    private long token = System.currentTimeMillis();
     
     /**
      * Constructor to build the runner.
@@ -63,6 +67,14 @@ public class CompilerRunner {
         this.problemId = problemId;
         this.type = type;
         sourceCode = f;
+    }
+    
+    /**
+     * Return the runner's token. Used for identification.
+     * @return Token
+     */
+    public long getToken() {
+        return token;
     }
     
     /**

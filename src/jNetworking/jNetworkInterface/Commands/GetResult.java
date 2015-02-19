@@ -26,52 +26,52 @@ package jNetworking.jNetworkInterface.Commands;
 import businessobjects.CompilerRunner;
 import jNetworking.jNetworkInterface.Command;
 import jNetworking.jNetworkInterface.Compiler;
-import jNetworking.jNetworkInterface.jNetworkInterface;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
-import util.SourceCodeFileManager;
 
 /**
  *
  * @author Jacob Gorney
  */
-public class TestSolution implements Command {
-    /**
-     * Team id of submission.
-     */
-    private int teamId = -1;
-    /**
-     * The problem id.
-     */
-    private int problemId = -1;
-    /**
-     * cpp or java.
-     */
-    private String type;
-    /**
-     * Code to be executed.
-     */
-    private String code;
+public class GetResult implements Command {
+    
+    private long token;
+    private int teamId;
     
     @Override
     public void setup(ArrayList<String> input, Socket client) {
-        // Values passed by command
-        teamId = Integer.parseInt(jNetworkInterface.base64Decode(input.get(0)));
-        problemId = Integer.parseInt(jNetworkInterface.base64Decode(input.get(1)));
-        type = jNetworkInterface.base64Decode(input.get(2)).trim();
-        code = jNetworkInterface.base64Decode(input.get(3));
+        // Input the team id and the run token
+        teamId = Integer.parseInt(input.get(0));
+        token = Long.parseLong(input.get(1));
     }
-    
+
     @Override
     public String run() {
-        // Build the file
-        File f = SourceCodeFileManager.writeSourceCode(teamId, problemId, type, code);
-        // Add the job to the compiler queue
-        Compiler comp = Compiler.getCompiler();
-        CompilerRunner runner = new CompilerRunner(teamId, problemId, type, f);
-        comp.add(runner);
-        // Add the run to the queue.
-        return String.valueOf(runner.getToken());
+        Compiler c = Compiler.getCompiler();
+        CompilerRunner runner = c.searchCompletedRunners(token, teamId);
+        // Return results
+        if (runner == null)
+            return "PROCESSING";
+        else {
+            String fileData;
+            try {
+            // Parse the results of the runner and return them.
+            File f = runner.getResultFile();
+            FileInputStream inFile = new FileInputStream(f);
+            // Read to buffer
+            byte[] buffer = new byte[(int) f.length()];
+            new DataInputStream(inFile).readFully(buffer);
+            inFile.close();
+            fileData = new String(buffer, "UTF-8");
+            } catch (IOException ex) {
+                return "ERROR";
+            }
+            // @todo parse the data
+            return fileData;
+        }
     }
 }

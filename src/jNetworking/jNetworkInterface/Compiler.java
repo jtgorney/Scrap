@@ -28,6 +28,7 @@ import compiler.CodeProcessor;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import util.ScrapServerLogger;
@@ -43,6 +44,8 @@ public class Compiler {
     private static final int THREAD_WAIT = 5000;
     private static Compiler compiler;
     private static Queue<CompilerRunner> compilerQueue = new LinkedList<>();
+    private static HashMap<Integer, ArrayList<CompilerRunner>> completedRuns = 
+            new HashMap<>();
 
     /**
      * Process the current queue of jobs. This is executed on each tick of the
@@ -73,14 +76,36 @@ public class Compiler {
                 }
                 // Record the results to the results queue
                 r.setResultFile(processor.getResult());
-                // Results.add(r);
+                // Add to the completed runs hash
+                if (completedRuns.containsKey(r.getTeamId()))
+                    // Add to existing key
+                    completedRuns.get(r.getTeamId()).add(r);
+                else {
+                    // Create the key
+                    ArrayList<CompilerRunner> runs = new ArrayList<>();
+                    runs.add(r);
+                    completedRuns.put(r.getTeamId(), runs);
+                }
             }
         } else {
             ScrapServerLogger.getLogger().write("No jobs in compiler queue.",
                     ServerLogger.LOG_NOTICE);
         }
     }
-
+    
+    public CompilerRunner searchCompletedRunners(long token, int teamId) {
+        if (completedRuns.isEmpty())
+            return null;
+        ArrayList<CompilerRunner> runs = completedRuns.get(teamId);
+        if (runs.isEmpty())
+            return null;
+        for (CompilerRunner r : runs) {
+            if (r.getToken() == token)
+                return r;
+        }
+        return null;
+    }
+    
     public void run() {
         // Just in case the thread drops
         new Thread(new Runnable() {

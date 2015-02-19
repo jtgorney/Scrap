@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import ui.IDEFrame;
 import ui.TestSolutionFrame;
@@ -146,7 +147,23 @@ public class TestSolutionController implements ActionListener {
                     // Get response
                     Thread.sleep(5000);
                     String response = client.sendCommand("testsolution", commandData);
-                    System.out.println("COMMAND RESULT: " + response);
+                    long compilerToken = Long.parseLong(response);
+                    // Wait while we get the response from the server.
+                    boolean isReturned = false;
+                    int runs = 0;
+                    while (!isReturned && runs < 10) {
+                        Thread.sleep(5000);
+                        ArrayList<String> compilerData = new ArrayList<>();
+                        compilerData.add("100");
+                        compilerData.add(String.valueOf(compilerToken));
+                        response = client.sendCommand("getresult", compilerData);
+                        if (!response.equals("PROCESSING")) {
+                            isReturned = true;
+                        } else
+                            runs++;
+                    }
+                    // Display the result to the user
+                    JOptionPane.showMessageDialog(testSolutionFrame, response);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
