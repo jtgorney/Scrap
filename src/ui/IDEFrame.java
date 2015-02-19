@@ -43,6 +43,10 @@ public class IDEFrame extends JFrame {
      * Submit Solution button.
      */
     public JButton jbtnSubmitSolution;
+    /**
+     * IDE code editor.
+     */
+    public RSyntaxTextArea rstaCode;
     
     /**
      * Create the application.
@@ -159,7 +163,7 @@ public class IDEFrame extends JFrame {
         jpnlEditor.setLayout(new BorderLayout(0, 0));
 
         // Add the editor
-        RSyntaxTextArea rstaCode = new RSyntaxTextArea(20, 60);
+        rstaCode = new RSyntaxTextArea(20, 60);
         rstaCode.setCurrentLineHighlightColor(Color.WHITE);
         rstaCode.setTabSize(3);
         rstaCode.setColumns(30);

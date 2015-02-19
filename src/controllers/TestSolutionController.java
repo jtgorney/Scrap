@@ -6,11 +6,17 @@
 package controllers;
 
 import businessobjects.CompetitionUser;
+import businessobjects.SettingsCommunicator;
+import jNetworking.jNetworkInterface.jNetworkInterface;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 import ui.IDEFrame;
 import ui.TestSolutionFrame;
@@ -20,6 +26,7 @@ import ui.TestSolutionFrame;
  * @author Jacob Gorney
  */
 public class TestSolutionController implements ActionListener {
+
     /**
      * The GUI reference to LoginView.
      */
@@ -37,6 +44,7 @@ public class TestSolutionController implements ActionListener {
 
     /**
      * Construct a test solution controller.
+     *
      * @param frame GUI
      * @param user Competition User
      * @param problemId Problem set ID
@@ -70,39 +78,43 @@ public class TestSolutionController implements ActionListener {
             }
         });
     }
-    
+
     /**
      * Set the parent IDE frame.
+     *
      * @param frame IDE frame
      */
     public void setParentIDEFrame(IDEFrame frame) {
         parent = frame;
     }
-    
+
     /**
      * Hide the parent JFrame.
      */
     public void hideParent() {
-        if (parent != null)
+        if (parent != null) {
             parent.setVisible(false);
+        }
     }
-    
+
     /**
      * Show the parent JFrame.
      */
     public void showParent() {
-        if (parent != null)
+        if (parent != null) {
             parent.setVisible(true);
+        }
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent ev) {
-        if (ev.getSource() == testSolutionFrame.btnCancel)
+        if (ev.getSource() == testSolutionFrame.btnCancel) {
             btnCancelClick();
-        else if (ev.getSource() == testSolutionFrame.btnTest)
+        } else if (ev.getSource() == testSolutionFrame.btnTest) {
             btnTestClick();
+        }
     }
-    
+
     private void btnTestClick() {
         // Build a new thread and run the operation.
         new Thread(new Runnable() {
@@ -117,14 +129,26 @@ public class TestSolutionController implements ActionListener {
                         testSolutionFrame.jpbLoading.setVisible(true);
                         testSolutionFrame.btnCancel.setEnabled(false);
                         testSolutionFrame.btnTest.setEnabled(false);
-                        
+
                     }
                 });
                 // Send the stuff to the server.
+                jNetworkInterface client = new jNetworkInterface(
+                    SettingsCommunicator.getServerAddr(),
+                    SettingsCommunicator.getServerPort(), false);
                 try {
-                    Thread.sleep(7000);
+                    // Add command data
+                    ArrayList<String> commandData = new ArrayList<>();
+                    commandData.add(jNetworkInterface.base64Encode("100"));
+                    commandData.add(jNetworkInterface.base64Encode(String.valueOf(problemId)));
+                    commandData.add(jNetworkInterface.base64Encode("cpp"));
+                    commandData.add(jNetworkInterface.base64Encode(sourceCode));
+                    // Get response
+                    Thread.sleep(5000);
+                    String response = client.sendCommand("testsolution", commandData);
+                    System.out.println("COMMAND RESULT: " + response);
                 } catch (Exception ex) {
-                    
+                    ex.printStackTrace();
                 }
                 // Revert GUI
                 SwingUtilities.invokeLater(new Runnable() {
@@ -135,16 +159,16 @@ public class TestSolutionController implements ActionListener {
                         testSolutionFrame.jpbLoading.setVisible(false);
                         testSolutionFrame.btnCancel.setEnabled(true);
                         testSolutionFrame.btnTest.setEnabled(true);
-                        
+
                     }
                 });
             }
         }).start();
     }
-    
+
     private void btnCancelClick() {
         this.testSolutionFrame.dispatchEvent(new WindowEvent(
-            testSolutionFrame, WindowEvent.WINDOW_CLOSING));
+                testSolutionFrame, WindowEvent.WINDOW_CLOSING));
         this.showParent();
     }
 }

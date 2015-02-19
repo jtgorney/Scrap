@@ -91,8 +91,9 @@ public class IDEController implements ActionListener {
      * Test Solution button click.
      */
     private void jbtnTestSolutionClick() {
+        // Run the controller
         TestSolutionController controller = new TestSolutionController(
-            new TestSolutionFrame());
+            new TestSolutionFrame(), user, -1, ideFrame.rstaCode.getText());
         // Hide windows
         controller.setParentIDEFrame(ideFrame);
         controller.hideParent();

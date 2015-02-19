@@ -43,6 +43,8 @@ import javax.swing.JProgressBar;
 public class TestSolutionFrame extends JFrame {
     public JButton btnTest;
     public JButton btnCancel;
+    public JLabel jlblTesting;
+    public JProgressBar jpbLoading;
     /**
      * Create the application.
      */
@@ -102,16 +104,20 @@ public class TestSolutionFrame extends JFrame {
         txtrYouAreAbout.setBounds(10, 75, 376, 85);
         this.getContentPane().add(txtrYouAreAbout);
 
-        JProgressBar progressBar = new JProgressBar();
-        progressBar.setIndeterminate(true);
-        progressBar.setValue(50);
-        progressBar.setBounds(10, 219, 156, 23);
-        this.getContentPane().add(progressBar);
+        jpbLoading = new JProgressBar();
+        jpbLoading.setIndeterminate(true);
+        jpbLoading.setValue(50);
+        jpbLoading.setBounds(10, 219, 156, 23);
+        this.getContentPane().add(jpbLoading);
 
-        JLabel lblTestingPleaseWait = new JLabel("Testing, Please Wait...");
-        lblTestingPleaseWait.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTestingPleaseWait.setBounds(10, 204, 156, 14);
-        this.getContentPane().add(lblTestingPleaseWait);
+        jlblTesting = new JLabel("Testing, Please Wait...");
+        jlblTesting.setHorizontalAlignment(SwingConstants.CENTER);
+        jlblTesting.setBounds(10, 204, 156, 14);
+        this.getContentPane().add(jlblTesting);
+        
+        jpbLoading.setVisible(false);
+        jlblTesting.setVisible(false);
+        
         // Show JOptionPane
         // JOptionPane.showMessageDialog(this, "Your Test Results:\n\nCompile Errors: None\nRuntime Errors: None\n\nOutput: \nHello World!");
     }
