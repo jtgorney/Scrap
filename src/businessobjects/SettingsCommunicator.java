@@ -65,6 +65,6 @@ public class SettingsCommunicator {
      * @return Save path
      */
     public static String getSavePath() {
-        return "C:\\Scrap\\";
+        return "code/";
     }
 }

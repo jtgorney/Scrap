@@ -7,8 +7,13 @@ package main;
 
 import businessobjects.SettingsCommunicator;
 import jNetworking.jNetworkInterface.jNetworkInterface;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import static java.nio.file.Files.readAllBytes;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 
 /**
  * Throw code at the server.
@@ -22,14 +27,25 @@ public class CodeTester {
                     SettingsCommunicator.getServerPort(), false);
             ArrayList<String> commandData = new ArrayList<>();
             try {
-            commandData.add(jNetworkInterface.base64Encode("1234"));
-            commandData.add(jNetworkInterface.base64Encode("1"));
-            commandData.add(jNetworkInterface.base64Encode("cpp"));
-            commandData.add(jNetworkInterface.base64Encode("#include <iostream>\n#include <iomanip>\n\nusing namespace std;\n\nint main() { cout << \"testing\" << endl; return 0; }"));
+                // Browse for file
+                final JFileChooser fc = new JFileChooser();
+                fc.showOpenDialog(null);
+                // Read file
+                String program = new String(readAllBytes(Paths.get(fc.getSelectedFile().toString())));
+                // Add command data
+                commandData.add(jNetworkInterface.base64Encode("1234"));
+                commandData.add(jNetworkInterface.base64Encode("1"));
+                commandData.add(jNetworkInterface.base64Encode("cpp"));
+                commandData.add(jNetworkInterface.base64Encode(program));
+                // Get response
+                String response = client.sendCommand("testsolution", commandData);
+                System.out.println("COMMAND RESULT: " + response);
             } catch (UnsupportedEncodingException ex) {
                 ex.printStackTrace();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-            String response = client.sendCommand("testsolution", commandData);
-            System.out.println("RESULT: " + response);
     }
 }
