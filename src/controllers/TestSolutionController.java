@@ -8,6 +8,7 @@ package controllers;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import ui.IDEFrame;
 import ui.TestSolutionFrame;
@@ -46,6 +47,13 @@ public class TestSolutionController implements ActionListener {
             }
         });
         testSolutionFrame.btnCancel.addActionListener(this);
+        // Add the closing operation to show parent frame
+        testSolutionFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent ev) {
+                showParent();
+            }
+        });
     }
     
     /**
