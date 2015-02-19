@@ -23,6 +23,7 @@
  */
 package controllers;
 
+import businessobjects.CompetitionUser;
 import java.awt.EventQueue;
 import businessobjects.User;
 import java.awt.event.ActionEvent;
@@ -40,7 +41,11 @@ public class IDEController implements ActionListener {
     /**
      * The GUI reference to IDEFrame.
      */
-    private IDEFrame ideFrame;
+    private final IDEFrame ideFrame;
+    /**
+     * User object.
+     */
+    private final CompetitionUser user;
 
     /**
      * Constructor for IDEFrame GUI.
@@ -48,9 +53,10 @@ public class IDEController implements ActionListener {
      * @param ideView IDEFrame class
      * @param user User object
      */
-    public IDEController(final IDEFrame ideView, User user) {
+    public IDEController(final IDEFrame ideView, CompetitionUser user) {
         // Nothing for now. Just show GUI
         this.ideFrame = ideView;
+        this.user = user;
         // For now, just display the GUI until we build the IDEFrame controller
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -86,9 +92,10 @@ public class IDEController implements ActionListener {
      * Test Solution button click.
      */
     private void jbtnTestSolutionClick() {
-        TestSolutionFrame frm = new TestSolutionFrame();
-        frm.setParentIDEFrame(this.ideFrame);
-        frm.hideParent();
-        frm.setVisible(true);
+        TestSolutionController controller = new TestSolutionController(
+            new TestSolutionFrame());
+        // Hide windows
+        controller.setParentIDEFrame(ideFrame);
+        controller.hideParent();
     }
 }

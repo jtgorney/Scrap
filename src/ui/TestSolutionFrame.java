@@ -2,8 +2,6 @@ package ui;
 
 import javax.swing.JFrame;
 
-import java.awt.Window.Type;
-
 import javax.swing.JPanel;
 
 import java.awt.Color;
@@ -21,39 +19,10 @@ import javax.swing.JProgressBar;
 
 public class TestSolutionFrame extends JFrame {
     /**
-     * Parent frame reference.
-     */
-    private IDEFrame parent;
-    
-    /**
      * Create the application.
      */
     public TestSolutionFrame() {
         initialize();
-    }
-
-    /**
-     * Set the parent IDE frame.
-     * @param frame IDE frame
-     */
-    public void setParentIDEFrame(IDEFrame frame) {
-        parent = frame;
-    }
-    
-    /**
-     * Hide the parent JFrame.
-     */
-    public void hideParent() {
-        if (parent != null)
-            parent.setVisible(false);
-    }
-    
-    /**
-     * Show the parent JFrame.
-     */
-    public void showParent() {
-        if (parent != null)
-            parent.setVisible(true);
     }
     
     /**
