@@ -34,12 +34,17 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 /**
- *
+ * Get the result of a compiler job.
  * @author Jacob Gorney
  */
 public class GetResult implements Command {
-    
+    /**
+     * Token of job.
+     */
     private long token;
+    /**
+     * Team ID associated with job.
+     */
     private int teamId;
     
     @Override

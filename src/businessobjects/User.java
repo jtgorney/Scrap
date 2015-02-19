@@ -61,4 +61,12 @@ public class User {
         this.username = username;
         this.password = password;
     }
+    
+    /**
+     * Get the user id.
+     * @return User id
+     */
+    public int getId() {
+        return userId;
+    }
 }

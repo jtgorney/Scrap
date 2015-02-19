@@ -47,8 +47,13 @@ public class CompetitionUser extends User {
      */
     public CompetitionUser(String username, String password) {
         super(username, password);
+        userId = -1;
     }
-
+    
+    /**
+     * Authenticate the user and get their user id.
+     * @return Authenticated or not
+     */
     public boolean authenticate() {
         // @todo make this work
         if (username.isEmpty() || password.isEmpty()) {
@@ -81,15 +86,13 @@ public class CompetitionUser extends User {
             }
             // Process the response.
             authenticated = (response > -1);
+            // Set user id
+            userId = response;
             return authenticated;
         }
     }
     
     public boolean isAuthenticated() {
         return authenticated;
-    }
-    
-    private int getUserIdFromDB() {
-        return 1;
     }
 }

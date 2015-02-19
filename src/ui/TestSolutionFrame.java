@@ -34,16 +34,27 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.JProgressBar;
 
 public class TestSolutionFrame extends JFrame {
+    /**
+     * Test solution button.
+     */
     public JButton btnTest;
+    /**
+     * Cancel button.
+     */
     public JButton btnCancel;
+    /**
+     * Testing label.
+     */
     public JLabel jlblTesting;
+    /**
+     * Loading bar.
+     */
     public JProgressBar jpbLoading;
     /**
      * Create the application.
@@ -117,8 +128,5 @@ public class TestSolutionFrame extends JFrame {
         
         jpbLoading.setVisible(false);
         jlblTesting.setVisible(false);
-        
-        // Show JOptionPane
-        // JOptionPane.showMessageDialog(this, "Your Test Results:\n\nCompile Errors: None\nRuntime Errors: None\n\nOutput: \nHello World!");
     }
 }

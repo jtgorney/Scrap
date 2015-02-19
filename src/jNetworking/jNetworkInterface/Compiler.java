@@ -93,6 +93,12 @@ public class Compiler {
         }
     }
     
+    /**
+     * Search for a completed run.
+     * @param token Runner token
+     * @param teamId Team ID
+     * @return CompilerRunner if found, null if not
+     */
     public CompilerRunner searchCompletedRunners(long token, int teamId) {
         if (completedRuns.isEmpty())
             return null;
@@ -106,6 +112,9 @@ public class Compiler {
         return null;
     }
     
+    /**
+     * Compiler thread that runs every THREAD_WAIT seconds.
+     */
     public void run() {
         // Just in case the thread drops
         new Thread(new Runnable() {
@@ -133,10 +142,17 @@ public class Compiler {
         compilerQueue.add(c);
     }
     
+    /**
+     * Hiding constructor.
+     */
     private Compiler() {
 
     }
-
+    
+    /**
+     * Return the current compiler object.
+     * @return System compiler
+     */
     public static Compiler getCompiler() {
         if (compiler == null) {
             compiler = new Compiler();

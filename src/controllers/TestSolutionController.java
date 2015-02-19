@@ -13,9 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -23,7 +20,7 @@ import ui.IDEFrame;
 import ui.TestSolutionFrame;
 
 /**
- *
+ * Test Solution Controller.
  * @author Jacob Gorney
  */
 public class TestSolutionController implements ActionListener {
@@ -40,7 +37,13 @@ public class TestSolutionController implements ActionListener {
      * Source code builder.
      */
     private final String sourceCode;
+    /**
+     * User reference.
+     */
     private final CompetitionUser user;
+    /**
+     * Problem ID
+     */
     private final int problemId;
 
     /**
@@ -115,7 +118,10 @@ public class TestSolutionController implements ActionListener {
             btnTestClick();
         }
     }
-
+    
+    /**
+     * Test solution button click event.
+     */
     private void btnTestClick() {
         // Build a new thread and run the operation.
         new Thread(new Runnable() {
@@ -140,7 +146,7 @@ public class TestSolutionController implements ActionListener {
                 try {
                     // Add command data
                     ArrayList<String> commandData = new ArrayList<>();
-                    commandData.add(jNetworkInterface.base64Encode("100"));
+                    commandData.add(jNetworkInterface.base64Encode(String.valueOf(user.getId())));
                     commandData.add(jNetworkInterface.base64Encode(String.valueOf(problemId)));
                     commandData.add(jNetworkInterface.base64Encode("cpp"));
                     commandData.add(jNetworkInterface.base64Encode(sourceCode));
@@ -154,7 +160,7 @@ public class TestSolutionController implements ActionListener {
                     while (!isReturned && runs < 10) {
                         Thread.sleep(5000);
                         ArrayList<String> compilerData = new ArrayList<>();
-                        compilerData.add("100");
+                        compilerData.add(String.valueOf(user.getId()));
                         compilerData.add(String.valueOf(compilerToken));
                         response = client.sendCommand("getresult", compilerData);
                         if (!response.equals("PROCESSING")) {
@@ -183,6 +189,9 @@ public class TestSolutionController implements ActionListener {
         }).start();
     }
 
+    /**
+     * Cancel button click event.
+     */
     private void btnCancelClick() {
         this.testSolutionFrame.dispatchEvent(new WindowEvent(
                 testSolutionFrame, WindowEvent.WINDOW_CLOSING));
