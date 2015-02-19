@@ -47,6 +47,10 @@ public class IDEFrame extends JFrame {
      * IDE code editor.
      */
     public RSyntaxTextArea rstaCode;
+    /**
+    * Problem set tabs.
+    */
+    public JTabbedPane tpProblemSet;
     
     /**
      * Create the application.
@@ -98,7 +102,7 @@ public class IDEFrame extends JFrame {
         SpringLayout springLayout = new SpringLayout();
         this.getContentPane().setLayout(springLayout);
 
-        JTabbedPane tpProblemSet = new JTabbedPane(JTabbedPane.TOP);
+        tpProblemSet = new JTabbedPane(JTabbedPane.TOP);
         springLayout.putConstraint(SpringLayout.EAST, tpProblemSet, -10, SpringLayout.EAST, this.getContentPane());
         this.getContentPane().add(tpProblemSet);
 
