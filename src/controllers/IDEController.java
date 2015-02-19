@@ -25,7 +25,10 @@ package controllers;
 
 import java.awt.EventQueue;
 import businessobjects.User;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import ui.IDEFrame;
+import ui.TestSolutionFrame;
 
 /**
  * IDEFrame Controller for programming interaction.
@@ -33,8 +36,7 @@ import ui.IDEFrame;
  * @author Jacob Gorney
  *
  */
-public class IDEController {
-
+public class IDEController implements ActionListener {
     /**
      * The GUI reference to IDEFrame.
      */
@@ -59,5 +61,35 @@ public class IDEController {
                 }
             }
         });
+        // Action listeners
+        ideFrame.jbtnTestSolution.addActionListener(this);
+        ideFrame.jbtnSubmitSolution.addActionListener(this);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent ev) {
+        System.out.println("Testing");
+        if (ev.getSource() == ideFrame.jbtnSubmitSolution) {
+            jbtnSubmitSolutionClick();
+        } else if (ev.getSource() == ideFrame.jbtnTestSolution) {
+            jbtnTestSolutionClick();
+        }
+    }
+    
+    /**
+     * Submit Solution button click.
+     */
+    private void jbtnSubmitSolutionClick() {
+        
+    }
+    
+    /**
+     * Test Solution button click.
+     */
+    private void jbtnTestSolutionClick() {
+        TestSolutionFrame frm = new TestSolutionFrame();
+        frm.setParentIDEFrame(this.ideFrame);
+        frm.hideParent();
+        frm.setVisible(true);
     }
 }

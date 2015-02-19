@@ -36,12 +36,21 @@ import java.awt.LayoutManager;
 
 public class IDEFrame extends JFrame {
     /**
+     * Test solution button.
+     */
+    public JButton jbtnTestSolution;
+    /**
+     * Submit Solution button.
+     */
+    public JButton jbtnSubmitSolution;
+    
+    /**
      * Create the application.
      */
     public IDEFrame() {
         initialize();
     }
-
+    
     /**
      * Initialize the contents of the frame.
      */
@@ -172,11 +181,11 @@ public class IDEFrame extends JFrame {
         jcmbLanguage.addItem("C++ 14");
         jpnlCodeControls.add(jcmbLanguage);
 
-        JButton jbtnTestSolution = new JButton("Test Solution");
+        jbtnTestSolution = new JButton("Test Solution");
         jbtnTestSolution.setIcon(new ImageIcon(IDEFrame.class.getResource("/com/alee/extended/filechooser/icons/forward.png")));
         jpnlCodeControls.add(jbtnTestSolution);
 
-        JButton jbtnSubmitSolution = new JButton("Submit Solution");
+        jbtnSubmitSolution = new JButton("Submit Solution");
         jbtnSubmitSolution.setIcon(new ImageIcon(IDEFrame.class.getResource("/com/alee/extended/filechooser/icons/ok.png")));
         jpnlCodeControls.add(jbtnSubmitSolution);
 
