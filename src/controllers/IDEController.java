@@ -25,7 +25,6 @@ package controllers;
 
 import businessobjects.CompetitionUser;
 import java.awt.EventQueue;
-import businessobjects.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import ui.IDEFrame;

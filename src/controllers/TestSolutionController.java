@@ -8,6 +8,7 @@ package controllers;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import ui.IDEFrame;
 import ui.TestSolutionFrame;
 
@@ -32,7 +33,7 @@ public class TestSolutionController implements ActionListener {
      */
     public TestSolutionController(final TestSolutionFrame frame) {
         // Assign the GUI
-        this.testSolutionFrame = frame;
+        testSolutionFrame = frame;
         // Open the GUI via EventQueue
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -44,6 +45,7 @@ public class TestSolutionController implements ActionListener {
                 }
             }
         });
+        testSolutionFrame.btnCancel.addActionListener(this);
     }
     
     /**
@@ -72,6 +74,14 @@ public class TestSolutionController implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent ev) {
-        
+        if (ev.getSource() == testSolutionFrame.btnCancel) {
+            btnCancelClick();
+        }
+    }
+    
+    private void btnCancelClick() {
+        this.testSolutionFrame.dispatchEvent(new WindowEvent(
+            testSolutionFrame, WindowEvent.WINDOW_CLOSING));
+        this.showParent();
     }
 }
