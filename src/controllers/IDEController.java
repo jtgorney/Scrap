@@ -27,6 +27,7 @@ import businessobjects.CompetitionUser;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import ui.IDEFrame;
 import ui.TestSolutionFrame;
 
@@ -91,14 +92,19 @@ public class IDEController implements ActionListener {
      * Test Solution button click.
      */
     private void jbtnTestSolutionClick() {
-        // Run the controller
-        TestSolutionController controller = new TestSolutionController(
-            new TestSolutionFrame(), user,
-                (ideFrame.tpProblemSet.getSelectedIndex() + 1),
-                ideFrame.rstaCode.getText(), getCompilerType());
-        // Hide windows
-        controller.setParentIDEFrame(ideFrame);
-        controller.hideParent();
+        if (!ideFrame.rstaCode.getText().trim().equals("")) {
+            // Run the controller
+            TestSolutionController controller = new TestSolutionController(
+                new TestSolutionFrame(), user,
+                    (ideFrame.tpProblemSet.getSelectedIndex() + 1),
+                    ideFrame.rstaCode.getText(), getCompilerType());
+            // Hide windows
+            controller.setParentIDEFrame(ideFrame);
+            controller.hideParent();
+        } else {
+            JOptionPane.showMessageDialog(ideFrame, "Pleae input a program to test.",
+                    "No Program", JOptionPane.WARNING_MESSAGE);
+        }
     }
     
     /**
