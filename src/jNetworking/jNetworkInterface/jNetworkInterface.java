@@ -31,6 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 
@@ -147,13 +148,16 @@ public class jNetworkInterface {
         if (isConnected) {
             try {
                 // Send the command
-                PrintWriter socketOut = new PrintWriter(socket.getOutputStream(), true);
-                BufferedReader socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                PrintWriter socketOut = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(),
+                        StandardCharsets.UTF_8), true);
+                BufferedReader socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream(),
+                        StandardCharsets.UTF_8));
                 // @todo change to accept data
                 socketOut.println(command);
                 // Print the command data
-                for (String s : data)
-                    socketOut.println(s);
+                if (data != null)
+                    for (String s : data)
+                        socketOut.println(s);
                 socketOut.println("END COMMAND");
                 socketOut.flush();
                 // Get the response from the server
@@ -161,7 +165,7 @@ public class jNetworkInterface {
                 String response = "";
                 while ((line = socketIn.readLine()) != null)
                     response += line;
-                    // Close the connections
+                // Close the connections
                 socketOut.close();
                 socketIn.close();
                 closeConnection();
@@ -187,6 +191,7 @@ public class jNetworkInterface {
             try {
                 responseEnd = Long.parseLong(sendCommand("ping", null));
             } catch (NumberFormatException ex) {
+                ex.printStackTrace();
                 quality = -1;
                 return;
             }
@@ -254,7 +259,7 @@ public class jNetworkInterface {
      * @throws UnsupportedEncodingException
      */
     public static String base64Encode(String s) throws UnsupportedEncodingException {
-        return Base64.getEncoder().encodeToString(s.getBytes("UTF-8"));
+        return Base64.getEncoder().encodeToString(s.getBytes(StandardCharsets.UTF_8));
     }
 
     /**
@@ -278,6 +283,8 @@ public class jNetworkInterface {
                 socket = (SSLSocket) sslSocketFactory.createSocket(hostname, port);
             } else
                 socket = new Socket(hostname, port);
+            // Set the default timeout.
+            socket.setSoTimeout(jNetworkInterfaceServer.TIMEOUT);
             isConnected = true;
         } catch (IOException ex) {
             isConnected = false;

@@ -8,6 +8,7 @@ package jNetworking.jNetworkInterface.Commands;
 import businessobjects.CompilerRunner;
 import jNetworking.jNetworkInterface.Command;
 import jNetworking.jNetworkInterface.Compiler;
+import jNetworking.jNetworkInterface.jNetworkInterface;
 import java.io.File;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -38,10 +39,10 @@ public class TestSolution implements Command {
     @Override
     public void setup(ArrayList<String> input, Socket client) {
         // Values passed by command
-        teamId = Integer.parseInt(input.get(0));
-        problemId = Integer.parseInt(input.get(1));
-        type = input.get(2).trim();
-        code = input.get(3);
+        teamId = Integer.parseInt(jNetworkInterface.base64Decode(input.get(0)));
+        problemId = Integer.parseInt(jNetworkInterface.base64Decode(input.get(1)));
+        type = jNetworkInterface.base64Decode(input.get(2)).trim();
+        code = jNetworkInterface.base64Decode(input.get(3));
     }
     
     @Override

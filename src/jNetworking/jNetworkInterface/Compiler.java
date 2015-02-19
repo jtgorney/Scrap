@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import util.ScrapServerLogger;
 
 /**
  * Compiler class implements static compiler sub system and queue. Events fire
@@ -30,10 +31,12 @@ public class Compiler {
      * thread below.
      */
     private synchronized void processQueue() {
-        System.out.println("Processing code queue.");
+        ScrapServerLogger.getLogger().write("Processing compiler queue.",
+                    ServerLogger.LOG_NOTICE);
         // Setup compiler system
         if (!compilerQueue.isEmpty()) {
-            System.out.println("Jobs in queue: " + compilerQueue.size());
+            ScrapServerLogger.getLogger().write("Jobs in queue: " + 
+                    compilerQueue.size(), ServerLogger.LOG_NOTICE);
             CodeProcessor processor = CodeProcessor.getInstance();
             // Get the jobs
             ArrayList<File> jobs = new ArrayList<>();
@@ -55,7 +58,8 @@ public class Compiler {
                 // Results.add(r);
             }
         } else {
-            System.out.println("No jobs in compiler queue.");
+            ScrapServerLogger.getLogger().write("No jobs in compiler queue.",
+                    ServerLogger.LOG_NOTICE);
         }
     }
 

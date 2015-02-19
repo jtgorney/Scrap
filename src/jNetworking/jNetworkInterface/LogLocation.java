@@ -24,23 +24,35 @@
 
 package jNetworking.jNetworkInterface;
 
-import java.net.Socket;
-import java.util.ArrayList;
-
 /**
- * Interface class for commands.
+ * Singleton like object for log location.
  */
-public interface Command {
+public class LogLocation {
     /**
-     * Setup method for pre-execution code.
-     * @param input Input parameters
-     * @param client Input socket
+     * Location of file.
      */
-    public abstract void setup(ArrayList<String> input, Socket client);
+    private static String location;
 
     /**
-     * Command execution. The 'Workhorse' of the command.
-     * @return Result
+     * Default constructor hidden.
      */
-    public abstract String run();
+    private LogLocation() {
+        return;
+    }
+
+    /**
+     * Set the location.
+     * @param loc New location
+     */
+    public static void setLocation(String loc) {
+        location = loc;
+    }
+
+    /**
+     * Get the location.
+     * @return Log location
+     */
+    public static String getLocation() {
+        return location;
+    }
 }
