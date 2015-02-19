@@ -9,22 +9,17 @@ import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.SpringLayout;
-import javax.swing.UIManager;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
-
-import com.alee.laf.WebLookAndFeel;
 
 import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JMenu;
 
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.GridLayout;
@@ -39,35 +34,7 @@ import javax.swing.JTextArea;
 
 import java.awt.LayoutManager;
 
-public class IDEView {
-
-    private JFrame jfrmIDEView;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        // Set the look and feel of the application.
-        try {
-            // Set cross-platform Java L&F (also called "Metal")
-            UIManager.setLookAndFeel(
-                    UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            // Do nothing else.
-        }
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    IDEView window = new IDEView();
-                    window.jfrmIDEView.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
+public class IDEView extends JFrame {
     /**
      * Create the application.
      */
@@ -79,16 +46,15 @@ public class IDEView {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-
-        jfrmIDEView = new JFrame();
-        jfrmIDEView.setTitle("Scrap Competition System | Version 1.0.0");
-        jfrmIDEView.setBounds(100, 100, 1053, 761);
-        jfrmIDEView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jfrmIDEView.setLocationRelativeTo(null);
+        
+        this.setTitle("Scrap Competition System | Version 1.0.0");
+        this.setBounds(100, 100, 1053, 761);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.setMargin(new Insets(2, 2, 2, 2));
-        jfrmIDEView.setJMenuBar(menuBar);
+        this.setJMenuBar(menuBar);
 
         JMenu mnFile = new JMenu("File");
         menuBar.add(mnFile);
@@ -117,11 +83,11 @@ public class IDEView {
         JMenuItem mntmAboutScrap = new JMenuItem("About Scrap");
         mnHelp.add(mntmAboutScrap);
         SpringLayout springLayout = new SpringLayout();
-        jfrmIDEView.getContentPane().setLayout(springLayout);
+        this.getContentPane().setLayout(springLayout);
 
         JTabbedPane tpProblemSet = new JTabbedPane(JTabbedPane.TOP);
-        springLayout.putConstraint(SpringLayout.EAST, tpProblemSet, -10, SpringLayout.EAST, jfrmIDEView.getContentPane());
-        jfrmIDEView.getContentPane().add(tpProblemSet);
+        springLayout.putConstraint(SpringLayout.EAST, tpProblemSet, -10, SpringLayout.EAST, this.getContentPane());
+        this.getContentPane().add(tpProblemSet);
 
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
@@ -177,10 +143,10 @@ public class IDEView {
 
         JPanel jpnlEditor = new JPanel();
         springLayout.putConstraint(SpringLayout.WEST, tpProblemSet, 6, SpringLayout.EAST, jpnlEditor);
-        springLayout.putConstraint(SpringLayout.EAST, jpnlEditor, -337, SpringLayout.EAST, jfrmIDEView.getContentPane());
-        springLayout.putConstraint(SpringLayout.WEST, jpnlEditor, 10, SpringLayout.WEST, jfrmIDEView.getContentPane());
+        springLayout.putConstraint(SpringLayout.EAST, jpnlEditor, -337, SpringLayout.EAST, this.getContentPane());
+        springLayout.putConstraint(SpringLayout.WEST, jpnlEditor, 10, SpringLayout.WEST, this.getContentPane());
         jpnlEditor.setBackground(Color.WHITE);
-        jfrmIDEView.getContentPane().add(jpnlEditor);
+        this.getContentPane().add(jpnlEditor);
         jpnlEditor.setLayout(new BorderLayout(0, 0));
 
         // Add the editor
@@ -196,9 +162,9 @@ public class IDEView {
 
         JPanel jpnlCodeControls = new JPanel();
         springLayout.putConstraint(SpringLayout.SOUTH, jpnlEditor, -6, SpringLayout.NORTH, jpnlCodeControls);
-        springLayout.putConstraint(SpringLayout.EAST, jpnlCodeControls, -337, SpringLayout.EAST, jfrmIDEView.getContentPane());
-        springLayout.putConstraint(SpringLayout.WEST, jpnlCodeControls, 10, SpringLayout.WEST, jfrmIDEView.getContentPane());
-        jfrmIDEView.getContentPane().add(jpnlCodeControls);
+        springLayout.putConstraint(SpringLayout.EAST, jpnlCodeControls, -337, SpringLayout.EAST, this.getContentPane());
+        springLayout.putConstraint(SpringLayout.WEST, jpnlCodeControls, 10, SpringLayout.WEST, this.getContentPane());
+        this.getContentPane().add(jpnlCodeControls);
         jpnlCodeControls.setLayout(new GridLayout(0, 3, 5, 5));
 
         JComboBox<String> jcmbLanguage = new JComboBox<>();
@@ -217,12 +183,12 @@ public class IDEView {
         JPanel jpnlTopBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
         springLayout.putConstraint(SpringLayout.NORTH, jpnlEditor, 6, SpringLayout.SOUTH, jpnlTopBar);
         springLayout.putConstraint(SpringLayout.NORTH, tpProblemSet, 6, SpringLayout.SOUTH, jpnlTopBar);
-        springLayout.putConstraint(SpringLayout.NORTH, jpnlTopBar, 0, SpringLayout.NORTH, jfrmIDEView.getContentPane());
-        springLayout.putConstraint(SpringLayout.WEST, jpnlTopBar, 0, SpringLayout.WEST, jfrmIDEView.getContentPane());
-        springLayout.putConstraint(SpringLayout.SOUTH, jpnlTopBar, 24, SpringLayout.NORTH, jfrmIDEView.getContentPane());
-        springLayout.putConstraint(SpringLayout.EAST, jpnlTopBar, 0, SpringLayout.EAST, jfrmIDEView.getContentPane());
+        springLayout.putConstraint(SpringLayout.NORTH, jpnlTopBar, 0, SpringLayout.NORTH, this.getContentPane());
+        springLayout.putConstraint(SpringLayout.WEST, jpnlTopBar, 0, SpringLayout.WEST, this.getContentPane());
+        springLayout.putConstraint(SpringLayout.SOUTH, jpnlTopBar, 24, SpringLayout.NORTH, this.getContentPane());
+        springLayout.putConstraint(SpringLayout.EAST, jpnlTopBar, 0, SpringLayout.EAST, this.getContentPane());
         jpnlTopBar.setBackground(new java.awt.Color(0, 153, 51));
-        jfrmIDEView.getContentPane().add(jpnlTopBar);
+        this.getContentPane().add(jpnlTopBar);
 
         JLabel jlblTopContent = new JLabel("Saginaw Valley State University | Test Contest | Time Remaining: 03:00:00 | Team: Pickles");
         jlblTopContent.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -232,13 +198,13 @@ public class IDEView {
         JPanel jpnlBottomBar = new JPanel((LayoutManager) null);
         springLayout.putConstraint(SpringLayout.SOUTH, tpProblemSet, -6, SpringLayout.NORTH, jpnlBottomBar);
         springLayout.putConstraint(SpringLayout.NORTH, jpnlCodeControls, -39, SpringLayout.NORTH, jpnlBottomBar);
-        springLayout.putConstraint(SpringLayout.WEST, jpnlBottomBar, 0, SpringLayout.WEST, jfrmIDEView.getContentPane());
-        springLayout.putConstraint(SpringLayout.EAST, jpnlBottomBar, 0, SpringLayout.EAST, jfrmIDEView.getContentPane());
+        springLayout.putConstraint(SpringLayout.WEST, jpnlBottomBar, 0, SpringLayout.WEST, this.getContentPane());
+        springLayout.putConstraint(SpringLayout.EAST, jpnlBottomBar, 0, SpringLayout.EAST, this.getContentPane());
         springLayout.putConstraint(SpringLayout.SOUTH, jpnlCodeControls, -6, SpringLayout.NORTH, jpnlBottomBar);
-        springLayout.putConstraint(SpringLayout.NORTH, jpnlBottomBar, -24, SpringLayout.SOUTH, jfrmIDEView.getContentPane());
-        springLayout.putConstraint(SpringLayout.SOUTH, jpnlBottomBar, 0, SpringLayout.SOUTH, jfrmIDEView.getContentPane());
+        springLayout.putConstraint(SpringLayout.NORTH, jpnlBottomBar, -24, SpringLayout.SOUTH, this.getContentPane());
+        springLayout.putConstraint(SpringLayout.SOUTH, jpnlBottomBar, 0, SpringLayout.SOUTH, this.getContentPane());
         jpnlBottomBar.setBackground(new java.awt.Color(0, 153, 51));
-        jfrmIDEView.getContentPane().add(jpnlBottomBar);
+        this.getContentPane().add(jpnlBottomBar);
         FlowLayout fl_jpnlBottomBar = new FlowLayout(FlowLayout.LEFT);
         fl_jpnlBottomBar.setVgap(4);
         jpnlBottomBar.setLayout(fl_jpnlBottomBar);
@@ -250,10 +216,6 @@ public class IDEView {
         jpnlBottomBar.add(jlblStatusBar);
 
         // Center
-        jfrmIDEView.setLocationRelativeTo(null);
-    }
-
-    public JFrame getFrame() {
-        return jfrmIDEView;
+        this.setLocationRelativeTo(null);
     }
 }

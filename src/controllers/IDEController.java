@@ -53,7 +53,7 @@ public class IDEController {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ideView.getFrame().setVisible(true);
+                    ideView.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
