@@ -61,6 +61,7 @@ public class DBMgr {
      * @param database Database name
      * @param username Database username
      * @param password Database password
+     * @return boolean
      */
     public static boolean build(String host, String database, String username,
             String password) {
