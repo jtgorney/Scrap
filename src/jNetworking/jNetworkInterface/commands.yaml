@@ -2,3 +2,4 @@ ping: Ping
 testsolution: TestSolution
 clientlogin: ClientLogin
 getresult: GetResult
+getusers: GetUsers

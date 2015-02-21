@@ -177,7 +177,10 @@ public class TestSolutionController implements ActionListener {
                         } else
                             runs++;
                     }
+                    // Decode the stream
+                    response = jNetworkInterface.base64Decode(response);
                     // Display the result to the user
+                    System.out.println(response);
                     JOptionPane.showMessageDialog(testSolutionFrame, response);
                     // Close
                     testSolutionFrame.dispatchEvent(new WindowEvent(

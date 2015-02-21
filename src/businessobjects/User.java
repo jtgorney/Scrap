@@ -57,7 +57,21 @@ public class User {
      * @param username Username
      * @param password Password
      */
-    protected User(String username, String password) {
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    
+    /**
+     * Constructor to build a user that has already been authenticated or the
+     * identity is already known.
+     * 
+     * @param userId User ID
+     * @param username Username
+     * @param password Password
+     */
+    public User(int userId, String username, String password) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
     }
@@ -68,5 +82,21 @@ public class User {
      */
     public int getId() {
         return userId;
+    }
+    
+    /**
+     * Return the username.
+     * @return Username
+     */
+    public String getUsername() {
+        return username;
+    }
+    
+    /**
+     * Return the password.
+     * @return Password
+     */
+    public String getPassword() {
+        return password;
     }
 }

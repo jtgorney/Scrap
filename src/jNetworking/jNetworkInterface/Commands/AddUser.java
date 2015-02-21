@@ -23,65 +23,46 @@
  */
 package jNetworking.jNetworkInterface.Commands;
 
-import businessobjects.CompilerRunner;
+import db.DBMgr;
 import jNetworking.jNetworkInterface.Command;
-import jNetworking.jNetworkInterface.Compiler;
 import jNetworking.jNetworkInterface.jNetworkInterface;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
 /**
- * Get the result of a compiler job.
+ * Command to add a user.
+ * 
  * @author Jacob Gorney
  */
-public class GetResult implements Command {
+public class AddUser implements Command {
     /**
-     * Token of job.
+     * Username of new user.
      */
-    private long token;
+    private String username;
     /**
-     * Team ID associated with job.
+     * Password of new user.
      */
-    private int teamId;
+    private String password;
     
     @Override
     public void setup(ArrayList<String> input, Socket client) {
-        // Input the team id and the run token
-        teamId = Integer.parseInt(input.get(0));
-        token = Long.parseLong(input.get(1));
+        username = jNetworkInterface.base64Decode(input.get(0));
+        password = jNetworkInterface.base64Decode(input.get(1));
     }
 
     @Override
     public String run() {
-        Compiler c = Compiler.getCompiler();
-        CompilerRunner runner = c.searchCompletedRunners(token, teamId);
-        // Return results
-        if (runner == null)
-            return "PROCESSING";
-        else {
-            String fileData;
-            try {
-            // Parse the results of the runner and return them.
-            File f = runner.getResultFile();
-            FileInputStream inFile = new FileInputStream(f);
-            // Read to buffer
-            byte[] buffer = new byte[(int) f.length()];
-            new DataInputStream(inFile).readFully(buffer);
-            inFile.close();
-            fileData = new String(buffer, "UTF-8");
-            } catch (IOException ex) {
-                return "ERROR";
-            }
-            // @todo send the data.
-            try {
-                return jNetworkInterface.base64Encode(fileData);
-            } catch (Exception ex) {
-                return "ERROR";
-            }
+        // Add the user
+        DBMgr dbmgr = new DBMgr();
+        if (!DBMgr.build("mysql.rentalsbyjb.com", "cs421_scrap",
+                "cs421_scrap", "cs421#scrap")) {
+            System.out.println("Error connecting to database.");
+            System.exit(0);
         }
+        // Add the user
+        if (dbmgr.addUser(username, password))
+            return "OK";
+        else
+            return "ERROR";
     }
 }
