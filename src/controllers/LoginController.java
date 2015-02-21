@@ -172,6 +172,8 @@ public class LoginController implements ActionListener {
                         // Show the IDE view.
                         loginView.setVisible(false);
                         // Run the IDE controller
+                        JOptionPane.showMessageDialog(loginView, "You have successfully authenticated.",
+                                "Authentication Successful", JOptionPane.INFORMATION_MESSAGE);
                         IDEController controller = new IDEController(new IDEFrame(), user);
                     } else {
                         JOptionPane.showMessageDialog(loginView,
