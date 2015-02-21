@@ -34,7 +34,7 @@ public class OutputParser {
                 if (line.equals(CodeProcessor.BEGIN_STD_OUT)) {
                     line = s.nextLine();
                     while (! line.equals(CodeProcessor.END_STD_OUT)) {
-                        stdOutput += line + "\n";
+                        stdOutput += line.substring(1) + "\n";
                         line = s.nextLine();
                     }
                 }
@@ -42,7 +42,7 @@ public class OutputParser {
                 if (line.equals(CodeProcessor.BEGIN_STD_ERR)) {
                     line = s.nextLine();
                     while (! line.equals(CodeProcessor.END_STD_ERR)) {
-                        stdError += line + "\n";
+                        stdError += line.substring(1) + "\n";
                         line = s.nextLine();
                     }
                 }
