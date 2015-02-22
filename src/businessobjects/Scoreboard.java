@@ -35,8 +35,8 @@ public class Scoreboard {
     private static Scoreboard scoreboard;
     
     public boolean scoreSolution(int problemId, OutputParser solution) {
-        // Return true for now because the problem subsystem is not implemented.
-        return true;
+        // @todo revise to score. Right now its compiler error only.
+        return (solution.getStatusHeader() == "OK");
     }
     
     public static Scoreboard getScoreboard() {
