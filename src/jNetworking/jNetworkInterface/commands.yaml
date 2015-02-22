@@ -4,3 +4,4 @@ clientlogin: ClientLogin
 getresult: GetResult
 getusers: GetUsers
 adduser: AddUser
+checkuserexists: CheckUserExists

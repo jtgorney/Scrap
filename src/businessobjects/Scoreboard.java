@@ -21,41 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package main;
+package businessobjects;
 
-import controllers.AdminController;
-import jNetworking.jNetworkInterface.*;
-import javax.swing.UIManager;
-import ui.AdminFrame;
+import compiler.OutputParser;
 
 /**
- * Scrap server and methods.
+ * Competition scoreboard to keep track of score.
+ * 
+ * @author Jacob Gorney
  */
-public class Server {
-
-    private jNetworkInterfaceServer server;
-
-    public static void main(String[] args) {
-        new Server();
+public class Scoreboard {
+    
+    private static Scoreboard scoreboard;
+    
+    public boolean scoreSolution(int problemId, OutputParser solution) {
+        // Return true for now because the problem subsystem is not implemented.
+        return true;
     }
-
-    public Server() {
-        // Set the look and feel of the application.
-        try {
-            // Set cross-platform Java L&F (also called "Metal")
-            UIManager.setLookAndFeel(
-                    UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            // Do nothing else.
-        }
-        // Not setting the location of the log file will default to the root drive.
-        // Ensure this program is executed with appropriate filesystem permissions.
-        // LogLocation.setLocation("/home/jacob/Desktop/log.txt");
-        // Create the server
-        // Get the server input stuff
-        server = new jNetworkInterfaceServer(8888, 100, false);
-        server.setServerName("Scrap Competition Server");
-        server.run();
+    
+    public static Scoreboard getScoreboard() {
+        if (scoreboard == null)
+            scoreboard = new Scoreboard();
+        return scoreboard;
+    }
+    
+    private Scoreboard() {
+        // Private default constructor.
     }
 }
