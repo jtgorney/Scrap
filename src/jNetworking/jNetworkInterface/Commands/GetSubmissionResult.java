@@ -36,7 +36,7 @@ import java.util.ArrayList;
  * Get the result of a compiler job.
  * @author Jacob Gorney
  */
-public class GetResult implements Command {
+public class GetSubmissionResult implements Command {
     /**
      * Token of job.
      */
@@ -60,26 +60,10 @@ public class GetResult implements Command {
         // Return results
         if (runner == null)
             return "PROCESSING";
-        else {
-            String out;
-            try {
-            // Parse the results of the runner and return them.
-            File f = runner.getResultFile();
-            OutputParser parser = new OutputParser(f);
-            // Send the response message back to the client
-            if (parser.getStatusHeader().equals("OK"))
-                out = "Program has executed and compiled successfully.";
+        else
+            if (runner.isAccepted())
+                return "ACCEPTED";
             else
-                out = "Program has generated an error.";
-            } catch (Exception ex) {
-                return "ERROR";
-            }
-            // @todo send the data.
-            try {
-                return jNetworkInterface.base64Encode(out);
-            } catch (Exception ex) {
-                return "ERROR";
-            }
-        }
+                return "INVALID";
     }
 }

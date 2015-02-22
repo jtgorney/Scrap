@@ -5,3 +5,5 @@ getresult: GetResult
 getusers: GetUsers
 adduser: AddUser
 checkuserexists: CheckUserExists
+submitsolution: SubmitSolution
+getsubmissionresult: GetSubmissionResult

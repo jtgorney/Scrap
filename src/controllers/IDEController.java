@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import ui.IDEFrame;
+import ui.SubmitSolutionFrame;
 import ui.TestSolutionFrame;
 
 /**
@@ -85,7 +86,19 @@ public class IDEController implements ActionListener {
      * Submit Solution button click.
      */
     private void jbtnSubmitSolutionClick() {
-        
+        if (!ideFrame.rstaCode.getText().trim().equals("")) {
+            // Run the controller
+            SubmitSolutionController controller = new SubmitSolutionController(
+                new SubmitSolutionFrame(), user,
+                    (ideFrame.tpProblemSet.getSelectedIndex() + 1),
+                    ideFrame.rstaCode.getText(), getCompilerType());
+            // Hide windows
+            controller.setParentIDEFrame(ideFrame);
+            controller.hideParent();
+        } else {
+            JOptionPane.showMessageDialog(ideFrame, "Pleae input a program to submit.",
+                    "No Program", JOptionPane.WARNING_MESSAGE);
+        }
     }
     
     /**

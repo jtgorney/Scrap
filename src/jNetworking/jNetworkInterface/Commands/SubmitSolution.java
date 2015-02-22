@@ -24,62 +24,54 @@
 package jNetworking.jNetworkInterface.Commands;
 
 import businessobjects.CompilerRunner;
-import compiler.OutputParser;
 import jNetworking.jNetworkInterface.Command;
 import businessobjects.Compiler;
 import jNetworking.jNetworkInterface.jNetworkInterface;
 import java.io.File;
 import java.net.Socket;
 import java.util.ArrayList;
+import util.SourceCodeFileManager;
 
 /**
- * Get the result of a compiler job.
+ *
  * @author Jacob Gorney
  */
-public class GetResult implements Command {
+public class SubmitSolution implements Command {
     /**
-     * Token of job.
+     * Team id of submission.
      */
-    private long token;
+    private int teamId = -1;
     /**
-     * Team ID associated with job.
+     * The problem id.
      */
-    private int teamId;
+    private int problemId = -1;
+    /**
+     * cpp or java.
+     */
+    private String type;
+    /**
+     * Code to be executed.
+     */
+    private String code;
     
     @Override
     public void setup(ArrayList<String> input, Socket client) {
-        // Input the team id and the run token
-        teamId = Integer.parseInt(input.get(0));
-        token = Long.parseLong(input.get(1));
+        // Values passed by command
+        teamId = Integer.parseInt(jNetworkInterface.base64Decode(input.get(0)));
+        problemId = Integer.parseInt(jNetworkInterface.base64Decode(input.get(1)));
+        type = jNetworkInterface.base64Decode(input.get(2)).trim();
+        code = jNetworkInterface.base64Decode(input.get(3));
     }
-
+    
     @Override
     public String run() {
-        Compiler c = Compiler.getCompiler();
-        CompilerRunner runner = c.searchCompletedRunners(token, teamId);
-        // Return results
-        if (runner == null)
-            return "PROCESSING";
-        else {
-            String out;
-            try {
-            // Parse the results of the runner and return them.
-            File f = runner.getResultFile();
-            OutputParser parser = new OutputParser(f);
-            // Send the response message back to the client
-            if (parser.getStatusHeader().equals("OK"))
-                out = "Program has executed and compiled successfully.";
-            else
-                out = "Program has generated an error.";
-            } catch (Exception ex) {
-                return "ERROR";
-            }
-            // @todo send the data.
-            try {
-                return jNetworkInterface.base64Encode(out);
-            } catch (Exception ex) {
-                return "ERROR";
-            }
-        }
+        // Build the file
+        File f = SourceCodeFileManager.writeSourceCode(teamId, problemId, type, code);
+        // Add the job to the compiler queue
+        Compiler comp = Compiler.getCompiler();
+        CompilerRunner runner = new CompilerRunner(teamId, problemId, type, f, true);
+        comp.add(runner);
+        // Add the run to the queue.
+        return String.valueOf(runner.getToken());
     }
 }

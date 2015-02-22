@@ -21,10 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package jNetworking.jNetworkInterface;
+package businessobjects;
 
-import businessobjects.CompilerRunner;
 import compiler.CodeProcessor;
+import compiler.OutputParser;
+import jNetworking.jNetworkInterface.ServerLogger;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -85,6 +86,17 @@ public class Compiler {
                     ArrayList<CompilerRunner> runs = new ArrayList<>();
                     runs.add(r);
                     completedRuns.put(r.getTeamId(), runs);
+                }
+                // Score it if we can
+                if (r.isSubmission()) {
+                    try {
+                        // Score the solution
+                        r.setAccepted(Scoreboard.getScoreboard().scoreSolution(r.getProblemId(),
+                                new OutputParser(r.getResultFile())));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        // Do nothing
+                    }
                 }
             }
         } else {

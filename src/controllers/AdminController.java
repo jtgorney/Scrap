@@ -41,19 +41,20 @@ import ui.AdminFrame;
 
 /**
  * Administrative GUI controller.
- * 
+ *
  * @author Jacob Gorney
  */
 public class AdminController implements ActionListener {
+
     /**
      * The GUI reference to IDEFrame.
      */
     private final AdminFrame adminFrame;
     private final DefaultListModel listModel;
-    
+
     /**
      * Constructor for admin controller.
-     * 
+     *
      * @param adminFrame Admin GUI Frame
      */
     public AdminController(final AdminFrame adminFrame) {
@@ -74,16 +75,20 @@ public class AdminController implements ActionListener {
         });
         // Add action listeners
         this.adminFrame.jbtnAddUser.addActionListener(this);
+        this.adminFrame.jbtnExit.addActionListener(this);
         // Load user list
         loadUsers();
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == adminFrame.jbtnAddUser)
+        if (e.getSource() == adminFrame.jbtnAddUser) {
             jbtnAddUserClick();
+        } else if (e.getSource() == adminFrame.jbtnExit) {
+            jbtnExitClick();
+        }
     }
-    
+
     /**
      * Load users into the select box.
      */
@@ -105,15 +110,17 @@ public class AdminController implements ActionListener {
                 });
                 // Send the stuff to the server.
                 jNetworkInterface client = new jNetworkInterface(
-                    SettingsCommunicator.getServerAddr(),
-                    SettingsCommunicator.getServerPort(), false);
+                        SettingsCommunicator.getServerAddr(),
+                        SettingsCommunicator.getServerPort(), false);
                 try {
                     // Get response
                     String response = client.sendCommand("getusers", null);
-                    ArrayList<User> data = new Gson().fromJson(response, new TypeToken<ArrayList<User>>(){}.getType());
+                    ArrayList<User> data = new Gson().fromJson(response, new TypeToken<ArrayList<User>>() {
+                    }.getType());
                     // Iterate and add
-                    for (User u : data)
+                    for (User u : data) {
                         listModel.addElement(u.getId() + " - " + u.getUsername());
+                    }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -130,7 +137,7 @@ public class AdminController implements ActionListener {
             }
         }).start();
     }
-    
+
     /**
      * Click event for jbtnAddUser.
      */
@@ -145,5 +152,13 @@ public class AdminController implements ActionListener {
             }
         });
         new AddUserController(frame);
+    }
+
+    /**
+     * Exit button click.
+     */
+    private void jbtnExitClick() {
+        adminFrame.dispatchEvent(new WindowEvent(
+                adminFrame, WindowEvent.WINDOW_CLOSING));
     }
 }
