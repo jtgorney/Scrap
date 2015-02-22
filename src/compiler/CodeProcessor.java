@@ -350,14 +350,14 @@ public class CodeProcessor {
          writer.println(";" + s.nextLine());
       }
       s.close();
-      writer.println("\n" + END_STD_OUT);
+      writer.println(END_STD_OUT);
       writer.println(BEGIN_STD_ERR);
       s = new Scanner(appendedOutput[1]);
       while (s.hasNextLine()) {
          writer.println(";" + s.nextLine());
       }
       s.close();
-      writer.println("\n" + END_STD_ERR);
+      writer.println(END_STD_ERR);
       writer.println(END_OUTPUT);
    }
 }
