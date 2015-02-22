@@ -36,7 +36,7 @@ public class Scoreboard {
     
     public boolean scoreSolution(int problemId, OutputParser solution) {
         // @todo revise to score. Right now its compiler error only.
-        return (solution.getStatusHeader() == "OK");
+        return (solution.getStatusHeader().equals("OK"));
     }
     
     public static Scoreboard getScoreboard() {
