@@ -175,6 +175,16 @@ public class LoginController implements ActionListener {
                         JOptionPane.showMessageDialog(loginView, "You have successfully authenticated.",
                                 "Authentication Successful", JOptionPane.INFORMATION_MESSAGE);
                         IDEController controller = new IDEController(new IDEFrame(), user);
+                        controller.setParent(loginView);
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Reset password field and focus username
+                                loginView.jpfPassword.setText("");
+                                loginView.jtfUsername.requestFocus();
+                                loginView.jtfUsername.setText("");
+                            }
+                        });
                     } else {
                         JOptionPane.showMessageDialog(loginView,
                                 "Invalid username or password.", "Login",

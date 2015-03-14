@@ -23,6 +23,7 @@
  */
 package db;
 
+import businessobjects.Problem;
 import businessobjects.User;
 import java.sql.*;
 import java.util.ArrayList;
@@ -102,6 +103,28 @@ public class DBMgr {
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
+        }
+    }
+    
+    public ArrayList<Problem> getProblemSet() {
+        Statement stmt = null;
+        String query = "SELECT `ProblemNum`, `Title`, `Description` FROM "
+                + "`Problems` ORDER BY `ProblemNum` ASC;";
+        try {
+            stmt = getConnection().createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            // Loop
+            ArrayList<Problem> problemSet = new ArrayList<>();
+            while (result.next())
+                problemSet.add(new Problem(result.getInt("ProblemNum"),
+                result.getString("Title"), result.getString("Description")));
+            if (problemSet.size() == 0)
+                return null;
+            else
+                return problemSet;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
         }
     }
     

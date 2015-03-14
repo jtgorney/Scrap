@@ -55,6 +55,14 @@ public class IDEFrame extends JFrame {
      * Compiler combo box.
      */
     public JComboBox<String> jcmbLanguage;
+    /**
+     * Exit System option.
+     */
+    public JMenuItem mntmExitSystem;
+    /**
+     * Logout option.
+     */
+    public JMenuItem mntmLogout;
     
     /**
      * Create the application.
@@ -82,10 +90,10 @@ public class IDEFrame extends JFrame {
 
         menuBar.add(Box.createHorizontalStrut(5));
 
-        JMenuItem mntmLogout = new JMenuItem("Logout");
+        mntmLogout = new JMenuItem("Logout");
         mnFile.add(mntmLogout);
 
-        JMenuItem mntmExitSystem = new JMenuItem("Exit System");
+        mntmExitSystem = new JMenuItem("Exit System");
         mnFile.add(mntmExitSystem);
 
         JMenu mnCompetitionTools = new JMenu("Competition Tools");

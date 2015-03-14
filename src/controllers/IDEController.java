@@ -27,6 +27,8 @@ import businessobjects.CompetitionUser;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import ui.IDEFrame;
 import ui.SubmitSolutionFrame;
@@ -43,6 +45,10 @@ public class IDEController implements ActionListener {
      * The GUI reference to IDEFrame.
      */
     private final IDEFrame ideFrame;
+    /**
+     * GUI Ref to login frame.
+     */
+    private JFrame parent;
     /**
      * User object.
      */
@@ -71,6 +77,8 @@ public class IDEController implements ActionListener {
         // Action listeners
         ideFrame.jbtnTestSolution.addActionListener(this);
         ideFrame.jbtnSubmitSolution.addActionListener(this);
+        ideFrame.mntmExitSystem.addActionListener(this);
+        ideFrame.mntmLogout.addActionListener(this);
     }
     
     @Override
@@ -79,7 +87,40 @@ public class IDEController implements ActionListener {
             jbtnSubmitSolutionClick();
         } else if (ev.getSource() == ideFrame.jbtnTestSolution) {
             jbtnTestSolutionClick();
+        } else if (ev.getSource() == ideFrame.mntmExitSystem) {
+            mntmExitSystemClick();
+        } else if (ev.getSource() == ideFrame.mntmLogout) {
+            mntmLogoutClick();
         }
+    }
+    
+    /**
+     * Set the parent frame.
+     * @param p Parent
+     */
+    public void setParent(JFrame p) {
+        this.parent = p;
+    }
+    
+    /**
+     * Logout system event handle.
+     */
+    public void mntmLogoutClick() {
+        if (JOptionPane.showConfirmDialog(ideFrame, "Are you "
+                + "sure you want to logout?", "Logout System",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            parent.setVisible(true);
+            ideFrame.setVisible(false);
+        }
+    }
+    
+    /**
+     * Exit system event handle.
+     */
+    public void mntmExitSystemClick() {
+        if (JOptionPane.showConfirmDialog(ideFrame, "Are you "
+                + "sure you want to exit?", "Exit System", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+            System.exit(0);
     }
     
     /**
