@@ -79,6 +79,7 @@ public class IDEController implements ActionListener {
         ideFrame.jbtnSubmitSolution.addActionListener(this);
         ideFrame.mntmExitSystem.addActionListener(this);
         ideFrame.mntmLogout.addActionListener(this);
+        ideFrame.mntmAboutScrap.addActionListener(this);
     }
     
     @Override
@@ -91,6 +92,8 @@ public class IDEController implements ActionListener {
             mntmExitSystemClick();
         } else if (ev.getSource() == ideFrame.mntmLogout) {
             mntmLogoutClick();
+        } else if (ev.getSource() == ideFrame.mntmAboutScrap) {
+            mntmAboutScrapClick();
         }
     }
     
@@ -123,6 +126,19 @@ public class IDEController implements ActionListener {
             System.exit(0);
     }
     
+    /**
+     * About Scrap event handle.
+     */
+    public void mntmAboutScrapClick() {
+        JOptionPane.showMessageDialog(ideFrame, 
+                "Scrap is an ambitious open source project geared at replacing or\n"
+                + "complementing the popular programming competition software\n" 
+                + "PC2. Scrap is geared towards teachers and institutions that want\n"
+                + "to provide and easy to use competition/testing environment for\n"
+                + "programming problems in which students can write code in an IDE\n"
+                + "like environment and submit to a server for processing and judging.",
+                "About Scrap", JOptionPane.PLAIN_MESSAGE);
+    }
     /**
      * Submit Solution button click.
      */
