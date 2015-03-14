@@ -34,6 +34,7 @@ import javax.swing.JTextArea;
 
 import java.awt.LayoutManager;
 
+
 public class IDEFrame extends JFrame {
     /**
      * Test solution button.
@@ -71,6 +72,10 @@ public class IDEFrame extends JFrame {
      * Calculator option
      */
     public JMenuItem mntmCalculator;
+    /**
+     * Jlabel for school and team information
+     */
+    public JLabel jlblTopContent;
     /**
      * Create the application.
      */
@@ -171,8 +176,8 @@ public class IDEFrame extends JFrame {
         springLayout.putConstraint(SpringLayout.EAST, jpnlTopBar, 0, SpringLayout.EAST, this.getContentPane());
         jpnlTopBar.setBackground(new java.awt.Color(0, 153, 51));
         this.getContentPane().add(jpnlTopBar);
-
-        JLabel jlblTopContent = new JLabel("Saginaw Valley State University | Test Contest | Time Remaining: 03:00:00 | Team: Pickles");
+        
+        jlblTopContent = new JLabel("");
         jlblTopContent.setFont(new Font("Tahoma", Font.BOLD, 11));
         jlblTopContent.setForeground(Color.WHITE);
         jpnlTopBar.add(jlblTopContent);

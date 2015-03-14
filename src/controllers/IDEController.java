@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import ui.IDEFrame;
 import ui.SubmitSolutionFrame;
@@ -75,6 +76,12 @@ public class IDEController implements ActionListener {
         // Nothing for now. Just show GUI
         this.ideFrame = ideView;
         this.user = user;
+        
+        // Setting The Top Bar JLabel
+        ideFrame.jlblTopContent.setText(SettingsCommunicator.getCompetitionSchool() 
+                + " | " + SettingsCommunicator.getCompetitionName() + 
+                " | Time Remaining: 03:00:00 | Team: " + user.getUsername());
+        
         // For now, just display the GUI until we build the IDEFrame controller
         EventQueue.invokeLater(new Runnable() {
             public void run() {
