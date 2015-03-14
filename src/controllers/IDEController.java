@@ -80,6 +80,7 @@ public class IDEController implements ActionListener {
         ideFrame.mntmExitSystem.addActionListener(this);
         ideFrame.mntmLogout.addActionListener(this);
         ideFrame.mntmAboutScrap.addActionListener(this);
+        ideFrame.mntmCalculator.addActionListener(this);
     }
     
     @Override
@@ -94,6 +95,8 @@ public class IDEController implements ActionListener {
             mntmLogoutClick();
         } else if (ev.getSource() == ideFrame.mntmAboutScrap) {
             mntmAboutScrapClick();
+        } else if (ev.getSource() == ideFrame.mntmCalculator) {
+            mntmCalculatorClick();
         }
     }
     
@@ -126,6 +129,29 @@ public class IDEController implements ActionListener {
             System.exit(0);
     }
     
+    /**
+     * Calculator handle
+     * Only checks for windows or linux
+     */
+    public void mntmCalculatorClick() {
+        //Getting the OS
+        String strOS = System.getProperty("os.name").toLowerCase();
+        
+        //Checking Windows
+        if (strOS.indexOf("win") >= 0) {
+            try {
+            Runtime.getRuntime().exec("calc");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                Process p = new ProcessBuilder("sh ./runCalculator.sh").start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
     /**
      * About Scrap event handle.
      */

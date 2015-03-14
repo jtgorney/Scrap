@@ -68,6 +68,10 @@ public class IDEFrame extends JFrame {
      */
     public JMenuItem mntmAboutScrap;
     /**
+     * Calculator option
+     */
+    public JMenuItem mntmCalculator;
+    /**
      * Create the application.
      */
     public IDEFrame() {
@@ -103,7 +107,10 @@ public class IDEFrame extends JFrame {
         menuBar.add(mnCompetitionTools);
 
         menuBar.add(Box.createHorizontalStrut(5));
-
+        
+        mntmCalculator = new JMenuItem("Calculator");
+        mnCompetitionTools.add(mntmCalculator);
+                
         JMenu mnCode = new JMenu("Code");
         menuBar.add(mnCode);
 
