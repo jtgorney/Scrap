@@ -46,11 +46,6 @@ public class GetUsers implements Command {
     @Override
     public String run() {
         DBMgr dbmgr = new DBMgr();
-        if (!DBMgr.build("mysql.rentalsbyjb.com", "cs421_scrap",
-                "cs421_scrap", "cs421#scrap")) {
-            System.out.println("Error connecting to database.");
-            System.exit(0);
-        }
         // Query for the users
         ArrayList<User> users = dbmgr.getUsers();
         // Return

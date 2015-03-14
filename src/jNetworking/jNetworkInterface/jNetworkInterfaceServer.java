@@ -262,10 +262,15 @@ public class jNetworkInterfaceServer implements Runnable {
      * Stop the server.
      */
     public synchronized void stop() {
+        try {
+            server.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        server = null; // Destory the server. For the lulz.
         isStopped = true;
         serverStarted = null;
         requests = 0;
-        Compiler.getCompiler().stop();
         logger.write("jNetworkInterfaceServer stopped.", ServerLogger.LOG_NOTICE);
     }
 
@@ -340,6 +345,7 @@ public class jNetworkInterfaceServer implements Runnable {
 //            System.out.println();
             logger.write("Server started.", ServerLogger.LOG_NOTICE);
         } catch (IOException ex) {
+            ex.printStackTrace();
             logger.write("Server socket could not be initialized.", ServerLogger.LOG_ERROR);
             throw new RuntimeException("Server socket could not be initialized.");
         }

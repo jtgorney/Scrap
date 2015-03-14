@@ -24,11 +24,6 @@ public class GetUserClarifications implements Command {
     @Override
     public String run() {
         DBMgr dbmgr = new DBMgr();
-        if (!DBMgr.build("mysql.rentalsbyjb.com", "cs421_scrap",
-                "cs421_scrap", "cs421#scrap")) {
-            System.out.println("Error connecting to database.");
-            return null;
-        }
         ArrayList<Clarification> clarifications = dbmgr.getUserClarifications(userId);
         return new Gson().toJson(clarifications);
     }

@@ -42,10 +42,11 @@ public class ServerFrame extends javax.swing.JFrame {
         jtfMySQLDatabase = new javax.swing.JTextField();
         jbtnStart = new javax.swing.JButton();
         jpfMySQLPassword = new javax.swing.JPasswordField();
+        jbtnStop = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaLog = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        jbtnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Scrap Competition System - Server");
@@ -53,45 +54,45 @@ public class ServerFrame extends javax.swing.JFrame {
         jlblServerPort.setText("Server Port:");
 
         jtfServerPort.setText("8888");
-        jtfServerPort.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfServerPortActionPerformed(evt);
-            }
-        });
 
-        jtfMySQLHost.setText("localhost");
+        jtfMySQLHost.setText("mysql.rentalsbyjb.com");
 
         jlblMySQLHost.setText("MySQL Host:");
 
         jlblMySQLUsername.setText("MySQL Username:");
 
-        jtfMySQLUsername.setText("root");
+        jtfMySQLUsername.setText("cs421_scrap");
 
         jlblMySQLPassword.setText("MySQL Password:");
 
+        jtfMySQLPort.setEditable(false);
         jtfMySQLPort.setText("3306");
+        jtfMySQLPort.setEnabled(false);
 
         jlblMySQLPort.setText("MySQL Port:");
 
         jlblMySQLDatabase.setText("MySQL Database:");
 
-        jtfMySQLDatabase.setText("scrap");
+        jtfMySQLDatabase.setText("cs421_scrap");
 
         jbtnStart.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jbtnStart.setForeground(new java.awt.Color(2, 118, 31));
         jbtnStart.setText("Start Server");
 
+        jpfMySQLPassword.setText("cs421#scrap");
+
+        jbtnStop.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jbtnStop.setForeground(new java.awt.Color(221, 8, 2));
+        jbtnStop.setText("Stop Server");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 233, Short.MAX_VALUE)
-                        .addComponent(jbtnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlblMySQLUsername)
                             .addComponent(jlblMySQLPassword))
@@ -99,7 +100,7 @@ public class ServerFrame extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfMySQLUsername)
                             .addComponent(jpfMySQLPassword)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlblServerPort)
                             .addComponent(jlblMySQLHost))
@@ -107,14 +108,19 @@ public class ServerFrame extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfMySQLHost)
                             .addComponent(jtfServerPort)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlblMySQLDatabase)
                             .addComponent(jlblMySQLPort))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfMySQLPort)
-                            .addComponent(jtfMySQLDatabase))))
+                            .addComponent(jtfMySQLDatabase)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 350, Short.MAX_VALUE)
+                        .addComponent(jbtnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,9 +150,11 @@ public class ServerFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jpfMySQLPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlblMySQLPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Server Settings", jPanel1);
@@ -172,16 +180,16 @@ public class ServerFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Server Log", jPanel2);
 
-        jButton1.setText("Exit");
+        jbtnExit.setText("Exit");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -189,16 +197,12 @@ public class ServerFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jbtnExit)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtfServerPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfServerPortActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfServerPortActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,24 +240,25 @@ public class ServerFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    public javax.swing.JButton jbtnExit;
     public javax.swing.JButton jbtnStart;
+    public javax.swing.JButton jbtnStop;
     private javax.swing.JLabel jlblMySQLDatabase;
     private javax.swing.JLabel jlblMySQLHost;
     private javax.swing.JLabel jlblMySQLPassword;
     private javax.swing.JLabel jlblMySQLPort;
     private javax.swing.JLabel jlblMySQLUsername;
     private javax.swing.JLabel jlblServerPort;
-    private javax.swing.JPasswordField jpfMySQLPassword;
+    public javax.swing.JPasswordField jpfMySQLPassword;
     public javax.swing.JTextArea jtaLog;
-    private javax.swing.JTextField jtfMySQLDatabase;
-    private javax.swing.JTextField jtfMySQLHost;
-    private javax.swing.JTextField jtfMySQLPort;
-    private javax.swing.JTextField jtfMySQLUsername;
-    private javax.swing.JTextField jtfServerPort;
+    public javax.swing.JTextField jtfMySQLDatabase;
+    public javax.swing.JTextField jtfMySQLHost;
+    public javax.swing.JTextField jtfMySQLPort;
+    public javax.swing.JTextField jtfMySQLUsername;
+    public javax.swing.JTextField jtfServerPort;
     // End of variables declaration//GEN-END:variables
 }

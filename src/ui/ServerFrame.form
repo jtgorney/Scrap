@@ -24,10 +24,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="0" pref="716" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="92" max="-2" attributes="0"/>
+              <Component id="jbtnExit" min="-2" pref="92" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -37,7 +37,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jTabbedPane1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="jbtnExit" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -60,13 +60,9 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="233" max="32767" attributes="0"/>
-                              <Component id="jbtnStart" min="-2" pref="451" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jlblMySQLUsername" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -99,6 +95,12 @@
                                   <Component id="jtfMySQLPort" max="32767" attributes="0"/>
                                   <Component id="jtfMySQLDatabase" max="32767" attributes="0"/>
                               </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="350" max="32767" attributes="0"/>
+                              <Component id="jbtnStart" min="-2" pref="164" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jbtnStop" min="-2" pref="164" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -138,9 +140,12 @@
                           <Component id="jpfMySQLPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jlblMySQLPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jbtnStart" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jbtnStart" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jbtnStop" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="98" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -155,14 +160,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="8888"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfServerPortActionPerformed"/>
-              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="jtfMySQLHost">
               <Properties>
-                <Property name="text" type="java.lang.String" value="localhost"/>
+                <Property name="text" type="java.lang.String" value="mysql.rentalsbyjb.com"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jlblMySQLHost">
               <Properties>
@@ -176,8 +184,11 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jtfMySQLUsername">
               <Properties>
-                <Property name="text" type="java.lang.String" value="root"/>
+                <Property name="text" type="java.lang.String" value="cs421_scrap"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jlblMySQLPassword">
               <Properties>
@@ -186,8 +197,13 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jtfMySQLPort">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="text" type="java.lang.String" value="3306"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jlblMySQLPort">
               <Properties>
@@ -201,8 +217,11 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jtfMySQLDatabase">
               <Properties>
-                <Property name="text" type="java.lang.String" value="scrap"/>
+                <Property name="text" type="java.lang.String" value="cs421_scrap"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="jbtnStart">
               <Properties>
@@ -219,6 +238,26 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jpfMySQLPassword">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="cs421#scrap"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbtnStop">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Ubuntu" size="15" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="2" green="8" red="dd" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Stop Server"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -276,10 +315,13 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jbtnExit">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exit"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

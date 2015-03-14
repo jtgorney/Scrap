@@ -48,11 +48,6 @@ public class CheckUserExists implements Command {
     public String run() {
         // Call check exists on DBMgr.
         DBMgr dbmgr = new DBMgr();
-        if (!DBMgr.build("mysql.rentalsbyjb.com", "cs421_scrap",
-                "cs421_scrap", "cs421#scrap")) {
-            System.out.println("Error connecting to database.");
-            System.exit(0);
-        }
         // Return the result
         if (dbmgr.doesUserExist(username))
             return "EXISTS";

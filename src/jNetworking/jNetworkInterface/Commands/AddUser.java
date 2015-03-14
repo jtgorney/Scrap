@@ -54,11 +54,6 @@ public class AddUser implements Command {
     public String run() {
         // Add the user
         DBMgr dbmgr = new DBMgr();
-        if (!DBMgr.build("mysql.rentalsbyjb.com", "cs421_scrap",
-                "cs421_scrap", "cs421#scrap")) {
-            System.out.println("Error connecting to database.");
-            System.exit(0);
-        }
         // Add the user
         if (dbmgr.addUser(username, password))
             return "OK";

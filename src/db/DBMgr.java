@@ -55,29 +55,25 @@ public class DBMgr {
      * Database password.
      */
     private static String password;
-
-    /**
-     * Public method to build the initial database connection.
-     *
-     * @param host Host or IP address of server
-     * @param database Database name
-     * @param username Database username
-     * @param password Database password
-     * @return boolean
-     */
-    public static boolean build(String host, String database, String username,
-            String password) {
-        // Set data
+    
+    public static void setDBHost(String host) {
         DBMgr.host = host;
-        DBMgr.database = database;
+    }
+    
+    public static void setDBDatabase(String db) {
+        DBMgr.database = db;
+    }
+    
+    public static void setDBUsername(String username) {
         DBMgr.username = username;
+    }
+    
+    public static void setDBPassword(String password) {
         DBMgr.password = password;
-        // Build the connection
-        return build();
     }
 
     /**
-     * Check if the database connection was initially established.
+     * Check if the database connection was init. established.
      *
      * @return Initial establish result
      */
@@ -107,6 +103,10 @@ public class DBMgr {
         }
     }
     
+    /**
+     * Return the problem set.
+     * @return Problem set
+     */
     public ArrayList<Problem> getProblemSet() {
         Statement stmt = null;
         String query = "SELECT `ProblemNum`, `Title`, `Description` FROM "
@@ -235,13 +235,7 @@ public class DBMgr {
      * @return Connection to database
      */
     private static Connection getConnection() {
-        try {
-            if (dbConnection.isValid(10) || dbConnection.isClosed()) {
-                build();
-            }
-            return dbConnection;
-        } catch (SQLException e) {
-            return null;
-        }
+        build();
+        return dbConnection;
     }
 }

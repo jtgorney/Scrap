@@ -162,6 +162,7 @@ public class IDEController implements ActionListener {
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             parent.setVisible(true);
             ideFrame.setVisible(false);
+            ideFrame.dispose();
         }
     }
     
