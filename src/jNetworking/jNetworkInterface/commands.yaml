@@ -7,3 +7,4 @@ adduser: AddUser
 checkuserexists: CheckUserExists
 submitsolution: SubmitSolution
 getsubmissionresult: GetSubmissionResult
+getproblemset: GetProblemSet

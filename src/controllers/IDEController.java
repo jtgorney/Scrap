@@ -24,12 +24,23 @@
 package controllers;
 
 import businessobjects.CompetitionUser;
+import businessobjects.Problem;
+import businessobjects.SettingsCommunicator;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import jNetworking.jNetworkInterface.jNetworkInterface;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import ui.IDEFrame;
 import ui.SubmitSolutionFrame;
 import ui.TestSolutionFrame;
@@ -74,6 +85,8 @@ public class IDEController implements ActionListener {
                 }
             }
         });
+        // Build the problem set
+        buildProblemSet();
         // Action listeners
         ideFrame.jbtnTestSolution.addActionListener(this);
         ideFrame.jbtnSubmitSolution.addActionListener(this);
@@ -92,6 +105,38 @@ public class IDEController implements ActionListener {
         } else if (ev.getSource() == ideFrame.mntmLogout) {
             mntmLogoutClick();
         }
+    }
+    
+    private void buildProblemSet() {
+        // Build a server connection
+        jNetworkInterface client = new jNetworkInterface(
+                    SettingsCommunicator.getServerAddr(),
+                    SettingsCommunicator.getServerPort(), false);
+        // Get the problem set
+        ArrayList<Problem> data = new Gson().fromJson(client.sendCommand(
+                "getproblemset", null), new TypeToken<ArrayList<Problem>>() {}
+                .getType());
+        // Build the tabs
+        JPanel problemPanel;
+        JTextArea problemDescription;
+        // Loop and build
+        for (Problem p : data) {
+            problemPanel = new JPanel();
+            problemPanel.setBackground(Color.WHITE);
+            ideFrame.tpProblemSet.addTab("Problem " + p.getProblemNumber(), null, problemPanel, null);
+            problemPanel.setLayout(new BorderLayout(0, 0));
+            
+            problemDescription = new JTextArea();
+            problemDescription.setEditable(false);
+            problemDescription.setText("Title: " + p.getProblemTitle() +
+                    System.getProperty("line.separator") + 
+                    System.getProperty("line.separator") + p.getProblemText());
+            problemDescription.setFont(new Font("Tahoma", Font.PLAIN, 12));
+            problemDescription.setLineWrap(true);
+            problemDescription.setMargin(new Insets(10, 10, 10, 10));
+            problemPanel.add(problemDescription, BorderLayout.CENTER);
+        }
+        ideFrame.repaint();
     }
     
     /**

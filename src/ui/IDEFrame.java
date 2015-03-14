@@ -117,59 +117,7 @@ public class IDEFrame extends JFrame {
         tpProblemSet = new JTabbedPane(JTabbedPane.TOP);
         springLayout.putConstraint(SpringLayout.EAST, tpProblemSet, -10, SpringLayout.EAST, this.getContentPane());
         this.getContentPane().add(tpProblemSet);
-
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.WHITE);
-        tpProblemSet.addTab("Problem 1", new ImageIcon(IDEFrame.class.getResource("/com/alee/extended/filechooser/icons/ok.png")), panel, null);
-        panel.setLayout(new BorderLayout(0, 0));
-
-        JTextArea jtxtProblemText = new JTextArea();
-        jtxtProblemText.setEditable(false);
-        jtxtProblemText.setText("Create a program that outputs the text:\r\n\r\nHello World!\r\n\r\nYour program should run in O(n) time.");
-        jtxtProblemText.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        jtxtProblemText.setLineWrap(true);
-        jtxtProblemText.setMargin(new Insets(10, 10, 10, 10));
-        panel.add(jtxtProblemText, BorderLayout.CENTER);
-
-        JPanel panel_1 = new JPanel();
-        panel_1.setBackground(Color.WHITE);
-        tpProblemSet.addTab("Problem 2", new ImageIcon(IDEFrame.class.getResource("/com/alee/extended/filechooser/icons/ok.png")), panel_1, null);
-        panel_1.setLayout(new BorderLayout(0, 0));
-
-        JTextArea txtrCreateAProgram = new JTextArea();
-        txtrCreateAProgram.setText("Create a program that outputs the first 7 numbers of the fibonnacci sequence.\r\n\r\nYour method/function should use recursion to output the numbers. No floating points.");
-        txtrCreateAProgram.setMargin(new Insets(10, 10, 10, 10));
-        txtrCreateAProgram.setLineWrap(true);
-        txtrCreateAProgram.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        txtrCreateAProgram.setEditable(false);
-        panel_1.add(txtrCreateAProgram, BorderLayout.CENTER);
-
-        JPanel panel_2 = new JPanel();
-        panel_2.setBackground(Color.WHITE);
-        tpProblemSet.addTab("Problem 3", null, panel_2, null);
-        panel_2.setLayout(new BorderLayout(0, 0));
-
-        JTextArea textArea_2 = new JTextArea();
-        textArea_2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis pretium arcu, ut ornare turpis. Vestibulum id tellus in purus venenatis molestie blandit ut nibh. Phasellus purus mi, imperdiet sed ex convallis, eleifend sollicitudin libero. Aliquam est tortor, mattis non sagittis id, volutpat vitae elit. Nam ac velit sit amet tortor sodales gravida.");
-        textArea_2.setMargin(new Insets(10, 10, 10, 10));
-        textArea_2.setLineWrap(true);
-        textArea_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        textArea_2.setEditable(false);
-        panel_2.add(textArea_2, BorderLayout.CENTER);
-
-        JPanel panel_3 = new JPanel();
-        panel_3.setBackground(Color.WHITE);
-        tpProblemSet.addTab("Problem 4", null, panel_3, null);
-        panel_3.setLayout(new BorderLayout(0, 0));
-
-        JTextArea textArea_3 = new JTextArea();
-        textArea_3.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis pretium arcu, ut ornare turpis. Vestibulum id tellus in purus venenatis molestie blandit ut nibh. Phasellus purus mi, imperdiet sed ex convallis, eleifend sollicitudin libero. Aliquam est tortor, mattis non sagittis id, volutpat vitae elit. Nam ac velit sit amet tortor sodales gravida.");
-        textArea_3.setMargin(new Insets(10, 10, 10, 10));
-        textArea_3.setLineWrap(true);
-        textArea_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        textArea_3.setEditable(false);
-        panel_3.add(textArea_3, BorderLayout.CENTER);
-
+        
         JPanel jpnlEditor = new JPanel();
         springLayout.putConstraint(SpringLayout.WEST, tpProblemSet, 6, SpringLayout.EAST, jpnlEditor);
         springLayout.putConstraint(SpringLayout.EAST, jpnlEditor, -337, SpringLayout.EAST, this.getContentPane());

@@ -23,10 +23,10 @@
  */
 package main;
 
-import controllers.AdminController;
+import controllers.ServerController;
 import jNetworking.jNetworkInterface.*;
 import javax.swing.UIManager;
-import ui.AdminFrame;
+import ui.ServerFrame;
 
 /**
  * Scrap server and methods.
@@ -36,10 +36,6 @@ public class Server {
     private jNetworkInterfaceServer server;
 
     public static void main(String[] args) {
-        new Server();
-    }
-
-    public Server() {
         // Set the look and feel of the application.
         try {
             // Set cross-platform Java L&F (also called "Metal")
@@ -49,6 +45,10 @@ public class Server {
             ex.printStackTrace();
             // Do nothing else.
         }
+        new ServerController(new ServerFrame());
+    }
+
+    public Server() {
         // Not setting the location of the log file will default to the root drive.
         // Ensure this program is executed with appropriate filesystem permissions.
         // LogLocation.setLocation("/home/jacob/Desktop/log.txt");
