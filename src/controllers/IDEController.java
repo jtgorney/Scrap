@@ -185,13 +185,13 @@ public class IDEController implements ActionListener {
         //Checking Windows
         if (strOS.indexOf("win") >= 0) {
             try {
-            Runtime.getRuntime().exec("calc");
+                Runtime.getRuntime().exec("calc");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else { // Checking Linux
             try {
-                Process process = new ProcessBuilder("sh ./runCalculator.sh").start();
+                Process process = Runtime.getRuntime().exec("gnome-calculator");
             } catch (Exception e) {
                 e.printStackTrace();
             }
