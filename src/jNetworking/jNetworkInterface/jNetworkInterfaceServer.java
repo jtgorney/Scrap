@@ -265,6 +265,7 @@ public class jNetworkInterfaceServer implements Runnable {
         isStopped = true;
         serverStarted = null;
         requests = 0;
+        Compiler.getCompiler().stop();
         logger.write("jNetworkInterfaceServer stopped.", ServerLogger.LOG_NOTICE);
     }
 

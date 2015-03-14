@@ -47,6 +47,7 @@ public class Compiler {
     private static Queue<CompilerRunner> compilerQueue = new LinkedList<>();
     private static HashMap<Integer, ArrayList<CompilerRunner>> completedRuns = 
             new HashMap<>();
+    private boolean isRunning = false;
 
     /**
      * Process the current queue of jobs. This is executed on each tick of the
@@ -63,7 +64,7 @@ public class Compiler {
             // Get the jobs
             ArrayList<File> jobs = new ArrayList<>();
             // For each process the file
-            while (!compilerQueue.isEmpty()) {
+            while (!compilerQueue.isEmpty() && isRunning) {
                 // Get the job id and team id
                 CompilerRunner r = compilerQueue.poll();
                 processor.add(new File[]{r.getSourceCode()});
@@ -129,10 +130,11 @@ public class Compiler {
      */
     public void run() {
         // Just in case the thread drops
+        isRunning = true;
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
+                while (isRunning) {
                     try {
                         Thread.sleep(THREAD_WAIT);
                     } catch (InterruptedException ex) {
@@ -144,6 +146,13 @@ public class Compiler {
                 }
             }
         }).start();
+    }
+    
+    /**
+     * Stop the queue.
+     */
+    public void stop() {
+        isRunning = false;
     }
     
     /**
