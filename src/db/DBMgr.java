@@ -23,6 +23,7 @@
  */
 package db;
 
+import businessobjects.Clarification;
 import businessobjects.User;
 import java.sql.*;
 import java.util.ArrayList;
@@ -153,6 +154,16 @@ public class DBMgr {
         } catch (Exception ex) {
             return null;
         }
+    }
+    
+    /**
+     * Get a list of clarifications initiated by a particular user.
+     * 
+     * @param userId User ID
+     * @return List of clarifications
+     */
+    public ArrayList<Clarification> getUserClarifications(int userId) {
+        return null;
     }
 
     /**
