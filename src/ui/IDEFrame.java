@@ -110,11 +110,6 @@ public class IDEFrame extends JFrame {
         
         mntmCalculator = new JMenuItem("Calculator");
         mnCompetitionTools.add(mntmCalculator);
-                
-        JMenu mnCode = new JMenu("Code");
-        menuBar.add(mnCode);
-
-        menuBar.add(Box.createHorizontalStrut(5));
 
         JMenu mnHelp = new JMenu("Help");
         menuBar.add(mnHelp);

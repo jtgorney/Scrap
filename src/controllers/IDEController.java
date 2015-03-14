@@ -197,6 +197,7 @@ public class IDEController implements ActionListener {
             }
         }
     }
+    
     /**
      * About Scrap event handle.
      */
@@ -210,6 +211,7 @@ public class IDEController implements ActionListener {
                 + "like environment and submit to a server for processing and judging.",
                 "About Scrap", JOptionPane.PLAIN_MESSAGE);
     }
+    
     /**
      * Submit Solution button click.
      */
