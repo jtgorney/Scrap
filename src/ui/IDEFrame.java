@@ -63,7 +63,10 @@ public class IDEFrame extends JFrame {
      * Logout option.
      */
     public JMenuItem mntmLogout;
-    
+    /**
+     * About Scrap option
+     */
+    public JMenuItem mntmAboutScrap;
     /**
      * Create the application.
      */
@@ -109,7 +112,7 @@ public class IDEFrame extends JFrame {
         JMenu mnHelp = new JMenu("Help");
         menuBar.add(mnHelp);
 
-        JMenuItem mntmAboutScrap = new JMenuItem("About Scrap");
+        mntmAboutScrap = new JMenuItem("About Scrap");
         mnHelp.add(mntmAboutScrap);
         SpringLayout springLayout = new SpringLayout();
         this.getContentPane().setLayout(springLayout);
