@@ -144,9 +144,9 @@ public class IDEController implements ActionListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else {
+        } else { // Checking Linux
             try {
-                Process p = new ProcessBuilder("sh ./runCalculator.sh").start();
+                Process process = new ProcessBuilder("sh ./runCalculator.sh").start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
