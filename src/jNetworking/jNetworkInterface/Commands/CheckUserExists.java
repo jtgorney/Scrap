@@ -21,41 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package main;
+package jNetworking.jNetworkInterface.Commands;
 
-import controllers.AdminController;
-import jNetworking.jNetworkInterface.*;
-import javax.swing.UIManager;
-import ui.AdminFrame;
+import db.DBMgr;
+import jNetworking.jNetworkInterface.Command;
+import jNetworking.jNetworkInterface.jNetworkInterface;
+import java.net.Socket;
+import java.util.ArrayList;
 
 /**
- * Scrap server and methods.
+ * Command to check if a username exists.
+ * @author Jacob Gorney
  */
-public class Server {
-
-    private jNetworkInterfaceServer server;
-
-    public static void main(String[] args) {
-        new Server();
+public class CheckUserExists implements Command {
+    /**
+     * Username to check.
+     */
+    private String username;
+    
+    @Override
+    public void setup(ArrayList<String> input, Socket client) {
+        username = jNetworkInterface.base64Decode(input.get(0));
     }
 
-    public Server() {
-        // Set the look and feel of the application.
-        try {
-            // Set cross-platform Java L&F (also called "Metal")
-            UIManager.setLookAndFeel(
-                    UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            // Do nothing else.
+    @Override
+    public String run() {
+        // Call check exists on DBMgr.
+        DBMgr dbmgr = new DBMgr();
+        if (!DBMgr.build("mysql.rentalsbyjb.com", "cs421_scrap",
+                "cs421_scrap", "cs421#scrap")) {
+            System.out.println("Error connecting to database.");
+            System.exit(0);
         }
-        // Not setting the location of the log file will default to the root drive.
-        // Ensure this program is executed with appropriate filesystem permissions.
-        // LogLocation.setLocation("/home/jacob/Desktop/log.txt");
-        // Create the server
-        // Get the server input stuff
-        server = new jNetworkInterfaceServer(8888, 100, false);
-        server.setServerName("Scrap Competition Server");
-        server.run();
+        // Return the result
+        if (dbmgr.doesUserExist(username))
+            return "EXISTS";
+        else
+            return "OK";
     }
+    
 }

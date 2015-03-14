@@ -24,13 +24,11 @@
 package jNetworking.jNetworkInterface.Commands;
 
 import businessobjects.CompilerRunner;
+import compiler.OutputParser;
 import jNetworking.jNetworkInterface.Command;
-import jNetworking.jNetworkInterface.Compiler;
+import businessobjects.Compiler;
 import jNetworking.jNetworkInterface.jNetworkInterface;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -63,22 +61,22 @@ public class GetResult implements Command {
         if (runner == null)
             return "PROCESSING";
         else {
-            String fileData;
+            String out;
             try {
             // Parse the results of the runner and return them.
             File f = runner.getResultFile();
-            FileInputStream inFile = new FileInputStream(f);
-            // Read to buffer
-            byte[] buffer = new byte[(int) f.length()];
-            new DataInputStream(inFile).readFully(buffer);
-            inFile.close();
-            fileData = new String(buffer, "UTF-8");
-            } catch (IOException ex) {
+            OutputParser parser = new OutputParser(f);
+            // Send the response message back to the client
+            if (parser.getStatusHeader().equals("OK"))
+                out = "Program has executed and compiled successfully.";
+            else
+                out = "Program has generated an error.";
+            } catch (Exception ex) {
                 return "ERROR";
             }
             // @todo send the data.
             try {
-                return jNetworkInterface.base64Encode(fileData);
+                return jNetworkInterface.base64Encode(out);
             } catch (Exception ex) {
                 return "ERROR";
             }

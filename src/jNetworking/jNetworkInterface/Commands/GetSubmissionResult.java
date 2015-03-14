@@ -21,41 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package main;
+package jNetworking.jNetworkInterface.Commands;
 
-import controllers.AdminController;
-import jNetworking.jNetworkInterface.*;
-import javax.swing.UIManager;
-import ui.AdminFrame;
+import businessobjects.CompilerRunner;
+import compiler.OutputParser;
+import jNetworking.jNetworkInterface.Command;
+import businessobjects.Compiler;
+import jNetworking.jNetworkInterface.jNetworkInterface;
+import java.io.File;
+import java.net.Socket;
+import java.util.ArrayList;
 
 /**
- * Scrap server and methods.
+ * Get the result of a compiler job.
+ * @author Jacob Gorney
  */
-public class Server {
-
-    private jNetworkInterfaceServer server;
-
-    public static void main(String[] args) {
-        new Server();
+public class GetSubmissionResult implements Command {
+    /**
+     * Token of job.
+     */
+    private long token;
+    /**
+     * Team ID associated with job.
+     */
+    private int teamId;
+    
+    @Override
+    public void setup(ArrayList<String> input, Socket client) {
+        // Input the team id and the run token
+        teamId = Integer.parseInt(input.get(0));
+        token = Long.parseLong(input.get(1));
     }
 
-    public Server() {
-        // Set the look and feel of the application.
-        try {
-            // Set cross-platform Java L&F (also called "Metal")
-            UIManager.setLookAndFeel(
-                    UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            // Do nothing else.
-        }
-        // Not setting the location of the log file will default to the root drive.
-        // Ensure this program is executed with appropriate filesystem permissions.
-        // LogLocation.setLocation("/home/jacob/Desktop/log.txt");
-        // Create the server
-        // Get the server input stuff
-        server = new jNetworkInterfaceServer(8888, 100, false);
-        server.setServerName("Scrap Competition Server");
-        server.run();
+    @Override
+    public String run() {
+        Compiler c = Compiler.getCompiler();
+        CompilerRunner runner = c.searchCompletedRunners(token, teamId);
+        // Return results
+        if (runner == null)
+            return "PROCESSING";
+        else
+            if (runner.isAccepted())
+                return "ACCEPTED";
+            else
+                return "INVALID";
     }
 }

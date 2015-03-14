@@ -24,22 +24,18 @@
 package main;
 
 import controllers.AdminController;
-import jNetworking.jNetworkInterface.*;
 import javax.swing.UIManager;
 import ui.AdminFrame;
 
 /**
  * Scrap server and methods.
  */
-public class Server {
-
-    private jNetworkInterfaceServer server;
-
+public class Admin {
     public static void main(String[] args) {
-        new Server();
+        new Admin();
     }
 
-    public Server() {
+    public Admin() {
         // Set the look and feel of the application.
         try {
             // Set cross-platform Java L&F (also called "Metal")
@@ -49,13 +45,7 @@ public class Server {
             ex.printStackTrace();
             // Do nothing else.
         }
-        // Not setting the location of the log file will default to the root drive.
-        // Ensure this program is executed with appropriate filesystem permissions.
-        // LogLocation.setLocation("/home/jacob/Desktop/log.txt");
-        // Create the server
-        // Get the server input stuff
-        server = new jNetworkInterfaceServer(8888, 100, false);
-        server.setServerName("Scrap Competition Server");
-        server.run();
+        // Add admin GUI
+        new AdminController(new AdminFrame());
     }
 }

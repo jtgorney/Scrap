@@ -25,7 +25,7 @@ package jNetworking.jNetworkInterface.Commands;
 
 import businessobjects.CompilerRunner;
 import jNetworking.jNetworkInterface.Command;
-import jNetworking.jNetworkInterface.Compiler;
+import businessobjects.Compiler;
 import jNetworking.jNetworkInterface.jNetworkInterface;
 import java.io.File;
 import java.net.Socket;
@@ -69,7 +69,7 @@ public class TestSolution implements Command {
         File f = SourceCodeFileManager.writeSourceCode(teamId, problemId, type, code);
         // Add the job to the compiler queue
         Compiler comp = Compiler.getCompiler();
-        CompilerRunner runner = new CompilerRunner(teamId, problemId, type, f);
+        CompilerRunner runner = new CompilerRunner(teamId, problemId, type, f, false);
         comp.add(runner);
         // Add the run to the queue.
         return String.valueOf(runner.getToken());

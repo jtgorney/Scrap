@@ -23,36 +23,55 @@
  */
 package jNetworking.jNetworkInterface.Commands;
 
-import db.DBMgr;
+import businessobjects.CompilerRunner;
 import jNetworking.jNetworkInterface.Command;
+import businessobjects.Compiler;
 import jNetworking.jNetworkInterface.jNetworkInterface;
-
+import java.io.File;
 import java.net.Socket;
 import java.util.ArrayList;
+import util.SourceCodeFileManager;
 
 /**
- * ClientLogin command class for jNetworkInterfaceServer.
+ *
+ * @author Jacob Gorney
  */
-public class ClientLogin implements Command {
-
-    private String username, password;
-
+public class SubmitSolution implements Command {
+    /**
+     * Team id of submission.
+     */
+    private int teamId = -1;
+    /**
+     * The problem id.
+     */
+    private int problemId = -1;
+    /**
+     * cpp or java.
+     */
+    private String type;
+    /**
+     * Code to be executed.
+     */
+    private String code;
+    
     @Override
     public void setup(ArrayList<String> input, Socket client) {
-        // Accept a username and password.
-        username = jNetworkInterface.base64Decode(input.get(0));
-        password = jNetworkInterface.base64Decode(input.get(1));
+        // Values passed by command
+        teamId = Integer.parseInt(jNetworkInterface.base64Decode(input.get(0)));
+        problemId = Integer.parseInt(jNetworkInterface.base64Decode(input.get(1)));
+        type = jNetworkInterface.base64Decode(input.get(2)).trim();
+        code = jNetworkInterface.base64Decode(input.get(3));
     }
-
+    
     @Override
     public String run() {
-        DBMgr dbmgr = new DBMgr();
-        if (!DBMgr.build("mysql.rentalsbyjb.com", "cs421_scrap",
-                "cs421_scrap", "cs421#scrap")) {
-            System.out.println("Error connecting to database.");
-            System.exit(0);
-        }
-        // Return the resulting ID
-        return String.valueOf(dbmgr.getUserIdForCredentials(username, password));
+        // Build the file
+        File f = SourceCodeFileManager.writeSourceCode(teamId, problemId, type, code);
+        // Add the job to the compiler queue
+        Compiler comp = Compiler.getCompiler();
+        CompilerRunner runner = new CompilerRunner(teamId, problemId, type, f, true);
+        comp.add(runner);
+        // Add the run to the queue.
+        return String.valueOf(runner.getToken());
     }
 }

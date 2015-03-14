@@ -4,4 +4,6 @@ clientlogin: ClientLogin
 getresult: GetResult
 getusers: GetUsers
 adduser: AddUser
-getuserclarifications: GetUserClarifications
+checkuserexists: CheckUserExists
+submitsolution: SubmitSolution
+getsubmissionresult: GetSubmissionResult

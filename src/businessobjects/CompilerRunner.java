@@ -54,6 +54,14 @@ public class CompilerRunner {
      * Used to identify the runner.
      */
     private long token = System.currentTimeMillis();
+    /**
+     * Is a submission run for scoring.
+     */
+    private boolean isSubmission = false;
+    /**
+     * Accepted solution or not.
+     */
+    private boolean isAccepted = false;
     
     /**
      * Constructor to build the runner.
@@ -61,12 +69,15 @@ public class CompilerRunner {
      * @param problemId Problem set ID
      * @param type Source code type
      * @param f Source code file
+     * @param submission Is a submission run
      */
-    public CompilerRunner(int teamId, int problemId, String type, File f) {
+    public CompilerRunner(int teamId, int problemId, String type, File f,
+            boolean submission) {
         this.teamId = teamId;
         this.problemId = problemId;
         this.type = type;
         sourceCode = f;
+        isSubmission = submission;
     }
     
     /**
@@ -115,5 +126,29 @@ public class CompilerRunner {
      */
     public void setResultFile(File f) {
         resultFile = f;
+    }
+    
+    /**
+     * Get submission flag.
+     * @return Submission
+     */
+    public boolean isSubmission() {
+        return isSubmission;
+    }
+    
+    /**
+     * Set acceptance flag.
+     * @param v Value
+     */
+    public void setAccepted(boolean v) {
+        isAccepted = v;
+    }
+    
+    /**
+     * Get accepted flag.
+     * @return Accepted
+     */
+    public boolean isAccepted() {
+        return isAccepted;
     }
 }

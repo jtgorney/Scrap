@@ -35,17 +35,17 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import ui.IDEFrame;
-import ui.TestSolutionFrame;
+import ui.SubmitSolutionFrame;
 
 /**
  * Test Solution Controller.
  * @author Jacob Gorney
  */
-public class TestSolutionController implements ActionListener {
+public class SubmitSolutionController implements ActionListener {
     /**
      * The GUI reference to LoginView.
      */
-    private final TestSolutionFrame testSolutionFrame;
+    private final SubmitSolutionFrame submitSolutionFrame;
     /**
      * The parent IDE View.
      */
@@ -76,10 +76,10 @@ public class TestSolutionController implements ActionListener {
      * @param code Source code
      * @param compiler Compiler type
      */
-    public TestSolutionController(final TestSolutionFrame frame, CompetitionUser user,
+    public SubmitSolutionController(final SubmitSolutionFrame frame, CompetitionUser user,
             int problemId, String code, String compiler) {
         // Assign the GUI and data
-        this.testSolutionFrame = frame;
+        this.submitSolutionFrame = frame;
         this.user = user;
         this.problemId = problemId;
         this.sourceCode = code;
@@ -88,24 +88,24 @@ public class TestSolutionController implements ActionListener {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    testSolutionFrame.setLocationRelativeTo(null);
-                    testSolutionFrame.setVisible(true);
+                    submitSolutionFrame.setLocationRelativeTo(null);
+                    submitSolutionFrame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
-        testSolutionFrame.btnCancel.addActionListener(this);
-        testSolutionFrame.btnTest.addActionListener(this);
+        submitSolutionFrame.btnCancel.addActionListener(this);
+        submitSolutionFrame.btnSubmitSolution.addActionListener(this);
         // Add the closing operation to show parent frame
-        testSolutionFrame.addWindowListener(new WindowAdapter() {
+        submitSolutionFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent ev) {
                 showParent();
             }
         });
         // Set the header label with the problem Id
-        testSolutionFrame.lblProblemNumber.setText("Problem Number: " +
+        submitSolutionFrame.lblProblemNumber.setText("Problem Number: " +
                 String.valueOf(problemId));
     }
 
@@ -138,17 +138,17 @@ public class TestSolutionController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ev) {
-        if (ev.getSource() == testSolutionFrame.btnCancel) {
+        if (ev.getSource() == submitSolutionFrame.btnCancel) {
             btnCancelClick();
-        } else if (ev.getSource() == testSolutionFrame.btnTest) {
-            btnTestClick();
+        } else if (ev.getSource() == submitSolutionFrame.btnSubmitSolution) {
+            btnSubmitSolutionClick();
         }
     }
     
     /**
      * Test solution button click event.
      */
-    private void btnTestClick() {
+    private void btnSubmitSolutionClick() {
         // Build a new thread and run the operation.
         new Thread(new Runnable() {
             @Override
@@ -158,10 +158,10 @@ public class TestSolutionController implements ActionListener {
                     @Override
                     public void run() {
                         // setup GUI
-                        testSolutionFrame.jlblTesting.setVisible(true);
-                        testSolutionFrame.jpbLoading.setVisible(true);
-                        testSolutionFrame.btnCancel.setEnabled(false);
-                        testSolutionFrame.btnTest.setEnabled(false);
+                        submitSolutionFrame.lblSubmitting.setVisible(true);
+                        submitSolutionFrame.pbSubmitting.setVisible(true);
+                        submitSolutionFrame.btnCancel.setEnabled(false);
+                        submitSolutionFrame.btnSubmitSolution.setEnabled(false);
 
                     }
                 });
@@ -178,7 +178,7 @@ public class TestSolutionController implements ActionListener {
                     commandData.add(jNetworkInterface.base64Encode(sourceCode));
                     // Get response
                     Thread.sleep(5000);
-                    String response = client.sendCommand("testsolution", commandData);
+                    String response = client.sendCommand("submitsolution", commandData);
                     long compilerToken = Long.parseLong(response);
                     // Wait while we get the response from the server.
                     boolean isReturned = false;
@@ -188,19 +188,23 @@ public class TestSolutionController implements ActionListener {
                         ArrayList<String> compilerData = new ArrayList<>();
                         compilerData.add(String.valueOf(user.getId()));
                         compilerData.add(String.valueOf(compilerToken));
-                        response = client.sendCommand("getresult", compilerData);
+                        response = client.sendCommand("getsubmissionresult", compilerData);
                         if (!response.equals("PROCESSING")) {
                             isReturned = true;
                         } else
                             runs++;
                     }
-                    // Decode the stream
-                    response = jNetworkInterface.base64Decode(response);
-                    // Display the result to the user
-                    JOptionPane.showMessageDialog(testSolutionFrame, response);
+                    // Show submission message to user
+                    if (response.equals("INVALID"))
+                        JOptionPane.showMessageDialog(parent, "Your solution was incorrect! Please revise and resubmit. "
+                                + "Your score has been updated.", "Incorrect Score", JOptionPane.WARNING_MESSAGE);
+                    else if (response.equals("ACCEPTED"))
+                        JOptionPane.showMessageDialog(parent, "Solution accepted! Your score will be updated momentarily.",
+                                "Accepted", JOptionPane.INFORMATION_MESSAGE);
+
                     // Close
-                    testSolutionFrame.dispatchEvent(new WindowEvent(
-                    testSolutionFrame, WindowEvent.WINDOW_CLOSING));
+                    submitSolutionFrame.dispatchEvent(new WindowEvent(
+                    submitSolutionFrame, WindowEvent.WINDOW_CLOSING));
                     showParent();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -210,10 +214,10 @@ public class TestSolutionController implements ActionListener {
                     @Override
                     public void run() {
                         // Revert GUI
-                        testSolutionFrame.jlblTesting.setVisible(false);
-                        testSolutionFrame.jpbLoading.setVisible(false);
-                        testSolutionFrame.btnCancel.setEnabled(true);
-                        testSolutionFrame.btnTest.setEnabled(true);
+                        submitSolutionFrame.lblSubmitting.setVisible(false);
+                        submitSolutionFrame.pbSubmitting.setVisible(false);
+                        submitSolutionFrame.btnCancel.setEnabled(true);
+                        submitSolutionFrame.btnSubmitSolution.setEnabled(true);
 
                     }
                 });
@@ -225,8 +229,8 @@ public class TestSolutionController implements ActionListener {
      * Cancel button click event.
      */
     private void btnCancelClick() {
-        this.testSolutionFrame.dispatchEvent(new WindowEvent(
-                testSolutionFrame, WindowEvent.WINDOW_CLOSING));
+        this.submitSolutionFrame.dispatchEvent(new WindowEvent(
+                submitSolutionFrame, WindowEvent.WINDOW_CLOSING));
         this.showParent();
     }
 }

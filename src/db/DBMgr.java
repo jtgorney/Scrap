@@ -83,7 +83,29 @@ public class DBMgr {
     public static boolean isConnectionMade() {
         return (!(dbConnection == null));
     }
-
+    
+    /**
+     * Check if a user exists in the system.
+     * @param username Username of user to check
+     * @return Result
+     */
+    public boolean doesUserExist(String username) {
+        Statement stmt = null;
+        String query = "SELECT COUNT(*) as c FROM `Team` WHERE `username` = '" + username + "';";
+        try {
+            // Execute the SQL
+            stmt = getConnection().createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            if (!result.next()) {
+                return false;
+            }			// Return the user ID
+            return (result.getInt("c") >= 1);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
     /**
      * Get a user id for passed credentials. This is a form of account
      * validation.
@@ -123,8 +145,10 @@ public class DBMgr {
                 "('" + username + "', '" + password + "');";
         try {
             stmt = getConnection().createStatement();
-            return stmt.execute(query);
+            stmt.execute(query);
+            return true;
         } catch (Exception ex) {
+            ex.printStackTrace();
             return false;
         }
     }
@@ -145,10 +169,10 @@ public class DBMgr {
             }
             // Build the list
             ArrayList<User> users = new ArrayList<>();
-            while (result.next()) {
+            do {
                 users.add(new User(result.getInt("team_id"),
                         result.getString("username"), result.getString("password")));
-            }
+            } while (result.next());
             // Return the list
             return users;
         } catch (Exception ex) {
