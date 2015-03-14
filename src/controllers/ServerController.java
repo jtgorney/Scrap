@@ -23,6 +23,7 @@
  */
 package controllers;
 
+import jNetworking.jNetworkInterface.jNetworkInterfaceServer;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,10 +41,15 @@ import ui.ServerFrame;
  * @author Jacob Gorney
  */
 public class ServerController implements ActionListener {
+
     /**
      * The GUI reference to IDEFrame.
      */
     private final ServerFrame serverFrame;
+    /**
+     * Server object.
+     */
+    private jNetworkInterfaceServer server;
 
     /**
      * Constructor for server controller.
@@ -64,29 +70,56 @@ public class ServerController implements ActionListener {
             }
         });
         // Add action listeners
-        
-        // Redirect System.out to text field.
-        try {
-            redirectOutput();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        serverFrame.jbtnStart.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if (e.getSource() == serverFrame.jbtnStart) {
+            jbtnStartClick();
+        }
     }
-    
-    private void redirectOutput() throws IOException {
+
+    public void jbtnStartClick() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Not setting the location of the log file will default to the root drive.
+                // Ensure this program is executed with appropriate filesystem permissions.
+                // LogLocation.setLocation("/home/jacob/Desktop/log.txt");
+                // Create the server
+                // Get the server input stuff
+                server = new jNetworkInterfaceServer(8888, 100, false);
+                server.setServerName("Scrap Competition Server");
+                server.run();
+            }
+        }).start();
+        // Redirect output
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Redirect System.out to text field.
+                try {
+                    redirectOutput();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void redirectOutput() throws IOException, InterruptedException {
         PipedOutputStream pOut = new PipedOutputStream();
         System.setOut(new PrintStream(pOut));
         PipedInputStream pIn = new PipedInputStream(pOut);
         BufferedReader reader = new BufferedReader(new InputStreamReader(pIn));
         while (true) {
             String line = reader.readLine();
-            if (line != null)
-                serverFrame.jtaLog.append(line);
+            if (line != null) {
+                serverFrame.jtaLog.append(line + System.getProperty("line.separator"));
+                serverFrame.jtaLog.setCaretPosition(serverFrame.jtaLog.getDocument().getLength());
+            }
+            Thread.sleep(2000);
         }
     }
 }

@@ -33,8 +33,6 @@ import ui.ServerFrame;
  */
 public class Server {
 
-    private jNetworkInterfaceServer server;
-
     public static void main(String[] args) {
         // Set the look and feel of the application.
         try {
@@ -46,16 +44,5 @@ public class Server {
             // Do nothing else.
         }
         new ServerController(new ServerFrame());
-    }
-
-    public Server() {
-        // Not setting the location of the log file will default to the root drive.
-        // Ensure this program is executed with appropriate filesystem permissions.
-        // LogLocation.setLocation("/home/jacob/Desktop/log.txt");
-        // Create the server
-        // Get the server input stuff
-        server = new jNetworkInterfaceServer(8888, 100, false);
-        server.setServerName("Scrap Competition Server");
-        server.run();
     }
 }
