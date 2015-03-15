@@ -30,8 +30,6 @@ import javax.swing.JMenuItem;
 
 import java.awt.Font;
 
-import javax.swing.JTextArea;
-
 import java.awt.LayoutManager;
 
 
@@ -73,6 +71,10 @@ public class IDEFrame extends JFrame {
      */
     public JMenuItem mntmCalculator;
     /**
+     * Calculator option
+     */
+    public JMenuItem mntmClarification;
+    /**
      * Jlabel for school and team information
      */
     public JLabel jlblTopContent;
@@ -110,7 +112,10 @@ public class IDEFrame extends JFrame {
 
         JMenu mnCompetitionTools = new JMenu("Competition Tools");
         menuBar.add(mnCompetitionTools);
-
+        
+        mntmClarification = new JMenuItem("Request Clarification");
+        mnCompetitionTools.add(mntmClarification);
+        
         menuBar.add(Box.createHorizontalStrut(5));
         
         mntmCalculator = new JMenuItem("Calculator");

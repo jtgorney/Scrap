@@ -51,6 +51,10 @@ public class RequestClarificationController implements ActionListener {
     public Clarification requestClarification() {
         requestClarificationView = new RequestClarificationDialog(dialogOwner, problemNumbers);
         requestClarificationView.jbtnCancel.addActionListener(this);
+        requestClarificationView.jbtnSend.addActionListener(this);
+        requestClarificationView.setLocationRelativeTo(null);
+        requestClarificationView.setTitle("Request Clarification");
+        requestClarificationView.setVisible(true);
         if (requestClarificationView != null) {
             JDialog waitDialog = new JDialog(requestClarificationView, false);
             waitDialog.setUndecorated(true);

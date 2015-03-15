@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import ui.IDEFrame;
 import ui.SubmitSolutionFrame;
@@ -101,6 +100,7 @@ public class IDEController implements ActionListener {
         ideFrame.mntmLogout.addActionListener(this);
         ideFrame.mntmAboutScrap.addActionListener(this);
         ideFrame.mntmCalculator.addActionListener(this);
+        ideFrame.mntmClarification.addActionListener(this);
     }
     
     @Override
@@ -117,7 +117,14 @@ public class IDEController implements ActionListener {
             mntmAboutScrapClick();
         } else if (ev.getSource() == ideFrame.mntmCalculator) {
             mntmCalculatorClick();
+        } else if (ev.getSource() == ideFrame.mntmClarification) {
+            mntmClarificationClick();
         }
+    }
+    
+    private void mntmClarificationClick() {
+        RequestClarificationController controller = new RequestClarificationController(ideFrame, user);
+        controller.requestClarification();
     }
     
     private void buildProblemSet() {
