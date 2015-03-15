@@ -230,14 +230,24 @@ public class ServerController implements ActionListener {
      * @throws IOException
      * @throws InterruptedException
      */
-    private void redirectOutput() throws IOException, InterruptedException {
+    private void redirectOutput() {
         PipedOutputStream pOut = new PipedOutputStream();
-        System.setOut(new PrintStream(pOut));
-        PipedInputStream pIn = new PipedInputStream(pOut);
+        PipedInputStream pIn = null;
+        try {
+            pIn = new PipedInputStream(pOut);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         BufferedReader reader = new BufferedReader(new InputStreamReader(pIn));
         while (isRunning) {
-            String line = reader.readLine();
-            if (line != null) {
+            System.setOut(new PrintStream(pOut));
+            String line = "";
+            try {
+                line = reader.readLine();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            if (line != null && !line.trim().equals("")) {
                 serverFrame.jtaLog.append(line + System.getProperty("line.separator"));
                 serverFrame.jtaLog.setCaretPosition(serverFrame.jtaLog.getDocument().getLength());
             }
