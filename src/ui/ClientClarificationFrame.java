@@ -8,17 +8,39 @@
 //------------------------------------------------------------------------------
 package ui;
 
+import businessobjects.Clarification;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author Matthew Mossner
  */
 public class ClientClarificationFrame extends javax.swing.JFrame {
 
+    public long lastUpdated;
+    private ArrayList<Clarification> clarifications;
+    
     /**
      * Creates new form SubmitClarificationFrame
      */
     public ClientClarificationFrame() {
         initComponents();
+    }
+    
+    public void updateTable(ArrayList<Clarification> updatedClarifications) {
+        lastUpdated = new Date().getTime();
+        for (Clarification clarification : updatedClarifications) {
+            if (clarifications.contains(clarification)) {
+                int index = clarifications.indexOf(clarification);
+                clarifications.set(index, clarification);
+            }
+            else
+                clarifications.add(clarification);
+        }
+        jtblClarifications.repaint();
     }
 
     /**
@@ -54,32 +76,7 @@ public class ClientClarificationFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jtblClarifications.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Problem", "Status", "Question", "Answer"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        jtblClarifications.setModel(new ClarificationTableModel());
         jScrollPane3.setViewportView(jtblClarifications);
         if (jtblClarifications.getColumnModel().getColumnCount() > 0) {
             jtblClarifications.getColumnModel().getColumn(0).setPreferredWidth(10);
@@ -147,6 +144,48 @@ public class ClientClarificationFrame extends javax.swing.JFrame {
                 new ClientClarificationFrame().setVisible(true);
             }
         });
+    }
+    
+    private class ClarificationTableModel extends DefaultTableModel {
+
+        @Override
+        public Object getValueAt(int row, int column) {
+            Clarification clarification = clarifications.get(row);
+            switch (column) {
+                case 0:
+                    return clarification.getProblemNumber();
+                case 1:
+                    return (clarification.isAnswered() ? "ANSWERED" : "PENDING");
+                case 2:
+                    return clarification.getQuestion();
+                default:
+                    return clarification.getAnswer();
+            }
+        }
+
+        @Override
+        public String getColumnName(int column) {
+            switch (column) {
+                case 0:
+                    return "Problem Number";
+                case 1:
+                    return "Status";
+                case 2:
+                    return "Question";
+                default:
+                    return "Answer";
+            }
+        }
+
+        @Override
+        public int getColumnCount() {
+            return 4;
+        }
+
+        @Override
+        public int getRowCount() {
+            return clarifications.size();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

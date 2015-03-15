@@ -1,61 +1,53 @@
-//------------------------------------------------------------------------------
-// Name: Matthew Mossner
-// Course: CS 421
-// Semester: Fall 2014
-// Instructor: Il-Hyung Cho
-// Date Finished: 
-// Program Description:
-//------------------------------------------------------------------------------
 package businessobjects;
-
-import java.util.Date;
 
 /**
  *
  * @author Matthew Mossner
  */
 public class Clarification {
-    private long lastUpdate;
-    private final int problemId;
+    
+    private int id;
+    private final int problemNumber;
     private String question;
     private String answer;
-    private boolean answered;
+    private long timestamp;
     
-    public Clarification(int problemId, String question) {
-        this.problemId = problemId;
+    public Clarification(int id, int problemNumber, String question, String answer, long timestamp) {
+        this.id = id;
+        this.problemNumber = problemNumber;
         this.question = question;
-        answered = false;
-        lastUpdate = new Date().getTime();
+        this.answer = answer;
+        this.timestamp = timestamp;
     }
 
+    public int getId() {
+        return id;
+    }
+    
+    public int getProblemNumber() {
+        return problemNumber;
+    }
+    
     public String getQuestion() {
         return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-        lastUpdate = new Date().getTime();
     }
 
     public String getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-        answered = true;
-        lastUpdate = new Date().getTime();
-    }
-
-    public long getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public int getProblemId() {
-        return problemId;
+    public long getTimestamp() {
+        return timestamp;
     }
 
     public boolean isAnswered() {
-        return answered;
+        return (answer != null);
     } 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || ! (obj instanceof Clarification))
+            return false;
+        return (id == ((Clarification) obj).getId());
+    }
 }

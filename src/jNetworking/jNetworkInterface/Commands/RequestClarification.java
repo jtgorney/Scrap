@@ -2,32 +2,34 @@ package jNetworking.jNetworkInterface.Commands;
 
 import businessobjects.Clarification;
 import com.google.gson.Gson;
-import db.DBMgr;
 import jNetworking.jNetworkInterface.Command;
 import jNetworking.jNetworkInterface.jNetworkInterface;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
- * Get clarifications initiated by a particular user.
+ *
  * @author Matthew Mossner
  */
-public class GetUserClarifications implements Command {
+public class RequestClarification implements Command {
 
     private int userId;
-    private long lastUpdate;
+    private int problemNumber;
+    private String question;
     
     @Override
     public void setup(ArrayList<String> input, Socket client) {
         userId = Integer.parseInt(jNetworkInterface.base64Decode(input.get(0)));
-        lastUpdate = Integer.parseInt(jNetworkInterface.base64Decode(input.get(1)));
+        problemNumber = Integer.parseInt(jNetworkInterface.base64Decode(input.get(1)));
+        question = jNetworkInterface.base64Decode(input.get(2));
     }
 
     @Override
     public String run() {
-        DBMgr dbmgr = new DBMgr();
-        ArrayList<Clarification> clarifications = dbmgr.getUserClarifications(userId, lastUpdate);
-        return new Gson().toJson(clarifications);
+        Clarification clarification= new Clarification(new Double(Math.random() * Integer.MAX_VALUE).intValue(), 
+                problemNumber, question, null, new Date().getTime());
+        return new Gson().toJson(clarification);
     }
     
 }

@@ -207,9 +207,10 @@ public class DBMgr {
      * Get a list of clarifications initiated by a particular user.
      * 
      * @param userId User ID
+     * @param minTimestamp Minimum timestamp  
      * @return List of clarifications
      */
-    public ArrayList<Clarification> getUserClarifications(int userId) {
+    public ArrayList<Clarification> getUserClarifications(int userId, long minTimestamp) {
         return null;
     }
 
