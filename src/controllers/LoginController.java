@@ -69,7 +69,7 @@ public class LoginController implements ActionListener {
         // Set the name of the competition. This will
         // eventually be retrieved from the server.
         loginView.jlblHeader.setText(SettingsCommunicator.getCompetitionName());
-        loginView.jlblSchool.setText(SettingsCommunicator.getCompetitionSchool());
+        loginView.jlblSchool.setText(SettingsCommunicator.getSchoolName());
         loginView.repaint();
         // Build listeners
         loginView.jbtnEnter.addActionListener(this);

@@ -23,11 +23,23 @@
  */
 package businessobjects;
 
+import ui.AdminFrame;
+import controllers.AdminController;
 /**
  * This class will eventually perform settings lookup via the server.
  * @author Jacob Gorney
  */
 public class SettingsCommunicator {
+    /**
+     * Competition Name
+     */
+    public static String strCompetitionName = "HSPC 2015";
+   
+    /**
+     * School Name
+     */
+    public static String strSchoolName = "Saginaw Valley State University";
+    
     /**
      * Get the remote server address.
      * @return Server IP Address
@@ -45,19 +57,35 @@ public class SettingsCommunicator {
     }
     
     /**
+     * Set the competition name.
+     * @param strCompName Competition Name
+     */
+    public static void setCompetitionName(String strCompName) {
+        strCompetitionName = strCompName;
+    }
+    
+    /**
      * Get the competition name.
      * @return Competition name
      */
     public static String getCompetitionName() {
-        return "SVSU HSPC 2015";
+        return strCompetitionName;
+    }
+    
+    /**
+     * Set the school name.
+     * @param strCompSchoolName School Name
+     */
+    public static void setSchoolName(String strCompSchoolName) {
+        strSchoolName = strCompSchoolName;
     }
     
     /**
      * Get the competition school.
      * @return School name
      */
-    public static String getCompetitionSchool() {
-        return "Saginaw Valley State University";
+    public static String getSchoolName() {
+        return strSchoolName;
     }
     
     /**

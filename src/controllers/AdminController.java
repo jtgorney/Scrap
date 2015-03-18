@@ -34,7 +34,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import ui.AddUserFrame;
 import ui.AdminFrame;
@@ -76,6 +78,7 @@ public class AdminController implements ActionListener {
         // Add action listeners
         this.adminFrame.jbtnAddUser.addActionListener(this);
         this.adminFrame.jbtnExit.addActionListener(this);
+        this.adminFrame.jbtnSave.addActionListener(this);
         // Load user list
         loadUsers();
     }
@@ -86,6 +89,8 @@ public class AdminController implements ActionListener {
             jbtnAddUserClick();
         } else if (e.getSource() == adminFrame.jbtnExit) {
             jbtnExitClick();
+        } else if (e.getSource() == adminFrame.jbtnSave) {
+            jbtnSaveClick();
         }
     }
 
@@ -154,6 +159,25 @@ public class AdminController implements ActionListener {
         new AddUserController(frame);
     }
 
+    /**
+     * Save Contest Name and School Name 
+     */
+    private void jbtnSaveClick() {
+        if (JOptionPane.showConfirmDialog(adminFrame, "Are you "
+                + "sure you want to save changes?", "Save Changes", 
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        String strCompName = adminFrame.jtfContestName.getText();
+        String strSchoolName = adminFrame.jtfSchoolName.getText();
+        SettingsCommunicator.setCompetitionName(strCompName);
+        SettingsCommunicator.setSchoolName(strSchoolName);
+        }
+        else {
+            adminFrame.jtfContestName.setText("");
+            adminFrame.jtfSchoolName.setText("");
+        }
+            
+    }
+    
     /**
      * Exit button click.
      */

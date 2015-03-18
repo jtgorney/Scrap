@@ -77,7 +77,7 @@ public class IDEController implements ActionListener {
         this.user = user;
         
         // Setting The Top Bar JLabel
-        ideFrame.jlblTopContent.setText(SettingsCommunicator.getCompetitionSchool() 
+        ideFrame.jlblTopContent.setText(SettingsCommunicator.getSchoolName() 
                 + " | " + SettingsCommunicator.getCompetitionName() + 
                 " | Time Remaining: 03:00:00 | Team: " + user.getUsername());
         
