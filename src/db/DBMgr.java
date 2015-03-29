@@ -227,7 +227,7 @@ public class DBMgr {
         int accepted = (runner.isAccepted()) ? 1 : 0;
         // Create the SQL:
         String query = "INSERT INTO `Solution` (`ProblemNumber`, `TeamId`, `Accepted`, `Score`) " +
-                "VALUES (" + problemNumber + "," + teamNumber + "," + accepted + ");";
+                "VALUES (" + problemNumber + "," + teamNumber + "," + accepted + "," + score + ");";
         Statement stmt = null;
         try {
             // Add the record

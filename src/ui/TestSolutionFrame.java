@@ -71,7 +71,7 @@ public class TestSolutionFrame extends JFrame {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        this.setAlwaysOnTop(true);
+        this.setAlwaysOnTop(false);
         this.setTitle("Test Your Solution");
         this.setAlwaysOnTop(true);
         this.setResizable(false);
@@ -126,6 +126,7 @@ public class TestSolutionFrame extends JFrame {
         this.getContentPane().add(jpbLoading);
 
         jlblTesting = new JLabel("Testing, Please Wait...");
+        jlblTesting.setFont(new Font("Tahoma", Font.BOLD, 11));
         jlblTesting.setHorizontalAlignment(SwingConstants.CENTER);
         jlblTesting.setBounds(10, 204, 156, 14);
         this.getContentPane().add(jlblTesting);

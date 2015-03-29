@@ -91,7 +91,9 @@ public class Compiler {
                 if (r.isSubmission()) {
                     try {
                         // Score the solution/runner
-                        scoreMach.score(r);
+                        boolean result = scoreMach.score(r);
+                        r.setAccepted(result);
+                        
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         // Do nothing

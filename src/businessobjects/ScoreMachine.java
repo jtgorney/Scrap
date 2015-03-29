@@ -62,6 +62,8 @@ public class ScoreMachine {
         }
         // Check for compile error first
         if (parser.getStatusHeader().equals("COMPILE ERROR")) {
+            // Penalized for compiler error because come on!
+            // Rutheless Vengence
             score += COMPILE_ERROR + REJECTED_SOLUTION;
             runner.setAccepted(false);
             // Record the changes
@@ -79,8 +81,12 @@ public class ScoreMachine {
                 // Record the changes
                 insertScoreToDB(runner, score);
                 return true;
-            } else
+            } else {
+                // Solution doesn't match. lol.
+                score += REJECTED_SOLUTION;
+                insertScoreToDB(runner, score);
                 return false;
+            }
         }
     }
     
