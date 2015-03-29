@@ -8,3 +8,5 @@ checkuserexists: CheckUserExists
 submitsolution: SubmitSolution
 getsubmissionresult: GetSubmissionResult
 getproblemset: GetProblemSet
+getuserclarifications: GetUserClarifications
+requestclarification: RequestClarification

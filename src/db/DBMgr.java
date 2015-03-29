@@ -210,8 +210,33 @@ public class DBMgr {
      * @param minTimestamp Minimum timestamp  
      * @return List of clarifications
      */
-    public ArrayList<Clarification> getUserClarifications(int userId, long minTimestamp) {
+    public ArrayList<Clarification> getUserClarifications(int userId, String minTimestamp) {
         return null;
+    }
+    
+    public Clarification requestClarification(int userId, int problemNum, String question) {
+        Statement stmt = null;
+        Clarification result = null;
+        String query = "INSERT INTO `Clarifications` (`ProblemNum`, `Question`) VALUES "
+                       + "('" + problemNum + "', '" + question + "');";
+        try {
+            stmt = getConnection().createStatement();
+            stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet resultSet = stmt.getGeneratedKeys();
+            resultSet.first();
+            int clarificationId = resultSet.getInt(1);
+            query = "INSERT INTO `UserClarifications` (`UserID`, `ClarificationID`) VALUES " +
+                    "('" + userId + "', '" + clarificationId + "');";
+            stmt.executeUpdate(query);
+            query = "SELECT `Timestamp` FROM `Clarifications` WHERE `ClarificationID` = '" + clarificationId + "';";
+            resultSet = stmt.executeQuery(query);
+            resultSet.first();
+            Timestamp timestamp = resultSet.getTimestamp(1);
+            result = new Clarification(clarificationId, problemNum, question, "", timestamp);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
 
     /**

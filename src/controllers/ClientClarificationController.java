@@ -33,6 +33,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import ui.ClientClarificationFrame;
@@ -46,10 +47,10 @@ public class ClientClarificationController implements ActionListener {
     private User user;
     private ClientClarificationFrame clarificationView;
     private RequestClarificationController requestClarificationController;
-    private long lastUpdated;
+    private Timestamp lastUpdated;
     
     public ClientClarificationController(User user) {
-        lastUpdated = 0;
+        lastUpdated = new Timestamp(new Date().getTime());
         this.user = user;
         clarificationView = new ClientClarificationFrame();
         clarificationView.jbtnNewClarification.addActionListener(this);
@@ -102,8 +103,8 @@ public class ClientClarificationController implements ActionListener {
             SettingsCommunicator.getServerAddr(),
             SettingsCommunicator.getServerPort(), false);
         ArrayList<String> commandData = new ArrayList<String>();
-        long tempLastUpdated = lastUpdated;
-        lastUpdated = new Date().getTime();
+        Timestamp tempLastUpdated = lastUpdated;
+        lastUpdated = new Timestamp(new Date().getTime());
         try {
             commandData.add(jNetworkInterface.base64Encode(String.valueOf(user.getId())));
             commandData.add(jNetworkInterface.base64Decode(String.valueOf(tempLastUpdated)));

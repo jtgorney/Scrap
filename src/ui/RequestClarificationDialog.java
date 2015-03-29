@@ -29,12 +29,12 @@ package ui;
  */
 public class RequestClarificationDialog extends javax.swing.JDialog {
 
-    private final int[] problemNumbers;
+    private final Integer[] problemNumbers;
     
     /**
      * Creates new form RequestClarificationDialog
      */
-    public RequestClarificationDialog(java.awt.Frame parent, int[] problemNumbers) {
+    public RequestClarificationDialog(java.awt.Frame parent, Integer[] problemNumbers) {
         super(parent, true);
         this.problemNumbers = problemNumbers;
         initComponents();
@@ -45,7 +45,7 @@ public class RequestClarificationDialog extends javax.swing.JDialog {
     }
     
     public int getProblemId() {
-        return (Integer) jcmbProblemNumber.getSelectedItem();
+        return Integer.parseInt(jcmbProblemNumber.getSelectedItem().toString());
     }
 
     /**
@@ -73,7 +73,7 @@ public class RequestClarificationDialog extends javax.swing.JDialog {
 
         jbtnSend.setText("Send");
 
-        jcmbProblemNumber.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcmbProblemNumber.setModel(new javax.swing.DefaultComboBoxModel<>(problemNumbers));
 
         jLabel1.setText("Problem Number");
 
@@ -87,7 +87,7 @@ public class RequestClarificationDialog extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jbtnCancel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcmbProblemNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +144,7 @@ public class RequestClarificationDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RequestClarificationDialog dialog = new RequestClarificationDialog(new javax.swing.JFrame(), new int[] {1, 2, 3});
+                RequestClarificationDialog dialog = new RequestClarificationDialog(new javax.swing.JFrame(), new Integer[] {1, 2, 3});
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -35,7 +35,6 @@ import javax.swing.table.TableModel;
  */
 public class ClientClarificationFrame extends javax.swing.JFrame {
 
-    public long lastUpdated;
     private ArrayList<Clarification> clarifications;
     
     /**
@@ -46,7 +45,6 @@ public class ClientClarificationFrame extends javax.swing.JFrame {
     }
     
     public void updateTable(ArrayList<Clarification> updatedClarifications) {
-        lastUpdated = new Date().getTime();
         for (Clarification clarification : updatedClarifications) {
             if (clarifications.contains(clarification)) {
                 int index = clarifications.indexOf(clarification);

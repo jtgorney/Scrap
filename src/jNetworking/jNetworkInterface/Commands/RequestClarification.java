@@ -25,6 +25,7 @@ package jNetworking.jNetworkInterface.Commands;
 
 import businessobjects.Clarification;
 import com.google.gson.Gson;
+import db.DBMgr;
 import jNetworking.jNetworkInterface.Command;
 import jNetworking.jNetworkInterface.jNetworkInterface;
 import java.net.Socket;
@@ -50,9 +51,11 @@ public class RequestClarification implements Command {
 
     @Override
     public String run() {
-        Clarification clarification= new Clarification(new Double(Math.random() * Integer.MAX_VALUE).intValue(), 
-                problemNumber, question, null, new Date().getTime());
+        Clarification clarification = new DBMgr().requestClarification(userId, problemNumber, question);
         return new Gson().toJson(clarification);
+        /*Clarification clarification= new Clarification(new Double(Math.random() * Integer.MAX_VALUE).intValue(), 
+                problemNumber, question, null, new Date().getTime());
+        return new Gson().toJson(clarification);*/
     }
     
 }

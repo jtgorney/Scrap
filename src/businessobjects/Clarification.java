@@ -23,6 +23,8 @@
  */
 package businessobjects;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author Matthew Mossner
@@ -33,9 +35,9 @@ public class Clarification {
     private final int problemNumber;
     private String question;
     private String answer;
-    private long timestamp;
+    private Timestamp timestamp;
     
-    public Clarification(int id, int problemNumber, String question, String answer, long timestamp) {
+    public Clarification(int id, int problemNumber, String question, String answer, Timestamp timestamp) {
         this.id = id;
         this.problemNumber = problemNumber;
         this.question = question;
@@ -59,7 +61,7 @@ public class Clarification {
         return answer;
     }
 
-    public long getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 

@@ -29,6 +29,7 @@ import db.DBMgr;
 import jNetworking.jNetworkInterface.Command;
 import jNetworking.jNetworkInterface.jNetworkInterface;
 import java.net.Socket;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -38,12 +39,12 @@ import java.util.ArrayList;
 public class GetUserClarifications implements Command {
 
     private int userId;
-    private long lastUpdate;
+    private String lastUpdate;
     
     @Override
     public void setup(ArrayList<String> input, Socket client) {
         userId = Integer.parseInt(jNetworkInterface.base64Decode(input.get(0)));
-        lastUpdate = Integer.parseInt(jNetworkInterface.base64Decode(input.get(1)));
+        lastUpdate = jNetworkInterface.base64Decode(input.get(1));
     }
 
     @Override

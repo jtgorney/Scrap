@@ -48,7 +48,7 @@ public class RequestClarificationController implements ActionListener {
     private Frame dialogOwner;
     private User user;
     private RequestClarificationDialog requestClarificationView;
-    private int[] problemNumbers;
+    private Integer[] problemNumbers;
     
     public RequestClarificationController(Frame dialogOwner, User user) {
         this.user = user;
@@ -57,7 +57,7 @@ public class RequestClarificationController implements ActionListener {
             SettingsCommunicator.getServerPort(), false);
         String response = client.sendCommand("getproblemset", null);
         ArrayList<Problem> problems = new Gson().fromJson(response, new TypeToken<ArrayList<Problem>>() {}.getType());
-        problemNumbers = new int[problems.size()];
+        problemNumbers = new Integer[problems.size()];
         for (int i = 0; i < problems.size(); i++) {
             problemNumbers[i] = problems.get(i).getProblemNumber();
         }
