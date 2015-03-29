@@ -25,6 +25,7 @@ package db;
 
 import businessobjects.Problem;
 import businessobjects.Clarification;
+import businessobjects.CompilerRunner;
 import businessobjects.User;
 import java.sql.*;
 import java.util.ArrayList;
@@ -212,6 +213,38 @@ public class DBMgr {
      */
     public ArrayList<Clarification> getUserClarifications(int userId, String minTimestamp) {
         return null;
+    }
+    
+    /**
+     * Insert a score into the DB
+     * @param runner Compiler runner
+     * @param score Score offset
+     */
+    public void insertScore(CompilerRunner runner, int score) {
+        // Insert new score into DB.
+    }
+    
+    /**
+     * Get a problem solution for a problem number.
+     * @param problemNum Problem number
+     * @return Solution 
+     */
+    public String getProblemSolution(int problemNum) {
+        Statement stmt = null;
+        String query = "SELECT `solution` FROM `Problems` WHERE `ProblemNum` = " + problemNum;
+        try {
+            stmt = getConnection().createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            if (!result.next())
+                return null;
+            else {
+                // Return the solution
+                return result.getString("Solution");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
     
     public Clarification requestClarification(int userId, int problemNum, String question) {
