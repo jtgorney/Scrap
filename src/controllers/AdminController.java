@@ -81,6 +81,8 @@ public class AdminController implements ActionListener {
         this.adminFrame.jbtnSave.addActionListener(this);
         // Load user list
         loadUsers();
+        // Load other settings
+        loadMisc();
     }
 
     @Override
@@ -144,6 +146,16 @@ public class AdminController implements ActionListener {
     }
 
     /**
+     * Loads the other settings boxes
+     */
+    private void loadMisc() {
+       String strContestName = SettingsCommunicator.getCompetitionName();
+       String strSchoolName = SettingsCommunicator.getSchoolName();
+       adminFrame.jtfContestName.setText(strContestName);
+       adminFrame.jtfSchoolName.setText(strSchoolName);
+    }
+    
+    /**
      * Click event for jbtnAddUser.
      */
     private void jbtnAddUserClick() {
@@ -170,12 +182,7 @@ public class AdminController implements ActionListener {
         String strSchoolName = adminFrame.jtfSchoolName.getText();
         SettingsCommunicator.setCompetitionName(strCompName);
         SettingsCommunicator.setSchoolName(strSchoolName);
-        }
-        else {
-            adminFrame.jtfContestName.setText("");
-            adminFrame.jtfSchoolName.setText("");
-        }
-            
+        }        
     }
     
     /**
