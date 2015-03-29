@@ -83,6 +83,8 @@ public class CodeProcessor {
    public static final String END_STD_OUT = "END STANDARD OUTPUT";
    public static final String BEGIN_STD_ERR = "BEGIN STANDARD ERROR";
    public static final String END_STD_ERR = "END STANDARD ERROR";
+   public static final String BEGIN_CODE = "BEGIN CODE";
+   public static final String END_CODE = "END CODE";
    public static final String END_FILE = "END FILE";
 
    public static final int TIMEOUT_DURATION = 30;
@@ -299,6 +301,7 @@ public class CodeProcessor {
                writer.println(UNSUPPORTED_LANGUAGE);
                writer.println(extension);
             }
+            appendCode(writer, codeFileAndInput[0]);
             writer.print(END_FILE);
          }
          catch (NullPointerException | InterruptedException | IOException e) {
@@ -309,6 +312,7 @@ public class CodeProcessor {
             writer.close();
             writer = new PrintStream(runResult);
             writer.println(TIMEOUT);
+            appendCode(writer, codeFileAndInput[0]);
             writer.print(END_FILE);
          }
          finally {
@@ -359,5 +363,16 @@ public class CodeProcessor {
       s.close();
       writer.println(END_STD_ERR);
       writer.println(END_OUTPUT);
+   }
+   
+   private static void appendCode(PrintStream writer, File codeFile) 
+           throws FileNotFoundException {
+       writer.println(BEGIN_CODE);
+       Scanner s = new Scanner(codeFile);
+       while (s.hasNextLine()) {
+           writer.println(s.nextLine());
+       }
+       s.close();
+       writer.println(END_CODE);
    }
 }

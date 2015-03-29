@@ -36,6 +36,7 @@ public class OutputParser {
     private String status = "";
     private String stdOutput = "";
     private String stdError = "";
+    private String code = "";
     
     /**
      *
@@ -63,6 +64,15 @@ public class OutputParser {
                 }
             }
         }
+        s.nextLine();
+        line = s.nextLine();
+        if (line.equals(CodeProcessor.BEGIN_CODE)) {
+            line = s.nextLine();
+            while (! line.equals(CodeProcessor.END_CODE)) {
+                code += line + "\n";
+                line = s.nextLine();
+            }
+        }
         s.close();
     }
     
@@ -76,5 +86,9 @@ public class OutputParser {
     
     public String getStdError() {
         return stdError;
+    }
+    
+    public String getCode() {
+        return code;
     }
 }
