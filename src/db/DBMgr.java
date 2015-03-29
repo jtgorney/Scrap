@@ -222,6 +222,20 @@ public class DBMgr {
      */
     public void insertScore(CompilerRunner runner, int score) {
         // Insert new score into DB.
+        int problemNumber = runner.getProblemId();
+        int teamNumber = runner.getTeamId();
+        int accepted = (runner.isAccepted()) ? 1 : 0;
+        // Create the SQL:
+        String query = "INSERT INTO `Solution` (`ProblemNumber`, `TeamId`, `Accepted`, `Score`) " +
+                "VALUES (" + problemNumber + "," + teamNumber + "," + accepted + ");";
+        Statement stmt = null;
+        try {
+            // Add the record
+            stmt = getConnection().createStatement();
+            stmt.executeUpdate(query);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
     /**

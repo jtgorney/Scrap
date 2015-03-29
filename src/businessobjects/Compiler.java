@@ -24,7 +24,6 @@
 package businessobjects;
 
 import compiler.CodeProcessor;
-import compiler.OutputParser;
 import jNetworking.jNetworkInterface.ServerLogger;
 import java.io.File;
 import java.io.IOException;
@@ -47,6 +46,7 @@ public class Compiler {
     private static Queue<CompilerRunner> compilerQueue = new LinkedList<>();
     private static HashMap<Integer, ArrayList<CompilerRunner>> completedRuns = 
             new HashMap<>();
+    private static ScoreMachine scoreMach = new ScoreMachine();
 
     /**
      * Process the current queue of jobs. This is executed on each tick of the
@@ -90,9 +90,8 @@ public class Compiler {
                 // Score it if we can
                 if (r.isSubmission()) {
                     try {
-                        // Score the solution
-                        r.setAccepted(Scoreboard.getScoreboard().scoreSolution(r.getProblemId(),
-                                new OutputParser(r.getResultFile())));
+                        // Score the solution/runner
+                        scoreMach.score(r);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         // Do nothing
