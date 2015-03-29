@@ -26,6 +26,7 @@ package db;
 import businessobjects.Problem;
 import businessobjects.Clarification;
 import businessobjects.CompilerRunner;
+import businessobjects.Submission;
 import businessobjects.User;
 import java.sql.*;
 import java.util.ArrayList;
@@ -213,6 +214,43 @@ public class DBMgr {
      */
     public ArrayList<Clarification> getUserClarifications(int userId, String minTimestamp) {
         return null;
+    }
+    
+    /**
+     * Get submissions.
+     * @return Submissions
+     */
+    public ArrayList<Submission> getSubmissions() {
+        String query = "SELECT 	`Solution`.`Id` AS Id, `Solution`.`ProblemNumber` AS ProblemNumber, `Solution`.`TeamId` AS TeamId,\n" +
+            "`Solution`.`Accepted` AS Accepted, `Solution`.`Score` AS Score, `Team`.`username` AS TeamName\n" +
+            "FROM `Solution` INNER JOIN `Team`\n" +
+            "ON `Team`.`team_id` = `Solution`.`TeamId`\n" +
+            "ORDER BY `Solution`.`Id` DESC";
+        Statement stmt;
+        try {
+            stmt = getConnection().createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            if (!result.next()) {
+                return null;
+            }
+            // Build the list
+            ArrayList<Submission> submissions = new ArrayList<>();
+            do {
+                submissions.add(new Submission(
+                    result.getInt("Id"),
+                    result.getInt("ProblemNumber"),
+                    result.getInt("TeamId"),
+                    result.getInt("Score"),
+                    result.getString("TeamName"),
+                    ((result.getInt("Accepted") == 1) ? true : false)
+                ));
+            } while (result.next());
+            // Return
+            return submissions;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
     
     /**
