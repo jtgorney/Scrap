@@ -25,6 +25,8 @@ package db;
 
 import businessobjects.Problem;
 import businessobjects.Clarification;
+import businessobjects.CompilerRunner;
+import businessobjects.Submission;
 import businessobjects.User;
 import java.sql.*;
 import java.util.ArrayList;
@@ -212,6 +214,89 @@ public class DBMgr {
      */
     public ArrayList<Clarification> getUserClarifications(int userId, String minTimestamp) {
         return null;
+    }
+    
+    /**
+     * Get submissions.
+     * @return Submissions
+     */
+    public ArrayList<Submission> getSubmissions() {
+        String query = "SELECT 	`Solution`.`Id` AS Id, `Solution`.`ProblemNumber` AS ProblemNumber, `Solution`.`TeamId` AS TeamId,\n" +
+            "`Solution`.`Accepted` AS Accepted, `Solution`.`Score` AS Score, `Team`.`username` AS TeamName\n" +
+            "FROM `Solution` INNER JOIN `Team`\n" +
+            "ON `Team`.`team_id` = `Solution`.`TeamId`\n" +
+            "ORDER BY `Solution`.`Id` DESC";
+        Statement stmt;
+        try {
+            stmt = getConnection().createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            if (!result.next()) {
+                return null;
+            }
+            // Build the list
+            ArrayList<Submission> submissions = new ArrayList<>();
+            do {
+                submissions.add(new Submission(
+                    result.getInt("Id"),
+                    result.getInt("ProblemNumber"),
+                    result.getInt("TeamId"),
+                    result.getInt("Score"),
+                    result.getString("TeamName"),
+                    ((result.getInt("Accepted") == 1) ? true : false)
+                ));
+            } while (result.next());
+            // Return
+            return submissions;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Insert a score into the DB
+     * @param runner Compiler runner
+     * @param score Score offset
+     */
+    public void insertScore(CompilerRunner runner, int score) {
+        // Insert new score into DB.
+        int problemNumber = runner.getProblemId();
+        int teamNumber = runner.getTeamId();
+        int accepted = (runner.isAccepted()) ? 1 : 0;
+        // Create the SQL:
+        String query = "INSERT INTO `Solution` (`ProblemNumber`, `TeamId`, `Accepted`, `Score`) " +
+                "VALUES (" + problemNumber + "," + teamNumber + "," + accepted + "," + score + ");";
+        Statement stmt = null;
+        try {
+            // Add the record
+            stmt = getConnection().createStatement();
+            stmt.executeUpdate(query);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    /**
+     * Get a problem solution for a problem number.
+     * @param problemNum Problem number
+     * @return Solution 
+     */
+    public String getProblemSolution(int problemNum) {
+        Statement stmt = null;
+        String query = "SELECT `solution` FROM `Problems` WHERE `ProblemNum` = " + problemNum;
+        try {
+            stmt = getConnection().createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            if (!result.next())
+                return null;
+            else {
+                // Return the solution
+                return result.getString("Solution");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
     
     public Clarification requestClarification(int userId, int problemNum, String question) {

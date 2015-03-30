@@ -135,6 +135,15 @@ public class SubmitSolutionController implements ActionListener {
             parent.setVisible(true);
         }
     }
+    
+    /**
+     * Remove a problem from the tab controller.
+     * @param problemNumber Problem number.
+     */
+    public void removeProblemFromIDE(int problemNumber) {
+        if (parent != null)
+            parent.tpProblemSet.remove(problemNumber-1);
+    }
 
     @Override
     public void actionPerformed(ActionEvent ev) {
@@ -198,9 +207,11 @@ public class SubmitSolutionController implements ActionListener {
                     if (response.equals("INVALID"))
                         JOptionPane.showMessageDialog(parent, "Your solution was incorrect! Please revise and resubmit. "
                                 + "Your score has been updated.", "Incorrect Score", JOptionPane.WARNING_MESSAGE);
-                    else if (response.equals("ACCEPTED"))
+                    else if (response.equals("ACCEPTED")) {
                         JOptionPane.showMessageDialog(parent, "Solution accepted! Your score will be updated momentarily.",
                                 "Accepted", JOptionPane.INFORMATION_MESSAGE);
+                        removeProblemFromIDE(problemId);
+                    }
 
                     // Close
                     submitSolutionFrame.dispatchEvent(new WindowEvent(

@@ -21,46 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package jNetworking.jNetworkInterface.Commands;
+package main;
 
-import businessobjects.CompilerRunner;
-import jNetworking.jNetworkInterface.Command;
-import businessobjects.Compiler;
-import java.net.Socket;
-import java.util.ArrayList;
+import controllers.JudgeController;
+import javax.swing.UIManager;
+import ui.JudgeFrame;
 
 /**
- * Get the result of a compiler job.
- * @author Jacob Gorney
+ * Scrap server and methods.
  */
-public class GetSubmissionResult implements Command {
-    /**
-     * Token of job.
-     */
-    private long token;
-    /**
-     * Team ID associated with job.
-     */
-    private int teamId;
-    
-    @Override
-    public void setup(ArrayList<String> input, Socket client) {
-        // Input the team id and the run token
-        teamId = Integer.parseInt(input.get(0));
-        token = Long.parseLong(input.get(1));
+public class Judge {
+    public static void main(String[] args) {
+        new Judge();
     }
 
-    @Override
-    public String run() {
-        Compiler c = Compiler.getCompiler();
-        CompilerRunner runner = c.searchCompletedRunners(token, teamId);
-        // Return results
-        if (runner == null)
-            return "PROCESSING";
-        else
-            if (runner.isAccepted())
-                return "ACCEPTED";
-            else
-                return "INVALID";
+    public Judge() {
+        // Set the look and feel of the application.
+        try {
+            // Set cross-platform Java L&F (also called "Metal")
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Do nothing else.
+        }
+        // Add admin GUI
+        new JudgeController(new JudgeFrame());
     }
 }

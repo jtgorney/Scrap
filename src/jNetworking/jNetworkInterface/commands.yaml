@@ -10,3 +10,4 @@ getsubmissionresult: GetSubmissionResult
 getproblemset: GetProblemSet
 getuserclarifications: GetUserClarifications
 requestclarification: RequestClarification
+getsubmissions: GetSubmissions

@@ -74,7 +74,7 @@ public class SubmitSolutionFrame extends JFrame {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        this.setAlwaysOnTop(true);
+        this.setAlwaysOnTop(false);
         this.setTitle("Submit Your Solution");
         this.setResizable(false);
         this.setBounds(100, 100, 402, 282);
@@ -128,6 +128,7 @@ public class SubmitSolutionFrame extends JFrame {
         this.getContentPane().add(pbSubmitting);
 
         lblSubmitting = new JLabel("Submitting, Please Wait...");
+        lblSubmitting.setFont(new Font("Tahoma", Font.BOLD, 11));
         lblSubmitting.setHorizontalAlignment(SwingConstants.CENTER);
         lblSubmitting.setBounds(10, 205, 156, 14);
         lblSubmitting.setVisible(false);

@@ -236,7 +236,7 @@ public class ServerController implements ActionListener {
         try {
             pIn = new PipedInputStream(pOut);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            
         }
         BufferedReader reader = new BufferedReader(new InputStreamReader(pIn));
         while (isRunning) {
@@ -245,7 +245,7 @@ public class ServerController implements ActionListener {
             try {
                 line = reader.readLine();
             } catch (Exception ex) {
-                ex.printStackTrace();
+                
             }
             if (line != null && !line.trim().equals("")) {
                 serverFrame.jtaLog.append(line + System.getProperty("line.separator"));

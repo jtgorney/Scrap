@@ -21,46 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package jNetworking.jNetworkInterface.Commands;
-
-import businessobjects.CompilerRunner;
-import jNetworking.jNetworkInterface.Command;
-import businessobjects.Compiler;
-import java.net.Socket;
-import java.util.ArrayList;
+package businessobjects;
 
 /**
- * Get the result of a compiler job.
+ * Solution container for a runner.
  * @author Jacob Gorney
  */
-public class GetSubmissionResult implements Command {
+public class Solution {
     /**
-     * Token of job.
+     * Runner object.
      */
-    private long token;
+    private CompilerRunner runner;
     /**
-     * Team ID associated with job.
+     * Is an accepted solution.
      */
-    private int teamId;
+    private boolean isCorrect = false;
     
-    @Override
-    public void setup(ArrayList<String> input, Socket client) {
-        // Input the team id and the run token
-        teamId = Integer.parseInt(input.get(0));
-        token = Long.parseLong(input.get(1));
-    }
-
-    @Override
-    public String run() {
-        Compiler c = Compiler.getCompiler();
-        CompilerRunner runner = c.searchCompletedRunners(token, teamId);
-        // Return results
-        if (runner == null)
-            return "PROCESSING";
-        else
-            if (runner.isAccepted())
-                return "ACCEPTED";
-            else
-                return "INVALID";
+    /**
+     * Construct solution.
+     * @param r Compiler runner for submission
+     */
+    public Solution(CompilerRunner r) {
+        runner = r;
     }
 }
