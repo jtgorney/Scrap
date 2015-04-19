@@ -11,3 +11,9 @@ getproblemset: GetProblemSet
 getuserclarifications: GetUserClarifications
 requestclarification: RequestClarification
 getsubmissions: GetSubmissions
+setcompetitionname: SetCompetitionName
+getcompetitionname: GetCompetitionName
+setschoolname: SetSchoolName
+getschoolname: GetSchoolName
+setavailablelanguages: SetAvailableLanguages
+getavailablelanguages: GetAvailableLanguages

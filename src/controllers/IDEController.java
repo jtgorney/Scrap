@@ -76,9 +76,13 @@ public class IDEController implements ActionListener {
         this.ideFrame = ideView;
         this.user = user;
         
+        jNetworkInterface client = new jNetworkInterface(SettingsCommunicator.getServerAddr(), SettingsCommunicator.getServerPort(), false);
+        
+        String schoolName = client.sendCommand("getschoolname", null);
+        String competitionName = client.sendCommand("getcompetitionname", null);
+        
         // Setting The Top Bar JLabel
-        ideFrame.jlblTopContent.setText(SettingsCommunicator.getSchoolName() 
-                + " | " + SettingsCommunicator.getCompetitionName() + 
+        ideFrame.jlblTopContent.setText(schoolName + " | " + competitionName + 
                 " | Time Remaining: 03:00:00 | Team: " + user.getUsername());
         
         // For now, just display the GUI until we build the IDEFrame controller

@@ -25,6 +25,7 @@ package controllers;
 
 import businessobjects.CompetitionUser;
 import businessobjects.SettingsCommunicator;
+import jNetworking.jNetworkInterface.jNetworkInterface;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,10 +67,9 @@ public class LoginController implements ActionListener {
                 }
             }
         });
-        // Set the name of the competition. This will
-        // eventually be retrieved from the server.
-        loginView.jlblHeader.setText(SettingsCommunicator.getCompetitionName());
-        loginView.jlblSchool.setText(SettingsCommunicator.getSchoolName());
+        jNetworkInterface client = new jNetworkInterface(SettingsCommunicator.getServerAddr(), SettingsCommunicator.getServerPort(), false);
+        loginView.jlblHeader.setText(client.sendCommand("getcompetitionname", null));
+        loginView.jlblSchool.setText(client.sendCommand("getschoolname", null));
         loginView.repaint();
         // Build listeners
         loginView.jbtnEnter.addActionListener(this);

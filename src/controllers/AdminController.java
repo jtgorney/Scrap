@@ -150,8 +150,9 @@ public class AdminController implements ActionListener {
      * Loads the other settings boxes
      */
     private void loadMisc() {
-       String strContestName = SettingsCommunicator.getCompetitionName();
-       String strSchoolName = SettingsCommunicator.getSchoolName();
+       jNetworkInterface client = new jNetworkInterface(SettingsCommunicator.getServerAddr(), SettingsCommunicator.getServerPort(), false);
+       String strContestName = client.sendCommand("getcompetitionname", null);
+       String strSchoolName = client.sendCommand("getschoolname", null);
        adminFrame.jtfContestName.setText(strContestName);
        adminFrame.jtfSchoolName.setText(strSchoolName);
     }
@@ -179,10 +180,12 @@ public class AdminController implements ActionListener {
         if (JOptionPane.showConfirmDialog(adminFrame, "Are you "
                 + "sure you want to save changes?", "Save Changes", 
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-        String strCompName = adminFrame.jtfContestName.getText();
-        String strSchoolName = adminFrame.jtfSchoolName.getText();
-        SettingsCommunicator.setCompetitionName(strCompName);
-        SettingsCommunicator.setSchoolName(strSchoolName);
+            jNetworkInterface client = new jNetworkInterface(SettingsCommunicator.getServerAddr(), SettingsCommunicator.getServerPort(), false);
+            ArrayList<String> data = new ArrayList<>(1);
+            data.add(0, adminFrame.jtfContestName.getText());
+            client.sendCommand("setcompetitionname", data);
+            data.add(0, adminFrame.jtfSchoolName.getText());
+            client.sendCommand("setschoolname", data);
         }        
     }
     
