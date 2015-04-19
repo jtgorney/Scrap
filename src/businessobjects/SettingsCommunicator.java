@@ -23,8 +23,8 @@
  */
 package businessobjects;
 
-import ui.AdminFrame;
-import controllers.AdminController;
+import java.util.Set;
+
 /**
  * This class will eventually perform settings lookup via the server.
  * @author Jacob Gorney
@@ -39,6 +39,16 @@ public class SettingsCommunicator {
      * School Name
      */
     public static String strSchoolName = "Saginaw Valley State University";
+    
+    public static Set<ProgrammingLanguage> availableLanguages;
+
+    public static Set<ProgrammingLanguage> getAvailableLanguages() {
+        return availableLanguages;
+    }
+
+    public static void setAvailableLanguages(Set<ProgrammingLanguage> availableLanguages) {
+        SettingsCommunicator.availableLanguages = availableLanguages;
+    }
     
     /**
      * Get the remote server address.

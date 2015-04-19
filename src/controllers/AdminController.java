@@ -52,6 +52,7 @@ public class AdminController implements ActionListener {
      */
     private final AdminFrame adminFrame;
     private final DefaultListModel listModel;
+    private final ProgrammingLanguagesController programmingLanguagesController;
 
     /**
      * Constructor for admin controller.
@@ -59,6 +60,7 @@ public class AdminController implements ActionListener {
      * @param adminFrame Admin GUI Frame
      */
     public AdminController(final AdminFrame adminFrame) {
+        programmingLanguagesController = new ProgrammingLanguagesController(adminFrame);
         // Nothing for now. Just show GUI
         this.adminFrame = adminFrame;
         this.listModel = new DefaultListModel();

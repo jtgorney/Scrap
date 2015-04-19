@@ -45,20 +45,36 @@ public class AdminFrame extends javax.swing.JFrame {
         jbtnSave = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jcmbLanguages = new javax.swing.JComboBox();
         jpnlLanguageSettings = new javax.swing.JPanel();
         jchkCompiled = new javax.swing.JCheckBox();
-        jpnlCompilerSettings = new javax.swing.JPanel();
-        jtxtCompilerExecutable = new javax.swing.JTextField();
+        jpnlInterpreterSettings = new javax.swing.JPanel();
+        jtxtInterpreterExecutable = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jbtnBrowseCompiler = new javax.swing.JButton();
+        jbtnBrowseInterpreter = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jtxtCompilerArgs = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jtxtCompilerOutExt = new javax.swing.JTextField();
+        jtxtInterpreterArgs = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtxtInterpreterInExt = new javax.swing.JTextField();
+        jchkInterpreted = new javax.swing.JCheckBox();
+        jpnlCompilerSettings1 = new javax.swing.JPanel();
+        jtxtCompilerExecutable1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jbtnBrowseCompiler = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jtxtCompilerArgs1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jtxtCompilerOutExt1 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jtxtCompilerInExt = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jtxtFilenameRegEx = new javax.swing.JTextField();
+        jtxtLanguageName = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jchkEnabled = new javax.swing.JCheckBox();
+        jbtnSaveLanguageSettings = new javax.swing.JButton();
+        jbtnAddLanguage = new javax.swing.JButton();
+        jbtnRemoveLanguage = new javax.swing.JButton();
         jbtnExit = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -92,11 +108,6 @@ public class AdminFrame extends javax.swing.JFrame {
         jbtnAddUser.setText("Add Team/User...");
 
         jButton4.setText("Delete");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
 
         jButton5.setText("Edit");
 
@@ -110,7 +121,7 @@ public class AdminFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jbtnAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 414, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 490, Short.MAX_VALUE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -120,7 +131,7 @@ public class AdminFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
@@ -156,7 +167,7 @@ public class AdminFrame extends javax.swing.JFrame {
                         .addComponent(jlblSchoolName)
                         .addGap(18, 18, 18)
                         .addComponent(jtfSchoolName)))
-                .addContainerGap(409, Short.MAX_VALUE))
+                .addContainerGap(485, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,7 +184,7 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblSchoolName)
                     .addComponent(jtfSchoolName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
                 .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -184,70 +195,124 @@ public class AdminFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Programming Language:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcmbLanguages.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jpnlLanguageSettings.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
         jpnlLanguageSettings.setName(""); // NOI18N
 
         jchkCompiled.setText("Compiled");
 
-        jpnlCompilerSettings.setBorder(javax.swing.BorderFactory.createTitledBorder("Compiler"));
+        jpnlInterpreterSettings.setBorder(javax.swing.BorderFactory.createTitledBorder("Compiler"));
 
         jLabel2.setText("Executable:");
 
-        jbtnBrowseCompiler.setText("Browse");
+        jbtnBrowseInterpreter.setText("Browse");
 
         jLabel3.setText("Arguments:");
 
-        jLabel4.setText("Output File Extension:");
-
         jLabel5.setText("Input File Extension:");
 
-        javax.swing.GroupLayout jpnlCompilerSettingsLayout = new javax.swing.GroupLayout(jpnlCompilerSettings);
-        jpnlCompilerSettings.setLayout(jpnlCompilerSettingsLayout);
-        jpnlCompilerSettingsLayout.setHorizontalGroup(
-            jpnlCompilerSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnlCompilerSettingsLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpnlInterpreterSettingsLayout = new javax.swing.GroupLayout(jpnlInterpreterSettings);
+        jpnlInterpreterSettings.setLayout(jpnlInterpreterSettingsLayout);
+        jpnlInterpreterSettingsLayout.setHorizontalGroup(
+            jpnlInterpreterSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnlInterpreterSettingsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpnlCompilerSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnlCompilerSettingsLayout.createSequentialGroup()
+                .addGroup(jpnlInterpreterSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnlInterpreterSettingsLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtCompilerExecutable, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtxtInterpreterExecutable, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbtnBrowseCompiler)
+                        .addComponent(jbtnBrowseInterpreter)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtCompilerArgs))
-                    .addGroup(jpnlCompilerSettingsLayout.createSequentialGroup()
+                        .addComponent(jtxtInterpreterArgs))
+                    .addGroup(jpnlInterpreterSettingsLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(122, 122, 122)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtCompilerOutExt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtxtInterpreterInExt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jpnlCompilerSettingsLayout.setVerticalGroup(
-            jpnlCompilerSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnlCompilerSettingsLayout.createSequentialGroup()
-                .addGroup(jpnlCompilerSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jpnlInterpreterSettingsLayout.setVerticalGroup(
+            jpnlInterpreterSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnlInterpreterSettingsLayout.createSequentialGroup()
+                .addGroup(jpnlInterpreterSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtxtCompilerExecutable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnBrowseCompiler)
+                    .addComponent(jtxtInterpreterExecutable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnBrowseInterpreter)
                     .addComponent(jLabel3)
-                    .addComponent(jtxtCompilerArgs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtInterpreterArgs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpnlCompilerSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                .addGroup(jpnlInterpreterSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtCompilerOutExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
+                    .addComponent(jtxtInterpreterInExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
+
+        jchkInterpreted.setText("Interpreted");
+
+        jpnlCompilerSettings1.setBorder(javax.swing.BorderFactory.createTitledBorder("Compiler"));
+
+        jLabel6.setText("Executable:");
+
+        jbtnBrowseCompiler.setText("Browse");
+
+        jLabel7.setText("Arguments:");
+
+        jLabel8.setText("Output File Extension:");
+
+        jLabel9.setText("Input File Extension:");
+
+        javax.swing.GroupLayout jpnlCompilerSettings1Layout = new javax.swing.GroupLayout(jpnlCompilerSettings1);
+        jpnlCompilerSettings1.setLayout(jpnlCompilerSettings1Layout);
+        jpnlCompilerSettings1Layout.setHorizontalGroup(
+            jpnlCompilerSettings1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnlCompilerSettings1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpnlCompilerSettings1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnlCompilerSettings1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtCompilerExecutable1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnBrowseCompiler)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtCompilerArgs1))
+                    .addGroup(jpnlCompilerSettings1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtCompilerInExt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtCompilerOutExt1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jpnlCompilerSettings1Layout.setVerticalGroup(
+            jpnlCompilerSettings1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnlCompilerSettings1Layout.createSequentialGroup()
+                .addGroup(jpnlCompilerSettings1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jtxtCompilerExecutable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnBrowseCompiler)
+                    .addComponent(jLabel7)
+                    .addComponent(jtxtCompilerArgs1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpnlCompilerSettings1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jtxtCompilerInExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtCompilerOutExt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jLabel10.setText("Filename RegEx:");
+
+        jLabel4.setText("Name:");
 
         javax.swing.GroupLayout jpnlLanguageSettingsLayout = new javax.swing.GroupLayout(jpnlLanguageSettings);
         jpnlLanguageSettings.setLayout(jpnlLanguageSettingsLayout);
@@ -256,23 +321,52 @@ public class AdminFrame extends javax.swing.JFrame {
             .addGroup(jpnlLanguageSettingsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpnlLanguageSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpnlCompilerSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnlInterpreterSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnlCompilerSettings1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jpnlLanguageSettingsLayout.createSequentialGroup()
-                        .addComponent(jchkCompiled)
-                        .addGap(0, 616, Short.MAX_VALUE)))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtFilenameRegEx))
+                    .addGroup(jpnlLanguageSettingsLayout.createSequentialGroup()
+                        .addGroup(jpnlLanguageSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jchkCompiled)
+                            .addComponent(jchkInterpreted)
+                            .addGroup(jpnlLanguageSettingsLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtxtLanguageName, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpnlLanguageSettingsLayout.setVerticalGroup(
             jpnlLanguageSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlLanguageSettingsLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(jpnlLanguageSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtxtLanguageName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jchkCompiled)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpnlCompilerSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addComponent(jpnlCompilerSettings1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jchkInterpreted)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpnlInterpreterSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpnlLanguageSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jtxtFilenameRegEx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        jpnlInterpreterSettings.getAccessibleContext().setAccessibleName("Interpreter");
+
         jchkEnabled.setText("Enabled");
+
+        jbtnSaveLanguageSettings.setText("Save");
+
+        jbtnAddLanguage.setText("Add Language");
+
+        jbtnRemoveLanguage.setText("Remove Language");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -285,10 +379,15 @@ public class AdminFrame extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jcmbLanguages, 0, 85, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jchkEnabled)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbtnRemoveLanguage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnAddLanguage)
+                        .addGap(228, 228, 228)
+                        .addComponent(jbtnSaveLanguageSettings)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -297,10 +396,14 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jchkEnabled))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpnlLanguageSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jcmbLanguages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jchkEnabled)
+                    .addComponent(jbtnSaveLanguageSettings)
+                    .addComponent(jbtnAddLanguage)
+                    .addComponent(jbtnRemoveLanguage))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpnlLanguageSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
 
         jTabbedPane1.addTab("Programming Languages", null, jPanel4, "");
@@ -320,18 +423,14 @@ public class AdminFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnExit)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,13 +470,17 @@ public class AdminFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButton4;
     public javax.swing.JButton jButton5;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -385,22 +488,34 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     public javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
+    public javax.swing.JButton jbtnAddLanguage;
     public javax.swing.JButton jbtnAddUser;
-    private javax.swing.JButton jbtnBrowseCompiler;
+    public javax.swing.JButton jbtnBrowseCompiler;
+    public javax.swing.JButton jbtnBrowseInterpreter;
     public javax.swing.JButton jbtnExit;
+    public javax.swing.JButton jbtnRemoveLanguage;
     public javax.swing.JButton jbtnSave;
-    private javax.swing.JCheckBox jchkCompiled;
-    private javax.swing.JCheckBox jchkEnabled;
+    public javax.swing.JButton jbtnSaveLanguageSettings;
+    public javax.swing.JCheckBox jchkCompiled;
+    public javax.swing.JCheckBox jchkEnabled;
+    public javax.swing.JCheckBox jchkInterpreted;
+    public javax.swing.JComboBox jcmbLanguages;
     private javax.swing.JLabel jlblContestName;
     private javax.swing.JLabel jlblSchoolName;
     public javax.swing.JList jlstUsers;
-    private javax.swing.JPanel jpnlCompilerSettings;
-    private javax.swing.JPanel jpnlLanguageSettings;
+    public javax.swing.JPanel jpnlCompilerSettings1;
+    public javax.swing.JPanel jpnlInterpreterSettings;
+    public javax.swing.JPanel jpnlLanguageSettings;
     public javax.swing.JTextField jtfContestName;
     public javax.swing.JTextField jtfSchoolName;
-    private javax.swing.JTextField jtxtCompilerArgs;
-    private javax.swing.JTextField jtxtCompilerExecutable;
-    private javax.swing.JTextField jtxtCompilerOutExt;
+    public javax.swing.JTextField jtxtCompilerArgs1;
+    public javax.swing.JTextField jtxtCompilerExecutable1;
+    public javax.swing.JTextField jtxtCompilerInExt;
+    public javax.swing.JTextField jtxtCompilerOutExt1;
+    public javax.swing.JTextField jtxtFilenameRegEx;
+    public javax.swing.JTextField jtxtInterpreterArgs;
+    public javax.swing.JTextField jtxtInterpreterExecutable;
+    public javax.swing.JTextField jtxtInterpreterInExt;
+    public javax.swing.JTextField jtxtLanguageName;
     // End of variables declaration//GEN-END:variables
 }
