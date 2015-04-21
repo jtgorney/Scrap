@@ -29,23 +29,27 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import jNetworking.jNetworkInterface.jNetworkInterface;
 import java.awt.EventQueue;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import ui.JudgeFrame;
+import ui.JudgeViewFrame;
 
 /**
  * Administrative GUI controller.
  *
  * @author Jacob Gorney
  */
-public class JudgeController implements ActionListener {
-
+public class JudgeController implements ActionListener, MouseListener {
     /**
      * The GUI reference to IDEFrame.
      */
@@ -81,6 +85,7 @@ public class JudgeController implements ActionListener {
         judgeFrame.jbtnExit.addActionListener(this);
         judgeFrame.jbtnRefresh.addActionListener(this);
         judgeFrame.jbtnScoreboard.addActionListener(this);
+        judgeFrame.jtblSubmissions.addMouseListener(this);
         // Load user list
         loadSubmissions();
     }
@@ -163,4 +168,29 @@ public class JudgeController implements ActionListener {
             }
         }).start();
     }
+    
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource() == judgeFrame.jtblSubmissions) {
+            JTable table = (JTable) e.getSource();
+            Point p = e.getPoint();
+            int row = table.rowAtPoint(p);
+            if (e.getClickCount() == 2) {
+                int selectedJob = (int) table.getModel().getValueAt(row, 0);
+                JudgeViewController controller = new JudgeViewController(new JudgeViewFrame(), selectedJob);
+            }
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) { }
+
+    @Override
+    public void mouseEntered(MouseEvent e) { }
+
+    @Override
+    public void mouseExited(MouseEvent e) { }
+
+    @Override
+    public void mousePressed(MouseEvent e) { }
 }

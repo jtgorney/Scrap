@@ -28,8 +28,13 @@ import businessobjects.Clarification;
 import businessobjects.CompilerRunner;
 import businessobjects.Submission;
 import businessobjects.User;
+import compiler.OutputParser;
+import jNetworking.jNetworkInterface.jNetworkInterface;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * DBMgr is responsible for getting the appropriate database connection.
@@ -253,6 +258,32 @@ public class DBMgr {
         }
     }
     
+    public ArrayList<String> getResultFromDB(int id) {
+        String query = "SELECT `Code`, `Solution` FROM `Solution` WHERE `Id` = " + id;
+        Statement stmt;
+        try {
+            stmt = getConnection().createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            // Build the list
+            ArrayList<String> resultList = new ArrayList<>();
+            resultList.add("");
+            resultList.add("");
+            if (!result.next()) {
+                return resultList;
+            }
+            
+            do {
+                resultList.set(0, result.getString("Code"));
+                resultList.set(1, result.getString("Solution"));
+            } while (result.next());
+            // Return
+            return resultList;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
     /**
      * Insert a score into the DB
      * @param runner Compiler runner
@@ -263,9 +294,18 @@ public class DBMgr {
         int problemNumber = runner.getProblemId();
         int teamNumber = runner.getTeamId();
         int accepted = (runner.isAccepted()) ? 1 : 0;
+        String code = "";
+        String solution = "";
+        try {
+            OutputParser parser = new OutputParser(runner.getResultFile());
+            code = jNetworkInterface.base64Encode(parser.getCode());
+            solution = jNetworkInterface.base64Encode(parser.getStdOutput());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         // Create the SQL:
-        String query = "INSERT INTO `Solution` (`ProblemNumber`, `TeamId`, `Accepted`, `Score`) " +
-                "VALUES (" + problemNumber + "," + teamNumber + "," + accepted + "," + score + ");";
+        String query = "INSERT INTO `Solution` (`ProblemNumber`, `TeamId`, `Accepted`, `Score`, `Code`, `Solution`) " +
+                "VALUES (" + problemNumber + "," + teamNumber + "," + accepted + "," + score + ", '" + code + "'" + ", '" + solution + "'" + ");";
         Statement stmt = null;
         try {
             // Add the record

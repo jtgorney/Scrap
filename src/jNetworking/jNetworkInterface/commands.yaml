@@ -17,3 +17,4 @@ setschoolname: SetSchoolName
 getschoolname: GetSchoolName
 setavailablelanguages: SetAvailableLanguages
 getavailablelanguages: GetAvailableLanguages
+getresultfromdb: GetResultFromDB
