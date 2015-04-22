@@ -63,47 +63,64 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jlblMySQLUsername" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlblMySQLPassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jtfMySQLUsername" max="32767" attributes="0"/>
-                                  <Component id="jpfMySQLPassword" max="32767" attributes="0"/>
-                              </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jlblSchoolName" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="381" pref="658" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jlblServerPort" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlblMySQLHost" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlblMySQLUsername" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlblMySQLPassword" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jtfMySQLUsername" max="32767" attributes="0"/>
+                                          <Component id="jpfMySQLPassword" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlblServerPort" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlblMySQLHost" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jtfMySQLHost" max="32767" attributes="0"/>
+                                          <Component id="jtfServerPort" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlblMySQLDatabase" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jlblMySQLPort" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jtfMySQLPort" max="32767" attributes="0"/>
+                                          <Component id="jtfMySQLDatabase" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlblContestName" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jtfSchoolName" max="32767" attributes="0"/>
+                                          <Component id="jtfContestName" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jtfMySQLHost" max="32767" attributes="0"/>
-                                  <Component id="jtfServerPort" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jlblMySQLDatabase" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlblMySQLPort" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jtfMySQLPort" max="32767" attributes="0"/>
-                                  <Component id="jtfMySQLDatabase" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="354" max="32767" attributes="0"/>
-                              <Component id="jbtnStart" min="-2" pref="164" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jbtnStop" min="-2" pref="164" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jbtnStart" min="-2" pref="164" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jbtnStop" min="-2" pref="164" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -142,10 +159,20 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jbtnStart" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jbtnStop" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jlblContestName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfContestName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="141" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jtfSchoolName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlblSchoolName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jbtnStop" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jbtnStart" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="110" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -259,6 +286,33 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
+            <Component class="javax.swing.JLabel" name="jlblContestName">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Contest Name:"/>
+                <Property name="name" type="java.lang.String" value="" noResource="true"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jtfContestName">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Farid Memorial Programming Contest"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jtfSchoolName">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ChoMart Academy"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlblSchoolName">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="School Name:"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -273,12 +327,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="708" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="733" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="336" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="362" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

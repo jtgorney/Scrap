@@ -56,6 +56,10 @@ public class LoginController implements ActionListener {
     public LoginController(final LoginFrame loginView) {
         // Assign the GUI
         this.loginView = loginView;
+        // Retrieve contest and school names from server
+        jNetworkInterface client = new jNetworkInterface(SettingsCommunicator.getServerAddr(), SettingsCommunicator.getServerPort(), false);
+        loginView.jlblHeader.setText(client.sendCommand("getcompetitionname", null));
+        loginView.jlblSchool.setText(client.sendCommand("getschoolname", null));
         // Open the GUI via EventQueue
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -67,10 +71,6 @@ public class LoginController implements ActionListener {
                 }
             }
         });
-        jNetworkInterface client = new jNetworkInterface(SettingsCommunicator.getServerAddr(), SettingsCommunicator.getServerPort(), false);
-        loginView.jlblHeader.setText(client.sendCommand("getcompetitionname", null));
-        loginView.jlblSchool.setText(client.sendCommand("getschoolname", null));
-        loginView.repaint();
         // Build listeners
         loginView.jbtnEnter.addActionListener(this);
         loginView.jbtnExit.addActionListener(this);

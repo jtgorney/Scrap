@@ -37,12 +37,6 @@ public class AdminFrame extends javax.swing.JFrame {
         jbtnAddUser = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jlblContestName = new javax.swing.JLabel();
-        jlblSchoolName = new javax.swing.JLabel();
-        jtfContestName = new javax.swing.JTextField();
-        jtfSchoolName = new javax.swing.JTextField();
-        jbtnSave = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jcmbLanguages = new javax.swing.JComboBox();
@@ -141,57 +135,6 @@ public class AdminFrame extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Teams & Users", jPanel2);
-
-        jlblContestName.setText("Contest Name:");
-        jlblContestName.setName(""); // NOI18N
-
-        jlblSchoolName.setText("School Name:");
-
-        jbtnSave.setText("Save");
-        jbtnSave.setMaximumSize(new java.awt.Dimension(63, 23));
-        jbtnSave.setMinimumSize(new java.awt.Dimension(63, 23));
-        jbtnSave.setPreferredSize(new java.awt.Dimension(63, 23));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jlblContestName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtfContestName, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jlblSchoolName)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfSchoolName)))
-                .addContainerGap(485, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblContestName)
-                    .addComponent(jtfContestName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblSchoolName)
-                    .addComponent(jtfSchoolName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
-                .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jlblContestName.getAccessibleContext().setAccessibleName("jlblContestName");
-
-        jTabbedPane1.addTab("Contest Information", jPanel3);
 
         jLabel1.setText("Programming Language:");
 
@@ -483,7 +426,6 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
@@ -494,20 +436,15 @@ public class AdminFrame extends javax.swing.JFrame {
     public javax.swing.JButton jbtnBrowseInterpreter;
     public javax.swing.JButton jbtnExit;
     public javax.swing.JButton jbtnRemoveLanguage;
-    public javax.swing.JButton jbtnSave;
     public javax.swing.JButton jbtnSaveLanguageSettings;
     public javax.swing.JCheckBox jchkCompiled;
     public javax.swing.JCheckBox jchkEnabled;
     public javax.swing.JCheckBox jchkInterpreted;
     public javax.swing.JComboBox jcmbLanguages;
-    private javax.swing.JLabel jlblContestName;
-    private javax.swing.JLabel jlblSchoolName;
     public javax.swing.JList jlstUsers;
     public javax.swing.JPanel jpnlCompilerSettings1;
     public javax.swing.JPanel jpnlInterpreterSettings;
     public javax.swing.JPanel jpnlLanguageSettings;
-    public javax.swing.JTextField jtfContestName;
-    public javax.swing.JTextField jtfSchoolName;
     public javax.swing.JTextField jtxtCompilerArgs1;
     public javax.swing.JTextField jtxtCompilerExecutable1;
     public javax.swing.JTextField jtxtCompilerInExt;

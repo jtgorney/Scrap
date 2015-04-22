@@ -43,6 +43,10 @@ public class ServerFrame extends javax.swing.JFrame {
         jbtnStart = new javax.swing.JButton();
         jpfMySQLPassword = new javax.swing.JPasswordField();
         jbtnStop = new javax.swing.JButton();
+        jlblContestName = new javax.swing.JLabel();
+        jtfContestName = new javax.swing.JTextField();
+        jtfSchoolName = new javax.swing.JTextField();
+        jlblSchoolName = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaLog = new javax.swing.JTextArea();
@@ -85,6 +89,15 @@ public class ServerFrame extends javax.swing.JFrame {
         jbtnStop.setForeground(new java.awt.Color(221, 8, 2));
         jbtnStop.setText("Stop Server");
 
+        jlblContestName.setText("Contest Name:");
+        jlblContestName.setName(""); // NOI18N
+
+        jtfContestName.setText("Farid Memorial Programming Contest");
+
+        jtfSchoolName.setText("ChoMart Academy");
+
+        jlblSchoolName.setText("School Name:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -92,36 +105,48 @@ public class ServerFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlblMySQLUsername)
-                            .addComponent(jlblMySQLPassword))
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfMySQLUsername)
-                            .addComponent(jpfMySQLPassword)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jlblSchoolName)
+                        .addGap(381, 658, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlblServerPort)
-                            .addComponent(jlblMySQLHost))
-                        .addGap(45, 45, 45)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfMySQLHost)
-                            .addComponent(jtfServerPort)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlblMySQLDatabase)
-                            .addComponent(jlblMySQLPort))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfMySQLPort)
-                            .addComponent(jtfMySQLDatabase)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 354, Short.MAX_VALUE)
-                        .addComponent(jbtnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbtnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlblMySQLUsername)
+                                    .addComponent(jlblMySQLPassword))
+                                .addGap(19, 19, 19)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfMySQLUsername)
+                                    .addComponent(jpfMySQLPassword)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlblServerPort)
+                                    .addComponent(jlblMySQLHost))
+                                .addGap(45, 45, 45)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfMySQLHost)
+                                    .addComponent(jtfServerPort)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlblMySQLDatabase)
+                                    .addComponent(jlblMySQLPort))
+                                .addGap(21, 21, 21)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfMySQLPort)
+                                    .addComponent(jtfMySQLDatabase)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jlblContestName)
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfSchoolName)
+                                    .addComponent(jtfContestName))))
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbtnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,9 +177,17 @@ public class ServerFrame extends javax.swing.JFrame {
                     .addComponent(jlblMySQLPassword))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(141, Short.MAX_VALUE))
+                    .addComponent(jlblContestName)
+                    .addComponent(jtfContestName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfSchoolName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlblSchoolName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Server Settings", jPanel1);
@@ -171,11 +204,11 @@ public class ServerFrame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Server Log", jPanel2);
@@ -247,18 +280,22 @@ public class ServerFrame extends javax.swing.JFrame {
     public javax.swing.JButton jbtnExit;
     public javax.swing.JButton jbtnStart;
     public javax.swing.JButton jbtnStop;
+    private javax.swing.JLabel jlblContestName;
     private javax.swing.JLabel jlblMySQLDatabase;
     private javax.swing.JLabel jlblMySQLHost;
     private javax.swing.JLabel jlblMySQLPassword;
     private javax.swing.JLabel jlblMySQLPort;
     private javax.swing.JLabel jlblMySQLUsername;
+    private javax.swing.JLabel jlblSchoolName;
     private javax.swing.JLabel jlblServerPort;
     public javax.swing.JPasswordField jpfMySQLPassword;
     public javax.swing.JTextArea jtaLog;
+    public javax.swing.JTextField jtfContestName;
     public javax.swing.JTextField jtfMySQLDatabase;
     public javax.swing.JTextField jtfMySQLHost;
     public javax.swing.JTextField jtfMySQLPort;
     public javax.swing.JTextField jtfMySQLUsername;
+    public javax.swing.JTextField jtfSchoolName;
     public javax.swing.JTextField jtfServerPort;
     // End of variables declaration//GEN-END:variables
 }

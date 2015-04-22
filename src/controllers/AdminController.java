@@ -79,11 +79,8 @@ public class AdminController implements ActionListener {
         // Add action listeners
         this.adminFrame.jbtnAddUser.addActionListener(this);
         this.adminFrame.jbtnExit.addActionListener(this);
-        this.adminFrame.jbtnSave.addActionListener(this);
         // Load user list
         loadUsers();
-        // Load other settings
-        loadMisc();
     }
 
     @Override
@@ -92,9 +89,7 @@ public class AdminController implements ActionListener {
             jbtnAddUserClick();
         } else if (e.getSource() == adminFrame.jbtnExit) {
             jbtnExitClick();
-        } else if (e.getSource() == adminFrame.jbtnSave) {
-            jbtnSaveClick();
-        }
+        } 
     }
 
     /**
@@ -145,17 +140,6 @@ public class AdminController implements ActionListener {
             }
         }).start();
     }
-
-    /**
-     * Loads the other settings boxes
-     */
-    private void loadMisc() {
-       jNetworkInterface client = new jNetworkInterface(SettingsCommunicator.getServerAddr(), SettingsCommunicator.getServerPort(), false);
-       String strContestName = client.sendCommand("getcompetitionname", null);
-       String strSchoolName = client.sendCommand("getschoolname", null);
-       adminFrame.jtfContestName.setText(strContestName);
-       adminFrame.jtfSchoolName.setText(strSchoolName);
-    }
     
     /**
      * Click event for jbtnAddUser.
@@ -176,18 +160,6 @@ public class AdminController implements ActionListener {
     /**
      * Save Contest Name and School Name 
      */
-    private void jbtnSaveClick() {
-        if (JOptionPane.showConfirmDialog(adminFrame, "Are you "
-                + "sure you want to save changes?", "Save Changes", 
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            jNetworkInterface client = new jNetworkInterface(SettingsCommunicator.getServerAddr(), SettingsCommunicator.getServerPort(), false);
-            ArrayList<String> data = new ArrayList<>(1);
-            data.add(0, adminFrame.jtfContestName.getText());
-            client.sendCommand("setcompetitionname", data);
-            data.add(0, adminFrame.jtfSchoolName.getText());
-            client.sendCommand("setschoolname", data);
-        }        
-    }
     
     /**
      * Exit button click.

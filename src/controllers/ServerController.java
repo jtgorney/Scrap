@@ -23,7 +23,9 @@
  */
 package controllers;
 
+import businessobjects.SettingsCommunicator;
 import db.DBMgr;
+import jNetworking.jNetworkInterface.jNetworkInterface;
 import jNetworking.jNetworkInterface.jNetworkInterfaceServer;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -161,6 +163,8 @@ public class ServerController implements ActionListener {
         serverFrame.jtfMySQLDatabase.setEnabled(true);
         serverFrame.jtfMySQLUsername.setEnabled(true);
         serverFrame.jpfMySQLPassword.setEnabled(true);
+        serverFrame.jtfContestName.setEnabled(true);
+        serverFrame.jtfSchoolName.setEnabled(true);
         
         server.stop();
     }
@@ -183,6 +187,8 @@ public class ServerController implements ActionListener {
         serverFrame.jtfMySQLDatabase.setEnabled(false);
         serverFrame.jtfMySQLUsername.setEnabled(false);
         serverFrame.jpfMySQLPassword.setEnabled(false);
+        serverFrame.jtfContestName.setEnabled(false);
+        serverFrame.jtfSchoolName.setEnabled(false);
         
         new Thread(new Runnable() {
             @Override
@@ -222,6 +228,9 @@ public class ServerController implements ActionListener {
         DBMgr.setDBPassword(String.valueOf(serverFrame.jpfMySQLPassword.getPassword()));
         // Set server settings
         serverPort = Integer.valueOf(serverFrame.jtfServerPort.getText().trim());
+        // Set competition settings
+        SettingsCommunicator.setCompetitionName(serverFrame.jtfContestName.getText());
+        SettingsCommunicator.setSchoolName(serverFrame.jtfSchoolName.getText());
     }
 
     /**
